@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory()->create([
+            'code' => generateRandomString(),
+            'username' => 'admin',
             'name' => 'admin',
             'email' => 'admin@softui.com',
             'password' => Hash::make('secret')
