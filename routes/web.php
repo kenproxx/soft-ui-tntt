@@ -49,3 +49,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
 });
 
+Route::middleware(['auth', 'isNormal'])->group(function () {
+
+});
+
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+
+});
+
+Route::middleware(['auth', 'isSuperAdmin'])->group(function () {
+
+});
+
+
