@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\RoleName;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('holy_name')->nullable();
             $table->string('location_id')->nullable();
             $table->string('avatar')->nullable();
-            $table->string('role_name')->nullable()->default(\App\Enums\RoleName::USER);
+            $table->string('role_name')->nullable()->default(RoleName::USER);
             $table->string('status')->nullable();
             $table->timestamp('email_verified_at')->nullable();
 

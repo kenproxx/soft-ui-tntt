@@ -6,7 +6,7 @@
                     <div class="col-xl-6 mb-xl-0 mb-4">
                         <div class="card bg-transparent shadow-xl">
                             <div class="overflow-hidden position-relative border-radius-xl"
-                                style="background-image: url('../assets/img/curved-images/curved14.jpg');">
+                                 style="background-image: url('../assets/img/curved-images/curved14.jpg');">
                                 <span class="mask bg-gradient-dark"></span>
                                 <div class="card-body position-relative z-index-1 p-3">
                                     <i class="fas fa-wifi text-white p-2"></i>
@@ -75,7 +75,7 @@
                                         <h6 class="mb-0">Payment Method</h6>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i
+                                        <a class="btn bg-gradient-dark mb-0" href="javascript:"><i
                                                 class="fas fa-plus"></i>&nbsp;&nbsp;Add New Card</a>
                                     </div>
                                 </div>
@@ -86,12 +86,12 @@
                                         <div
                                             class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
                                             <img class="w-10 me-3 mb-0" src="../assets/img/logos/mastercard.png"
-                                                alt="logo">
+                                                 alt="logo">
                                             <h6 class="mb-0">
                                                 ****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;7852
                                             </h6>
                                             <i class="fas fa-pencil-alt ms-auto text-dark cursor-pointer"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Card"></i>
+                                               data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Card"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -102,7 +102,7 @@
                                                 ****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;5248
                                             </h6>
                                             <i class="fas fa-pencil-alt ms-auto text-dark cursor-pointer"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Card"></i>
+                                               data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Card"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +134,8 @@
                                 <div class="d-flex align-items-center text-sm">
                                     $350
                                     <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                            class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
+                                            class="fas fa-file-pdf text-lg me-1"></i> PDF
+                                    </button>
                                 </div>
                             </li>
                             <li
@@ -146,7 +147,8 @@
                                 <div class="d-flex align-items-center text-sm">
                                     $560
                                     <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                            class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
+                                            class="fas fa-file-pdf text-lg me-1"></i> PDF
+                                    </button>
                                 </div>
                             </li>
                             <li
@@ -158,7 +160,8 @@
                                 <div class="d-flex align-items-center text-sm">
                                     $120
                                     <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                            class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
+                                            class="fas fa-file-pdf text-lg me-1"></i> PDF
+                                    </button>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
@@ -169,20 +172,22 @@
                                 <div class="d-flex align-items-center text-sm">
                                     $300
                                     <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                            class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
+                                            class="fas fa-file-pdf text-lg me-1"></i> PDF
+                                    </button>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-                              <div class="d-flex flex-column">
-                                  <h6 class="text-dark mb-1 font-weight-bold text-sm">March, 01, 2019</h6>
-                                  <span class="text-xs">#ST-451897</span>
-                              </div>
-                              <div class="d-flex align-items-center text-sm">
-                                  $275
-                                  <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
-                                          class="fas fa-file-pdf text-lg me-1"></i> PDF</button>
-                              </div>
-                          </li>
+                                <div class="d-flex flex-column">
+                                    <h6 class="text-dark mb-1 font-weight-bold text-sm">March, 01, 2019</h6>
+                                    <span class="text-xs">#ST-451897</span>
+                                </div>
+                                <div class="d-flex align-items-center text-sm">
+                                    $275
+                                    <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i
+                                            class="fas fa-file-pdf text-lg me-1"></i> PDF
+                                    </button>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -207,9 +212,9 @@
                                             class="text-dark ms-2 font-weight-bold">FRB1235476</span></span>
                                 </div>
                                 <div class="ms-auto">
-                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i
+                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:"><i
                                             class="far fa-trash-alt me-2"></i>Delete</a>
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
+                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:"><i
                                             class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                                 </div>
                             </li>
@@ -224,9 +229,9 @@
                                             class="text-dark ms-2 font-weight-bold">FRB1235476</span></span>
                                 </div>
                                 <div class="ms-auto">
-                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i
+                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:"><i
                                             class="far fa-trash-alt me-2"></i>Delete</a>
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
+                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:"><i
                                             class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                                 </div>
                             </li>
@@ -241,9 +246,9 @@
                                             class="text-dark ms-2 font-weight-bold">FRB1235476</span></span>
                                 </div>
                                 <div class="ms-auto">
-                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i
+                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:"><i
                                             class="far fa-trash-alt me-2"></i>Delete</a>
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i
+                                    <a class="btn btn-link text-dark px-3 mb-0" href="javascript:"><i
                                             class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                                 </div>
                             </li>
@@ -271,7 +276,8 @@
                                 class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                 <div class="d-flex align-items-center">
                                     <button
-                                        class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i
+                                        class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">
+                                        <i
                                             class="fas fa-arrow-down"></i></button>
                                     <div class="d-flex flex-column">
                                         <h6 class="mb-1 text-dark text-sm">Netflix</h6>
@@ -287,7 +293,8 @@
                                 class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                 <div class="d-flex align-items-center">
                                     <button
-                                        class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i
+                                        class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">
+                                        <i
                                             class="fas fa-arrow-up"></i></button>
                                     <div class="d-flex flex-column">
                                         <h6 class="mb-1 text-dark text-sm">Apple</h6>
@@ -306,7 +313,8 @@
                                 class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                 <div class="d-flex align-items-center">
                                     <button
-                                        class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i
+                                        class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">
+                                        <i
                                             class="fas fa-arrow-up"></i></button>
                                     <div class="d-flex flex-column">
                                         <h6 class="mb-1 text-dark text-sm">Stripe</h6>
@@ -322,7 +330,8 @@
                                 class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                 <div class="d-flex align-items-center">
                                     <button
-                                        class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i
+                                        class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">
+                                        <i
                                             class="fas fa-arrow-up"></i></button>
                                     <div class="d-flex flex-column">
                                         <h6 class="mb-1 text-dark text-sm">HubSpot</h6>
@@ -338,7 +347,8 @@
                                 class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                 <div class="d-flex align-items-center">
                                     <button
-                                        class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i
+                                        class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">
+                                        <i
                                             class="fas fa-arrow-up"></i></button>
                                     <div class="d-flex flex-column">
                                         <h6 class="mb-1 text-dark text-sm">Creative Tim</h6>
@@ -354,7 +364,8 @@
                                 class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                                 <div class="d-flex align-items-center">
                                     <button
-                                        class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i
+                                        class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">
+                                        <i
                                             class="fas fa-exclamation"></i></button>
                                     <div class="d-flex flex-column">
                                         <h6 class="mb-1 text-dark text-sm">Webflow</h6>

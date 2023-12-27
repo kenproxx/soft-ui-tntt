@@ -13,12 +13,12 @@
                                 <label>Email</label>
                                 <div class="mb-3">
                                     <input type="email" class="form-control" placeholder="Email" aria-label="Email"
-                                        aria-describedby="email-addon">
+                                           aria-describedby="email-addon">
                                 </div>
                                 <label>Password</label>
                                 <div class="mb-3">
                                     <input type="email" class="form-control" placeholder="Password"
-                                        aria-label="Password" aria-describedby="password-addon">
+                                           aria-label="Password" aria-describedby="password-addon">
                                 </div>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
@@ -32,7 +32,7 @@
                         <div class="card-footer text-center pt-0 px-lg-2 px-1">
                             <p class="mb-4 text-sm mx-auto">
                                 Don't have an account?
-                                <a href="javascript:;" class="text-info text-gradient font-weight-bold">Sign up</a>
+                                <a href="javascript:" class="text-info text-gradient font-weight-bold">Sign up</a>
                             </p>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="col-md-6">
                     <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
                         <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
-                            style="background-image:url('../assets/img/curved-images/curved6.jpg')"></div>
+                             style="background-image:url('../assets/img/curved-images/curved6.jpg')"></div>
                     </div>
                 </div>
             </div>

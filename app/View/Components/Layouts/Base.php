@@ -2,6 +2,8 @@
 
 namespace App\View\Components\Layouts;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Base extends Component
@@ -19,7 +21,7 @@ class Base extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
     public function render()
     {
