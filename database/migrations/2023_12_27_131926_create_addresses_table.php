@@ -17,7 +17,10 @@ return new class extends Migration {
             $table->string('slug');
             $table->string('cap_bac');
 
-            $table->nestedSet();
+            $table->integer('parent_id')->nullable();
+            $table->integer('left')->nullable();
+            $table->integer('right')->nullable();
+            $table->integer('depth')->nullable();
 
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
