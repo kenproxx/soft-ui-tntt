@@ -42,7 +42,7 @@ class ForgotPassword extends Component
             $this->validate();
             $user = User::where('email', $this->email)->first();
             if ($user) {
-                $this->notify(new ResetPassword($user->id));
+//                $this->notify(new ResetPassword($user->id));
                 $this->showSuccesNotification = true;
                 $this->showFailureNotification = false;
             } else {
