@@ -47,18 +47,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/rtl', Rtl::class)->name('rtl');
     Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
     Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
+
+
+
+    Route::middleware('isNormal')->group(function () {
+        require_once __DIR__.'/permissions/normal.php';
+    });
+
+    Route::middleware('isAdmin')->group(function () {
+        require_once __DIR__.'/permissions/admin.php';
+    });
+
+    Route::middleware('isSuperAdmin')->group(function () {
+        require_once __DIR__.'/permissions/super_admin.php';
+    });
 });
-
-Route::middleware(['auth', 'isNormal'])->group(function () {
-
-});
-
-Route::middleware(['auth', 'isAdmin'])->group(function () {
-
-});
-
-Route::middleware(['auth', 'isSuperAdmin'])->group(function () {
-
-});
-
-
