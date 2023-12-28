@@ -8,6 +8,6 @@ class Address extends Component
 {
     public function render()
     {
-        return view('livewire.address');
+        return view('livewire.advance_config.address');
     }
 }
