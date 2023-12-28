@@ -1,5 +1,14 @@
 @php use App\Models\User; @endphp
-<aside class="z-index-0 sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
+<style>
+
+@media (min-width: 1200px) {
+    .z-index-xl-0 {
+        z-index: 0 !important;
+    }
+}
+
+</style>
+<aside class="z-index-xl-0 sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
        id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
