@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AddressController extends Controller
 {
@@ -28,7 +29,16 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->input());
+        $params = $request->only(['name', 'cap_bac']);
+        $params['slug'] = strtoupper(Str::studly($request->input('name')));
+
+        $address = new Address();
+        $address->fill($params);
+        $address->parent_id = null;
+
+        $address->save();
+
+        return back();
     }
 
     /**

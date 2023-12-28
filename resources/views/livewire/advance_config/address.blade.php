@@ -1,20 +1,26 @@
+@php use App\Enums\CapBacAddress; @endphp
 <div class="main-content">
     <div class="card mx-4 mb-4">
         <form class="p-4">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                        <input wire:model="name_search" type="text" class="form-control" id="exampleFormControlInput1"
                                placeholder="name@example.com">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" placeholder="Regular" class="form-control"/>
+                        <select wire:model="level_search" class="form-control" id="level_create" name="cap_bac">
+                            <option value="">Tất cả</option>
+                        @foreach(CapBacAddress::getArray() as $key => $value)
+                            <option value="{{ $value }}">{{ $value  }} </option>
+                        @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn bg-gradient-primary">
+            <button type="button" wire:click="render" class="btn bg-gradient-primary">
                 Tìm kiếm
             </button>
         </form>
@@ -37,20 +43,26 @@
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             ID
                         </th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                            Photo
-                        </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Name
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Email
+                            Slug
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            role
+                            Caaps bac
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Creation Date
+                            Nguoi tao
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Ngayf tao
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Nguoi sua
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            ngay sua
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Action
@@ -58,171 +70,51 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="ps-4">
-                            <p class="text-xs font-weight-bold mb-0">1</p>
-                        </td>
-                        <td>
-                            <div>
-                                <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3">
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Admin</p>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">admin@softui.com</p>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Admin</p>
-                        </td>
-                        <td class="text-center">
-                            <span class="text-secondary text-xs font-weight-bold">16/06/18</span>
-                        </td>
-                        <td class="text-center">
-                            <a href="#" class="mx-3"
-                               data-bs-toggle="modal"
-                               data-bs-target="#modal-create">
-                                <i class="fas fa-user-edit text-secondary"></i>
-                            </a>
-                            <span>
+                    @foreach($addresses as $index => $item)
+                        <tr>
+                            <td class="ps-4">
+                                <p class="text-xs font-weight-bold mb-0">1</p>
+                            </td>
+                            <td class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">{{ $item->name }}</p>
+                            </td>
+                            <td class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">{{ $item->slug }}</p>
+                            </td>
+                            <td class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">{{ $item->cap_bac }}</p>
+                            </td>
+                            <td class="text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{ $item->created_by }}</span>
+                            </td>
+                            <td class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">{{ $item->created_at }}</p>
+                            </td>
+                            <td class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">{{ $item->updated_by }}</p>
+                            </td>
+                            <td class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">{{ $item->updated_at }}</p>
+                            </td>
+                            <td class="text-center">
+                                <a href="#" class="mx-3"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#modal-create">
+                                    <i class="fas fa-user-edit text-secondary"></i>
+                                </a>
+                                <span>
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ps-4">
-                            <p class="text-xs font-weight-bold mb-0">2</p>
-                        </td>
-                        <td>
-                            <div>
-                                <img src="/assets/img/team-1.jpg" class="avatar avatar-sm me-3">
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Creator</p>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">creator@softui.com</p>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Creator</p>
-                        </td>
-                        <td class="text-center">
-                            <span class="text-secondary text-xs font-weight-bold">05/05/20</span>
-                        </td>
-                        <td class="text-center">
-                            <a href="#" class="mx-3"
-                               data-bs-toggle="modal"
-                               data-bs-target="#modal-create">
-                                <i class="fas fa-user-edit text-secondary"></i>
-                            </a>
-                            <span>
-                                            <i class="cursor-pointer fas fa-trash text-secondary"></i>
-                                        </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ps-4">
-                            <p class="text-xs font-weight-bold mb-0">3</p>
-                        </td>
-                        <td>
-                            <div>
-                                <img src="/assets/img/team-3.jpg" class="avatar avatar-sm me-3">
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Member</p>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">member@softui.com</p>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Member</p>
-                        </td>
-                        <td class="text-center">
-                            <span class="text-secondary text-xs font-weight-bold">23/06/20</span>
-                        </td>
-                        <td class="text-center">
-                            <a href="#" class="mx-3"
-                               data-bs-toggle="modal"
-                               data-bs-target="#modal-create">
-                                <i class="fas fa-user-edit text-secondary"></i>
-                            </a>
-                            <span>
-                                            <i class="cursor-pointer fas fa-trash text-secondary"></i>
-                                        </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ps-4">
-                            <p class="text-xs font-weight-bold mb-0">4</p>
-                        </td>
-                        <td>
-                            <div>
-                                <img src="/assets/img/team-4.jpg" class="avatar avatar-sm me-3">
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Peterson</p>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">peterson@softui.com</p>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Member</p>
-                        </td>
-                        <td class="text-center">
-                            <span class="text-secondary text-xs font-weight-bold">26/10/17</span>
-                        </td>
-                        <td class="text-center">
-                            <a href="#" class="mx-3"
-                               data-bs-toggle="modal"
-                               data-bs-target="#modal-create">
-                                <i class="fas fa-user-edit text-secondary"></i>
-                            </a>
-                            <span>
-                                            <i class="cursor-pointer fas fa-trash text-secondary"></i>
-                                        </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="ps-4">
-                            <p class="text-xs font-weight-bold mb-0">5</p>
-                        </td>
-                        <td>
-                            <div>
-                                <img src="/assets/img/marie.jpg" class="avatar avatar-sm me-3">
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Marie</p>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">marie@softui.com</p>
-                        </td>
-                        <td class="text-center">
-                            <p class="text-xs font-weight-bold mb-0">Creator</p>
-                        </td>
-                        <td class="text-center">
-                            <span class="text-secondary text-xs font-weight-bold">23/01/21</span>
-                        </td>
-                        <td class="text-center">
-                            <a href="#" class="mx-3"
-                               data-bs-toggle="modal"
-                               data-bs-target="#modal-create">
-                                <i class="fas fa-user-edit text-secondary"></i>
-                            </a>
-                            <span>
-                                            <i class="cursor-pointer fas fa-trash text-secondary"></i>
-                                        </span>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+
 </div>
 
 <!-- Modal -->
@@ -231,18 +123,33 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tạo mới địa ch</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn bg-gradient-primary">Save changes</button>
-            </div>
+            <form action="{{ route('address.store') }}" method="post">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name_create">Tên</label>
+                        <input type="text" class="form-control" id="name_create" name="name"
+                               placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="level_create">Cấp bậc cần tạo</label>
+                        <select class="form-control" id="level_create" name="cap_bac">
+                            @foreach(CapBacAddress::getArray() as $key => $value)
+                                <option value="{{ $value }}">{{ $value  }} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
