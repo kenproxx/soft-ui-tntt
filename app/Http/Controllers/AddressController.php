@@ -12,7 +12,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.address.index');
     }
 
     /**
@@ -28,7 +28,7 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->input());
     }
 
     /**
