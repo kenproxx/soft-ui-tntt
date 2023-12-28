@@ -3,7 +3,8 @@
 namespace App\Enums;
 
 
-use Illuminate\Validation\Rules\Enum;
+
+use Spatie\Enum\Enum;
 
 final class RoleName extends Enum
 {

@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-
-use Illuminate\Validation\Rules\Enum;
+use ReflectionClass;
+use Spatie\Enum\Enum;
 
 final class CapBacAddress extends Enum
 {
@@ -14,5 +14,11 @@ final class CapBacAddress extends Enum
     const GIAO_XU = 'Giáo xứ';
     const GIAO_HO = 'Giáo họ';
     const GIAO_DIEM = 'Giáo điểm';
+
+    public static function getArray()
+    {
+        $reflectionClass = new ReflectionClass(static::class);
+        return $reflectionClass->getConstants();
+    }
 
 }

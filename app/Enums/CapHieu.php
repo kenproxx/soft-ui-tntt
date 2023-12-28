@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-
-use Illuminate\Validation\Rules\Enum;
+use ReflectionClass;
+use Spatie\Enum\Enum;
 
 final class CapHieu extends Enum
 {
@@ -23,4 +23,9 @@ final class CapHieu extends Enum
     const TRO_UY = 'Trợ úy';
     const TUYEN_UY = 'Tuyên úy';
 
+    public static function getArray()
+    {
+        $reflectionClass = new ReflectionClass(static::class);
+        return $reflectionClass->getConstants();
+    }
 }
