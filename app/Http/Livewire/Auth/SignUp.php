@@ -8,13 +8,14 @@ use Livewire\Component;
 
 class SignUp extends Component
 {
+    public $code = '';
     public $name = '';
-    public $email = '';
+    public $username = '';
     public $password = '';
 
     protected $rules = [
         'name' => 'required|min:3',
-        'email' => 'required|email:rfc,dns|unique:users',
+        'username' => 'required|unique:users',
         'password' => 'required|min:6'
     ];
 
@@ -29,8 +30,9 @@ class SignUp extends Component
     {
         $this->validate();
         $user = User::create([
+            'code' => generateRandomString(),
             'name' => $this->name,
-            'email' => $this->email,
+            'username' => $this->username,
             'password' => Hash::make($this->password)
         ]);
 
