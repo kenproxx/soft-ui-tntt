@@ -10,7 +10,8 @@
         "kalnoy/nestedset": "^6.0",
         "laravel/framework": "^10.0",
         "laravel/tinker": "^2.6",
-        "livewire/livewire": "^2.8"
+        "livewire/livewire": "^2.8",
+        "spatie/laravel-enum": "^3.0"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^2.0",
