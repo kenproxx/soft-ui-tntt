@@ -1,6 +1,5 @@
 @php use App\Enums\CapBacAddress;use App\Enums\PaginateValue;use App\Models\User; @endphp
 
-
 <div class="main-content" id="#address">
     <style>
         #address ol, #address ul, #address dl {
@@ -199,6 +198,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('livewire:loading', function () {
+            console.log(123)
+        });
+    </script>
 </div>
 
 <!-- Modal -->
