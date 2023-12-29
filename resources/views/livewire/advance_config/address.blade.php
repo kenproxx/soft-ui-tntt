@@ -112,10 +112,10 @@
                             <td class="text-center">
                                 <a href="#" class="mx-3"
                                    data-bs-toggle="modal"
-                                   data-bs-target="#modal-create">
+                                   data-bs-target="#modal-edit">
                                     <i class="fas fa-user-edit text-secondary"></i>
                                 </a>
-                                <span>
+                                <span wire:click="delete('{{ $item->id }}')">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
                             </td>
@@ -127,6 +127,7 @@
         </div>
     </div>
 
+    {{-- phân trang --}}
     <div class="card m-4">
         <div class="row m-4">
             <div class="col-5 col-sm-3">
@@ -206,7 +207,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tạo mới địa ch</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tạo mới địa chỉ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -241,7 +242,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa địa chỉ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -34,4 +34,10 @@ class Address extends Component
         return view('livewire.advance_config.address',
             ['addresses' => $addresses, 'currentPage' => $this->currentPage]);
     }
+
+    public function delete($id)
+    {
+        $address = \App\Models\Address::find($id);
+        $address->delete();
+    }
 }
