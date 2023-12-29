@@ -1,4 +1,4 @@
-@php use App\Enums\CapBacAddress;use App\Enums\PaginateValue; @endphp
+@php use App\Enums\CapBacAddress;use App\Enums\PaginateValue;use App\Models\User; @endphp
 
 
 <div class="main-content" id="#address">
@@ -85,7 +85,7 @@
                     @foreach($addresses as $index => $item)
                         <tr>
                             <td class="ps-4">
-                                <p class="text-xs font-weight-bold mb-0">1</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ ++$index }}</p>
                             </td>
                             <td class="text-center">
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->name }}</p>
@@ -97,13 +97,14 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->cap_bac }}</p>
                             </td>
                             <td class="text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{ $item->created_by }}</span>
+                                <span
+                                    class="text-secondary text-xs font-weight-bold">{{ User::getNameById($item->created_by) }}</span>
                             </td>
                             <td class="text-center">
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->created_at }}</p>
                             </td>
                             <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">{{ $item->updated_by }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ User::getNameById($item->updated_by) }}</p>
                             </td>
                             <td class="text-center">
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->updated_at }}</p>
@@ -128,12 +129,12 @@
 
     <div class="card m-4">
         <div class="row m-4">
-            <div class="col-sm-3">
+            <div class="col-5 col-sm-3">
                 <div class="row">
-                    <div class="col-sm-6 d-flex align-items-center">
-                        Hiển thị
+                    <div class="col-6 col-sm-6 d-flex align-items-center">
+                        Hiển thị:
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-6 col-sm-6">
                         <select class="form-control " id="per_page" name="per_page" wire:model="perPage">
                             @foreach(PaginateValue::getArray() as $key => $value)
                                 <option value="{{ $value }}">{{ $value  }} </option>
@@ -143,24 +144,51 @@
                 </div>
 
             </div>
-            <div class="col-sm-9">
+            <div class="col-7 col-sm-9">
                 <div class="pagination-container justify-content-center d-flex">
                     <ul class="pagination pagination-warning">
-                        <li class="page-item">
+                        <li class="page-item" disabled="">
                             <a class="page-link" href="javascript:" aria-label="Previous">
                                 <span aria-hidden="true"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
                             </a>
                         </li>
-                        @for ($page = 1; $page <= $totalPage; $page++)
-                            <li class="page-item {{ $currentPage == $page ? 'active' : '' }}">
+
+                        {{-- Display 2 pages before current page --}}
+                        @for ($page = max(1, $currentPage - 2); $page < $currentPage; $page++)
+                            <li class="page-item">
                                 <label class="page-link">
-                                    {{ $page }} <input type="radio" wire:model="currentPage" name="currentPage"
-                                                       value="{{ $page }}"
-                                                       class="visually-hidden">
+                                    {{ $page }}
+                                    <input type="radio" wire:model="currentPage" name="currentPage"
+                                           value="{{ $page }}"
+                                           class="visually-hidden">
                                 </label>
                             </li>
                         @endfor
-                        <li class="page-item">
+
+                        {{-- Current page --}}
+                        <li class="page-item active">
+                            <label class="page-link">
+                                {{ $currentPage }}
+                                <input type="radio" wire:model="currentPage" name="currentPage"
+                                       value="{{ $currentPage }}"
+                                       class="visually-hidden">
+                            </label>
+                        </li>
+
+                        {{-- Display 2 pages after current page --}}
+                        @for ($page = $currentPage + 1; $page <= min($totalPage, $currentPage + 2); $page++)
+                            <li class="page-item">
+                                <label class="page-link">
+                                    {{ $page }}
+                                    <input type="radio" wire:model="currentPage" name="currentPage"
+                                           value="{{ $page }}"
+                                           class="visually-hidden">
+                                </label>
+                            </li>
+                        @endfor
+
+
+                        <li class="page-item" disabled="">
                             <a class="page-link" href="javascript:" aria-label="Next">
                                 <span aria-hidden="true"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
                             </a>

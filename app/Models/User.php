@@ -69,4 +69,14 @@ class User extends Authenticatable
         return false;
     }
 
+    // get name by id
+    public static function getNameById($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            return $user->name;
+        }
+        return '';
+    }
+
 }

@@ -19,7 +19,8 @@ class Address extends Component
         $addresses = \App\Models\Address::where([
             ['name', 'like', '%'.$this->name_search.'%'],
             ['cap_bac', 'like', '%'.$this->level_search.'%'],
-        ])->get();
+            ['slug', 'like', '%'.$this->name_search.'%'],
+        ])->orderBy('created_at', 'desc')->get();
 
         if ($this->name_search) {
             $this->currentPage = 1;
