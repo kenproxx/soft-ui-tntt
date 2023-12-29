@@ -1,11 +1,23 @@
-@php use App\Enums\CapBacAddress; @endphp
-<div class="main-content">
+@php use App\Enums\CapBacAddress;use App\Enums\PaginateValue; @endphp
+
+
+<div class="main-content" id="#address">
+    <style>
+        #address ol, #address ul, #address dl {
+            margin-top: revert;
+            margin-bottom: revert;
+        }
+
+        #address .pagination {
+            padding-left: revert;
+        }
+    </style>
     <div class="card mx-4 mb-4">
         <form class="p-4">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input wire:model="name_search" type="text" class="form-control" id="exampleFormControlInput1"
+                        <input wire:model="name_search" type="search" class="form-control" id="exampleFormControlInput1"
                                placeholder="name@example.com">
                     </div>
                 </div>
@@ -13,9 +25,9 @@
                     <div class="form-group">
                         <select wire:model="level_search" class="form-control" id="level_create" name="cap_bac">
                             <option value="">Tất cả</option>
-                        @foreach(CapBacAddress::getArray() as $key => $value)
-                            <option value="{{ $value }}">{{ $value  }} </option>
-                        @endforeach
+                            @foreach(CapBacAddress::getArray() as $key => $value)
+                                <option value="{{ $value }}">{{ $value  }} </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -44,28 +56,28 @@
                             ID
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Name
+                            Tên
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Slug
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Caaps bac
+                            Cấp bậc
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Nguoi tao
+                            Người tạo
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Ngayf tao
+                            Ngày tạo
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Nguoi sua
+                            Người sửa
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            ngay sua
+                            Ngày sửa
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Action
+                            Thao tác
                         </th>
                     </tr>
                     </thead>
@@ -113,6 +125,39 @@
             </div>
         </div>
     </div>
+
+    <div class="card m-4 row">
+        <select class="form-control" id="per_page" name="per_page">
+            @foreach(PaginateValue::getArray() as $key => $value)
+                <option value="{{ $value }}">{{ $value  }} </option>
+            @endforeach
+        </select>
+
+        <div class="pagination-container justify-content-center">
+            <ul class="pagination pagination-warning">
+                <li class="page-item">
+                    <a class="page-link" href="javascript:" aria-label="Previous">
+                        <span aria-hidden="true"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+                    </a>
+                </li>
+                @for ($page = 1; $page <= 5; $page++)
+                    <li class="page-item {{ $currentPage == $page ? 'active' : '' }}">
+                        <label class="page-link">
+                            {{ $page }} <input type="radio" wire:model="currentPage" name="currentPage"
+                                               value="{{ $page }}"
+                                               class="visually-hidden">
+                        </label>
+                    </li>
+                @endfor
+                <li class="page-item">
+                    <a class="page-link" href="javascript:" aria-label="Next">
+                        <span aria-hidden="true"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {{ $currentPage }}
 
 
 </div>
