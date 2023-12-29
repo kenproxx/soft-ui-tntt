@@ -126,40 +126,50 @@
         </div>
     </div>
 
-    <div class="card m-4 row">
-        <select class="form-control" id="per_page" name="per_page">
-            @foreach(PaginateValue::getArray() as $key => $value)
-                <option value="{{ $value }}">{{ $value  }} </option>
-            @endforeach
-        </select>
+    <div class="card m-4">
+        <div class="row m-4">
+            <div class="col-sm-3">
+                <div class="row">
+                    <div class="col-sm-6 d-flex align-items-center">
+                        Hiển thị
+                    </div>
+                    <div class="col-sm-6">
+                        <select class="form-control " id="per_page" name="per_page" wire:model="perPage">
+                            @foreach(PaginateValue::getArray() as $key => $value)
+                                <option value="{{ $value }}">{{ $value  }} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
 
-        <div class="pagination-container justify-content-center">
-            <ul class="pagination pagination-warning">
-                <li class="page-item">
-                    <a class="page-link" href="javascript:" aria-label="Previous">
-                        <span aria-hidden="true"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
-                    </a>
-                </li>
-                @for ($page = 1; $page <= 5; $page++)
-                    <li class="page-item {{ $currentPage == $page ? 'active' : '' }}">
-                        <label class="page-link">
-                            {{ $page }} <input type="radio" wire:model="currentPage" name="currentPage"
-                                               value="{{ $page }}"
-                                               class="visually-hidden">
-                        </label>
-                    </li>
-                @endfor
-                <li class="page-item">
-                    <a class="page-link" href="javascript:" aria-label="Next">
-                        <span aria-hidden="true"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                    </a>
-                </li>
-            </ul>
+            </div>
+            <div class="col-sm-9">
+                <div class="pagination-container justify-content-center d-flex">
+                    <ul class="pagination pagination-warning">
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:" aria-label="Previous">
+                                <span aria-hidden="true"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+                            </a>
+                        </li>
+                        @for ($page = 1; $page <= $totalPage; $page++)
+                            <li class="page-item {{ $currentPage == $page ? 'active' : '' }}">
+                                <label class="page-link">
+                                    {{ $page }} <input type="radio" wire:model="currentPage" name="currentPage"
+                                                       value="{{ $page }}"
+                                                       class="visually-hidden">
+                                </label>
+                            </li>
+                        @endfor
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:" aria-label="Next">
+                                <span aria-hidden="true"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    {{ $currentPage }}
-
-
 </div>
 
 <!-- Modal -->
