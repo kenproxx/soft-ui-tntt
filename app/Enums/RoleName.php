@@ -4,6 +4,7 @@ namespace App\Enums;
 
 
 
+use ReflectionClass;
 use Spatie\Enum\Enum;
 
 final class RoleName extends Enum
@@ -12,4 +13,9 @@ final class RoleName extends Enum
     const ADMIN = 'ADMIN';
     const USER = 'USER';
 
+    public static function getArray()
+    {
+        $reflectionClass = new ReflectionClass(static::class);
+        return $reflectionClass->getConstants();
+    }
 }
