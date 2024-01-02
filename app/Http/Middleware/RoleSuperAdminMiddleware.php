@@ -16,7 +16,7 @@ class RoleSuperAdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (User::isSuperAdminRole()) {
+        if (isSuperAdminRole()) {
             return $next($request);
         }
         return abort(403, 'Unauthorized');

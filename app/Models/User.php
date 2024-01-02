@@ -41,42 +41,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function isNormalRole()
-    {
-        $allowedRoles = [RoleName::USER, RoleName::ADMIN, RoleName::SUPER_ADMIN];
-
-        if (Auth::check() && in_array(Auth::user()->role_name, $allowedRoles)) {
-            return true;
-        }
-        return false;
-    }
-
-    public static function isAdminRole()
-    {
-        $allowedRoles = [RoleName::ADMIN, RoleName::SUPER_ADMIN];
-
-        if (Auth::check() && in_array(Auth::user()->role_name, $allowedRoles)) {
-            return true;
-        }
-        return false;
-    }
-
-    public static function isSuperAdminRole()
-    {
-        if (Auth::check() && Auth::user()->role_name === RoleName::SUPER_ADMIN) {
-            return true;
-        }
-        return false;
-    }
-
-    // get name by id
-    public static function getNameById($id)
-    {
-        $user = User::find($id);
-        if ($user) {
-            return $user->name;
-        }
-        return '';
-    }
-
 }

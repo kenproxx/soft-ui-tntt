@@ -17,7 +17,7 @@ class RoleAdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (User::isAdminRole()) {
+        if (isAdminRole()) {
             return $next($request);
         }
         return abort(403, 'Unauthorized');

@@ -17,7 +17,7 @@ class RoleUserMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (User::isNormalRole()) {
+        if (isNormalRole()) {
             return $next($request);
         }
         return abort(403, 'Unauthorized');

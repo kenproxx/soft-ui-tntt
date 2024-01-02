@@ -97,13 +97,13 @@
                             </td>
                             <td class="text-center">
                                 <span
-                                    class="text-secondary text-xs font-weight-bold">{{ User::getNameById($item->created_by) }}</span>
+                                    class="text-secondary text-xs font-weight-bold">{{ getNameUserById($item->created_by) }}</span>
                             </td>
                             <td class="text-center">
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->created_at }}</p>
                             </td>
                             <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">{{ User::getNameById($item->updated_by) }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ getNameUserById($item->updated_by) }}</p>
                             </td>
                             <td class="text-center">
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->updated_at }}</p>
