@@ -10,5 +10,5 @@ Route::group(['prefix' => 'address'], function () {
 
 Route::group(['prefix' => 'user'], function () {
     Route::get('index', \App\Http\Livewire\advance_config\UserManagement::class)->name('user.index');
-    Route::post('store', [AddressController::class,'store'])->name('user.store');
+    Route::post('store', [\App\Http\Controllers\UserController::class,'store'])->name('user.store');
 });

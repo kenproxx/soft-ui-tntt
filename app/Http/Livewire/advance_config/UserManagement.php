@@ -51,6 +51,7 @@ class UserManagement extends Component
         $users = $users->slice(($this->currentPage - 1) * $this->perPage, $this->perPage);
 
 
-        return view('livewire.advance_config.user-management', ['users' => $users]);
+        return view('livewire.advance_config.user.index', ['users' => $users]);
     }
+
 }
