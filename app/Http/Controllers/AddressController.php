@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ToastrEnum;
 use App\Models\Address;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -71,5 +73,19 @@ class AddressController extends Controller
     public function destroy(Address $address)
     {
         //
+    }
+
+    public function handSetUserAddress(Request $request)
+    {
+        $user = User::find($request->input('id'));
+
+        if (!$user) {
+            toastr()->addNotification(ToastrEnum::ERROR, "Không tìm thấy user", ToastrEnum::LOI);
+            return back();
+        }
+        $user->location_id = $request->input('location_id');
+        $user->save();
+        toastr()->addNotification(ToastrEnum::SUCCESS, "Setup thành công", ToastrEnum::THANH_CONG);
+        return back();
     }
 }

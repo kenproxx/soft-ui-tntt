@@ -1,4 +1,4 @@
-@php use App\Enums\CapBacAddress;use App\Enums\PaginateValue;use App\Models\User; @endphp
+@php use App\Enums\CapBacAddress;use App\Enums\PaginateValue;use App\Models\User; $currentLocationId = '';@endphp
 
 <div class="main-content" id="#address">
     <style>
@@ -106,13 +106,19 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ getNameUserById($item->updated_by) }}</p>
                             </td>
                             <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">{{ $item->updated_at }}</p>
+                                <p class="text-xs font-weight-bold mb-0" wire:click="setCurrentLocationId('{{ $item->id }}')">{{ $item->updated_at }}</p>
                             </td>
                             <td class="text-center">
-                                <a href="#" class="mx-3"
+                                <a href="#"
                                    data-bs-toggle="modal"
                                    data-bs-target="#modal-edit">
-                                    <i class="fas fa-user-edit text-secondary"></i>
+                                    <i class="fas fa-edit text-secondary"></i>
+                                </a>
+                                <a href="#" class="mx-3"
+                                   data-bs-toggle="modal"
+                                   onclick="selectLocation('{{ $item->id }}')"
+                                   data-bs-target="#modal-set-user">
+                                    <i class="fas fa-user-cog text-secondary"></i>
                                 </a>
                                 <span wire:click="delete('{{ $item->id }}')">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
@@ -199,66 +205,101 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('livewire:loading', function () {
-            console.log(123)
-        });
-    </script>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tạo mới địa chỉ</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <!-- Modal -->
+    <div class="modal fade" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tạo mới địa chỉ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('address.store') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name_create">Tên</label>
+                            <input type="text" class="form-control" id="name_create" name="name"
+                                   placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="level_create">Cấp bậc cần tạo</label>
+                            <select class="form-control" id="level_create" name="cap_bac">
+                                @foreach(CapBacAddress::getArray() as $key => $value)
+                                    <option value="{{ $value }}">{{ $value  }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
-            <form action="{{ route('address.store') }}" method="post">
-                @csrf
+        </div>
+    </div>
+    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa địa chỉ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="name_create">Tên</label>
-                        <input type="text" class="form-control" id="name_create" name="name"
-                               placeholder="name@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="level_create">Cấp bậc cần tạo</label>
-                        <select class="form-control" id="level_create" name="cap_bac">
-                            @foreach(CapBacAddress::getArray() as $key => $value)
-                                <option value="{{ $value }}">{{ $value  }} </option>
-                            @endforeach
-                        </select>
-                    </div>
+                    ...
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                    <button type="button" class="btn bg-gradient-primary">Save changes</button>
                 </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa địa chỉ</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn bg-gradient-primary">Save changes</button>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-set-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Set user quản lý</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('address.set.user') }}" method="post">
+                    @csrf
+                    <input type="hidden" id="location_id" name="location_id">
+                    <div class="modal-body">
+                        <select class="form-control" id="selectUser" name="id">
+                            @foreach($userAdmin as $user)
+                                <option
+                                    value="{{ $user->id }}" {{ disableUserHasAdmin($user->location_id) }} {{ selectedUser($user->location_id, $currentLocationId) }}>
+                                    {{ $user->holy_name . ' ' . $user->name . ' | '  . $user->username . ' - ' . $user->email   }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function selectLocation(id) {
+            console.log('{{ $currentLocationId }}')
+            document.getElementById('location_id').value = id;
+        }
+
+    </script>
 </div>
