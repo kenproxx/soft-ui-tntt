@@ -49,12 +49,10 @@
         <div class="card-header pb-0">
             <div class="d-flex flex-row justify-content-between">
                 <div>
-                    <h5 class="mb-0">
-                        Danh sách tài khoản
-                    </h5>
+                    <h5 class="mb-0">All Users</h5>
                 </div>
                 <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal"
-                   data-bs-target="#modal-create">+ Tạo mới tài khoản</a>
+                   data-bs-target="#modal-create">+&nbsp; New User</a>
             </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
@@ -66,22 +64,22 @@
                             ID
                         </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                            Ảnh đại diện
+                            Photo
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Tên
+                            Name
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Email
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Quyền
+                            role
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Ngày tạo
+                            Creation Date
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Thao tác
+                            Action
                         </th>
                     </tr>
                     </thead>

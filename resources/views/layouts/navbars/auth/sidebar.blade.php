@@ -46,7 +46,9 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
+                    <span class="nav-link-text ms-1">
+                        Trang chủ
+                    </span>
                 </a>
             </li>
 

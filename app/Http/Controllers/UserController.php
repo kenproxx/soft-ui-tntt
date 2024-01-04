@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\UserInfo;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -30,15 +31,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-//        $request->validate([
-//            'username' => 'required|string|min:4|max:20|unique:users',
-//            'name' => 'required|string|max:255',
-//            'role_name' => 'required',
-//            'password' => 'required|min:6|max:12',
-//        ]);
-        toastr()->error('An error has occurred please try again later.');
-        return back();
+        try {
 
+            $request->validate([
+                'username' => 'required|string|min:4|max:20|unique:users',
+                'name' => 'required|string|max:255',
+                'role_name' => 'required',
+                'password' => 'required|min:6|max:12',
+            ]);
+        } catch (Exception $e) {
+            toastr()->addNotification('error', $e->getMessage(), 'Lỗi');
+            return back();
+        }
 
         $params = $request->only(['name', 'username', 'role_name']);
         $params['password'] = Hash::make($request->input('password'));
