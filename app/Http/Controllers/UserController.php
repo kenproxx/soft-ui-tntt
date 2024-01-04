@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -28,7 +30,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        $request->validate([
+//            'username' => 'required|string|min:4|max:20|unique:users',
+//            'name' => 'required|string|max:255',
+//            'role_name' => 'required',
+//            'password' => 'required|min:6|max:12',
+//        ]);
+        toastr()->error('An error has occurred please try again later.');
+        return back();
+
+
+        $params = $request->only(['name', 'username', 'role_name']);
+        $params['password'] = Hash::make($request->input('password'));
+        $params['code'] = $this->generateUniqueCode();
+
+        $user = new User();
+        $user->fill($params);
+
+        $user->save();
+
+        return back();
+    }
+
+    private function generateUniqueCode()
+    {
+        do {
+            $code = generateRandomString();
+        } while (User::where('code', $code)->exists());
+
+        return $code;
     }
 
     /**

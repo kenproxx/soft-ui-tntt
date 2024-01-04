@@ -1,4 +1,4 @@
-@php use App\Enums\RoleName; @endphp
+@php use App\Enums\PaginateValue;use App\Enums\RoleName; @endphp
 <div class="main-content" id="#user_management">
     <style>
         #user_management ol, #user_management ul, #user_management dl {
@@ -51,7 +51,8 @@
                 <div>
                     <h5 class="mb-0">All Users</h5>
                 </div>
-                <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; New User</a>
+                <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal"
+                   data-bs-target="#modal-create">+&nbsp; New User</a>
             </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
@@ -131,7 +132,7 @@
                     </div>
                     <div class="col-6 col-sm-6">
                         <select class="form-control " id="per_page" name="per_page" wire:model="perPage">
-                            @foreach(\App\Enums\PaginateValue::getArray() as $key => $value)
+                            @foreach(PaginateValue::getArray() as $key => $value)
                                 <option value="{{ $value }}">{{ $value  }} </option>
                             @endforeach
                         </select>
@@ -190,6 +191,52 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tạo mới địa chỉ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('user.store') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Tên</label>
+                            <input type="text" class="form-control" id="name" name="name" required
+                                   placeholder="Tên">
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Tên đăng nhập</label>
+                            <input type="text" class="form-control" id="username" name="username" required
+                                   placeholder="Tên đăng nhập">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <input type="password" class="form-control" id="password" name="password" required
+                                   placeholder="Mật khẩu">
+                        </div>
+                        <div class="form-group">
+                            <label for="role_name">Cấp bậc cần tạo</label>
+                            <select class="form-control" id="role_name" name="role_name" required>
+                                @foreach(RoleName::getArray() as $key => $value)
+                                    <option value="{{ $value }}">{{ $value  }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
