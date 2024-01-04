@@ -79,13 +79,22 @@ class AddressController extends Controller
     {
         $user = User::find($request->input('id'));
 
+        if (!$request->input('id')) {
+            $user = User::where('location_id', $request->input('location_id'))->first();
+            $user->location_id = '';
+            $user->save();
+            toastr()->addNotification(ToastrEnum::SUCCESS, "Sửa thành công", ToastrEnum::THANH_CONG);
+            return back();
+        }
+
         if (!$user) {
             toastr()->addNotification(ToastrEnum::ERROR, "Không tìm thấy user", ToastrEnum::LOI);
             return back();
         }
         $user->location_id = $request->input('location_id');
         $user->save();
-        toastr()->addNotification(ToastrEnum::SUCCESS, "Setup thành công", ToastrEnum::THANH_CONG);
+        toastr()->addNotification(ToastrEnum::SUCCESS, "Sửa thành công", ToastrEnum::THANH_CONG);
         return back();
+
     }
 }

@@ -1,4 +1,4 @@
-@php use App\Enums\CapBacAddress;use App\Enums\PaginateValue;use App\Models\User; $currentLocationId = '';@endphp
+@php use App\Enums\CapBacAddress;use App\Enums\PaginateValue;use App\Models\User; @endphp
 
 <div class="main-content" id="#address">
     <style>
@@ -106,23 +106,39 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ getNameUserById($item->updated_by) }}</p>
                             </td>
                             <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0" wire:click="setCurrentLocationId('{{ $item->id }}')">{{ $item->updated_at }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $item->updated_at }}</p>
                             </td>
                             <td class="text-center">
-                                <a href="#"
-                                   data-bs-toggle="modal"
-                                   data-bs-target="#modal-edit">
-                                    <i class="fas fa-edit text-secondary"></i>
-                                </a>
-                                <a href="#" class="mx-3"
-                                   data-bs-toggle="modal"
-                                   onclick="selectLocation('{{ $item->id }}')"
-                                   data-bs-target="#modal-set-user">
-                                    <i class="fas fa-user-cog text-secondary"></i>
-                                </a>
-                                <span wire:click="delete('{{ $item->id }}')">
+                                <div class="dropdown">
+                                    <a href="#" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown"
+                                       id="navbarDropdownMenuLink2">
+                                        <img
+                                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/icons/flags/US.png"/>
+                                        Thao tác
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                        <li>
+                                            <a href="#"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#modal-edit">
+                                                <i class="fas fa-edit text-secondary"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="mx-3"
+                                               data-bs-toggle="modal"
+                                               onclick="selectLocation('{{ $item->id }}')"
+                                               data-bs-target="#modal-set-user">
+                                                <i class="fas fa-user-cog text-secondary"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <span wire:click="delete('{{ $item->id }}')">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -277,12 +293,12 @@
                     <input type="hidden" id="location_id" name="location_id">
                     <div class="modal-body">
                         <select class="form-control" id="selectUser" name="id">
-                            @foreach($userAdmin as $user)
-                                <option
-                                    value="{{ $user->id }}" {{ disableUserHasAdmin($user->location_id) }} {{ selectedUser($user->location_id, $currentLocationId) }}>
-                                    {{ $user->holy_name . ' ' . $user->name . ' | '  . $user->username . ' - ' . $user->email   }}
-                                </option>
-                            @endforeach
+                            {{--                            @foreach($userAdmin as $user)--}}
+                            {{--                            <option--}}
+                            {{--                                value="{{ $user->id }}" {{ disableUserHasAdmin($user->location_id) }}>--}}
+                            {{--                                {{ $user->holy_name . ' ' . $user->name . ' | '  . $user->username . ' - ' . $user->email   }}--}}
+                            {{--                            </option>--}}
+                            {{--                            @endforeach--}}
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -296,10 +312,40 @@
 
     <script>
 
+        let currentLocationId;
+
         function selectLocation(id) {
-            console.log('{{ $currentLocationId }}')
             document.getElementById('location_id').value = id;
+            currentLocationId = id;
+            loadUserToSet();
         }
+
+        function loadUserToSet() {
+            let listUserAdmin = @json($userAdmin);
+
+            let selectUser = document.getElementById('selectUser');
+            selectUser.innerHTML = '';
+
+            let html = '';
+
+            html += `<option value=""></option>`;
+
+            listUserAdmin.forEach(user => {
+                const isSelected = currentLocationId === user.location_id ? 'selected' : '';
+                const isHas = !!user.location_id;
+
+                if (isSelected || !isHas) {
+                    html += `
+                <option value="${user.id}" ${isSelected}>
+                ${user.holy_name ?? ''} ${user.name ?? ''} | ${user.username ?? ''} ${user.email ?? ''}
+                </option>`;
+                }
+            });
+
+            selectUser.innerHTML = html;
+
+        }
+
 
     </script>
 </div>

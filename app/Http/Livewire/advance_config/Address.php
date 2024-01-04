@@ -17,10 +17,7 @@ class Address extends Component
     public $totalPage = 1;
     public $currentLocationId;
 
-    public function setCurrentLocationId($locationId)
-    {
-        $this->currentLocationId = $locationId;
-    }
+
     public function render()
     {
 
