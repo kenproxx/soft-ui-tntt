@@ -89,7 +89,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $index => $item)
+                    @foreach($users as $index => $user)
                         <tr>
                             <td class="ps-4">
                                 <p class="text-xs font-weight-bold mb-0">{{ ++$index }}</p>
@@ -100,26 +100,27 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">{{ $item->name }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $user->name }}</p>
                             </td>
                             <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">{{ $item->username }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $user->username }}</p>
                             </td>
                             <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">{{ $item->email }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $user->email }}</p>
                             </td>
                             <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">{{ $item->role_name }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $user->role_name }}</p>
                             </td>
                             <td class="text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{ $item->created_at }}</span>
+                                <span class="text-secondary text-xs font-weight-bold">{{ $user->created_at }}</span>
                             </td>
                             <td class="text-center">
-                                <a href="#" class="mx-3" data-bs-toggle="tooltip"
-                                   data-bs-original-title="Edit user">
+                                <a href="{{ route('user.edit', $user->id) }}"  class="mx-3" data-bs-toggle="tooltip"
+                                   data-bs-original-title="Sửa">
                                     <i class="fas fa-user-edit text-secondary"></i>
                                 </a>
-                                <span>
+                                <span data-bs-toggle="tooltip"
+                                      data-bs-original-title="Xóa">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
                             </td>
