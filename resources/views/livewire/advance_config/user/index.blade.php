@@ -72,6 +72,9 @@
                             Tên
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Username
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Email
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -98,6 +101,9 @@
                             </td>
                             <td class="text-center">
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->name }}</p>
+                            </td>
+                            <td class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">{{ $item->username }}</p>
                             </td>
                             <td class="text-center">
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->email }}</p>
