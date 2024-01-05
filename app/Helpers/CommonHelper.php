@@ -59,3 +59,22 @@ if (!function_exists('getNameUserById')) {
         return '';
     }
 }
+
+if (!function_exists('isOnlyRoleNormal')) {
+    function isOnlyRoleNormal()
+    {
+        return Auth::check() && Auth::user()->role_name === RoleName::USER;
+    }
+}
+if (!function_exists('isOnlyRoleAdmin')) {
+    function isOnlyRoleAdmin()
+    {
+        return Auth::check() && Auth::user()->role_name === RoleName::ADMIN;
+    }
+}
+if (!function_exists('isOnlyRoleSuperAdmin')) {
+    function isOnlyRoleSuperAdmin()
+    {
+        return Auth::check() && Auth::user()->role_name === RoleName::SUPER_ADMIN;
+    }
+}
