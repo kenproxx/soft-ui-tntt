@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserInfo;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -47,6 +48,10 @@ class UserController extends Controller
         $params = $request->only(['name', 'username', 'role_name']);
         $params['password'] = Hash::make($request->input('password'));
         $params['code'] = $this->generateUniqueCode();
+
+        if (isOnlyRoleAdmin()) {
+            $params['location_id'] = Auth::user()->location_id;
+        }
 
         $user = new User();
         $user->fill($params);

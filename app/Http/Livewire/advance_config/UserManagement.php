@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\advance_config;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class UserManagement extends Component
@@ -17,8 +18,6 @@ class UserManagement extends Component
 
     public function render()
     {
-
-
         $users = User::query();
         if ($this->keyword_search) {
             $users->where(function ($query) {
@@ -39,6 +38,13 @@ class UserManagement extends Component
         if ($this->role_search) {
             $users->where('role_name', '=', $this->role_search);
             $this->currentPage = 1;
+        }
+
+        if (isOnlyRoleAdmin()) {
+            if (!Auth::user()->location_id) {
+                return view('livewire.advance_config.user.index', ['users' => []]);
+            }
+            $users->where('location_id', Auth::user()->location_id);
         }
 
         $users->orderBy('created_at', 'desc');
