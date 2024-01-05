@@ -235,7 +235,12 @@
                             <label for="role_name">Cấp bậc cần tạo</label>
                             <select class="form-control" id="role_name" name="role_name" required>
                                 @foreach(RoleName::getArray() as $key => $value)
-                                    <option value="{{ $value }}">{{ $value  }} </option>
+                                    <option
+                                        value="{{ $value }}"
+                                        {{ $value === RoleName::SUPER_ADMIN && isOnlyRoleAdmin() ? 'disabled' : '' }}
+                                        {{ $value === RoleName::USER ? 'selected' : '' }}>
+                                        {{ $value  }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
