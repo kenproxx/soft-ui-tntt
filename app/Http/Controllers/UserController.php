@@ -33,7 +33,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
-
             $request->validate([
                 'username' => 'required|string|min:4|max:20|unique:users',
                 'name' => 'required|string|max:255',
@@ -89,9 +88,49 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserInfo $userInfo)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+            ]);
+        } catch (Exception $e) {
+            toastr()->addNotification('error', $e->getMessage(), 'Lỗi');
+            return back();
+        }
+
+        $param_user = $request->only(['name', 'holy_name']);
+        $param_user_info = $request
+            ->only(['sex', 'date_of_birth', 'my_phone', 'my_email',
+                'ten_bo', 'nghe_nghiep_bo', 'sdt_bo',
+                'ten_me', 'nghe_nghiep_me', 'sdt_me',
+                'giao_phan_id', 'giao_hat_id', 'giao_xu_id', 'giao_ho_id', 'dia_chi',
+                'ngay_rua_toi', 'nguoi_rua_toi', 'nguoi_do_dau_rua_toi',
+                'ngay_them_suc', 'nguoi_them_suc', 'nguoi_do_dau_them_suc',
+                'chuc_vu', 'cap_hieu', 'ngay_tuyen_hua_ht_1'
+            ]);
+
+        $user = User::find($id);
+        $user->fill($param_user);
+        $result1 = $user->save();
+
+        $userInfo = UserInfo::where('user_id', $id)->first();
+
+        if (!$userInfo) {
+            $userInfo = new UserInfo();
+            $userInfo->user_id = $id;
+        }
+
+        $userInfo->fill($param_user_info);
+        $result2 = $userInfo->save();
+
+        if ($result1 && $result2) {
+            toastr()->addNotification('success', 'Sửa thành công', 'Thành công');
+        } else {
+            toastr()->addNotification('error', 'Sửa thất bại', 'Lỗi');
+        }
+        return redirect()->route('user.index');
+
     }
 
     /**

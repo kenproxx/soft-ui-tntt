@@ -10,4 +10,5 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('index', UserManagement::class)->name('user.index');
     Route::post('store', [UserController::class, 'store'])->name('user.store');
     Route::get('edit/{id}', UserEdit::class)->name('user.edit');
+    Route::post('update/{id}', [UserController::class, 'update'])->name('user.update');
 });
