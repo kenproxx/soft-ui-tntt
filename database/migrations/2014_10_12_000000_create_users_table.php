@@ -18,15 +18,15 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('username')->unique();
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->nullable();
 
             $table->string('name');
             $table->string('password');
 
-            $table->string('holy_name')->nullable();
-            $table->string('location_id')->nullable();
-            $table->string('avatar')->nullable();
-            $table->string('role_name')->nullable()->default(RoleName::USER);
+            $table->string('holy_name')->nullable()->comment('Tên thánh');
+            $table->string('location_id')->nullable()->comment('id giáo xứ');
+            $table->string('avatar')->nullable()->comment('ảnh đại diện');
+            $table->string('role_name')->nullable()->default(RoleName::USER)->comment('quyền hạn');
             $table->string('status')->nullable();
             $table->timestamp('email_verified_at')->nullable();
 

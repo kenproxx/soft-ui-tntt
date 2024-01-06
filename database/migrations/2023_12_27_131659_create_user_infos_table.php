@@ -14,12 +14,26 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('user_id')->unique();
 
-            $table->boolean('sex')->nullable()->comment('0: nữ, 1: nam');
+            $table->string('sex')->nullable()->comment('giới tính');
             $table->date('date_of_birth')->nullable()->comment('Ngày sinh');
-            $table->integer('my_phone')->nullable()->comment('số điện thoại cá nhân');
+            $table->string('my_phone', 11)->nullable()->comment('số điện thoại cá nhân');
             $table->string('my_email')->nullable()->comment('email cá nhân');
 
-            $table->date('ngay_rua_toi')->nullable()->comment('ngày rửa tôội');
+            $table->string('ten_bo')->nullable()->comment('Tên bố');
+            $table->string('nghe_nghiep_bo')->nullable()->comment('nghề nghiệp bố');
+            $table->string('sdt_bo', 11)->nullable()->comment('số điện thoại bố');
+
+            $table->string('ten_me')->nullable()->comment('Tên mẹ');
+            $table->string('nghe_nghiep_me')->nullable()->comment('nghề nghiệp mẹ');
+            $table->string('sdt_me', 11)->nullable()->comment('số điện thoại mẹ');
+
+            $table->string('giao_phan_id')->nullable()->comment('giáo phận');
+            $table->string('giao_hat_id')->nullable()->comment('giáo hạt');
+            $table->string('giao_xu_id')->nullable()->comment('giáo xứ');
+            $table->string('giao_ho_id')->nullable()->comment('giáo họ');
+            $table->string('dia_chi')->nullable()->comment('địa chỉ gia đình');
+
+            $table->date('ngay_rua_toi')->nullable()->comment('ngày rửa tội');
             $table->string('nguoi_rua_toi')->nullable()->comment('người rửa tội');
             $table->string('nguoi_do_dau_rua_toi')->nullable()->comment('người đỡ đầu rửa tội');
 
