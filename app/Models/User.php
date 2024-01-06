@@ -41,4 +41,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $fillable = [
+        'code','holy_name', 'name', 'username', 'password', 'role_name', 'location_id', 'email', 'avatar', 'status'
+    ];
+
+    // relationship 1 - 1 with user_info
+
+    public function userInfo()
+    {
+        return $this->hasOne(UserInfo::class, 'user_id', 'id');
+    }
+
 }
