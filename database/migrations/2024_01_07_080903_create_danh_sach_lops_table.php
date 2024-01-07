@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('danh_sach_lops', function (Blueprint $table) {
             $table->id();
+            $table->string('ten_lop');
+            $table->string('ma_lop');
+            $table->string('nganh');
+            $table->unsignedBigInteger('location_id');
+
+
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

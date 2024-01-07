@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('danh_sach_lop_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('lop_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }
