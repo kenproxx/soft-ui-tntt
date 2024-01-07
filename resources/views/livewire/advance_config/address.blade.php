@@ -230,15 +230,17 @@
                         </div>
                         <div class="form-group">
                             <label for="level_create">Cấp bậc cha</label>
-                            <input type="text" class="parent_select_modal_address" placeholder="Select">
+                            <input type="text" id="parent_select_modal_create" placeholder="Select">
 
                         </div>
 
-                        <input type="hidden" name="parent_id">
+                        <input type="hidden" name="parent_id" id="parent_id_create">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                        <button type="submit" class="btn bg-gradient-primary">Save
+                            changes
+                        </button>
                     </div>
                 </form>
             </div>
@@ -254,7 +256,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="">
+                <form action="" onsubmit="return handleSubmitEdit()">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name_create">Tên</label>
@@ -271,10 +273,10 @@
                         </div>
                         <div class="form-group">
                             <label for="level_create">Cấp bậc cha</label>
-                            <input type="text" class="parent_select_modal_address" placeholder="Select">
+                            <input type="text" id="parent_select_modal_edit" placeholder="Select">
                         </div>
 
-                        <input type="hidden" name="parent_id">
+                        <input type="hidden" name="parent_id" id="parent_id_edit">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
@@ -360,13 +362,25 @@
             });
         }
 
-        var instance = $('.parent_select_modal_address').comboTree({
-            source: objectToArray(@json($listAddress)),
+        const listAddress = objectToArray(@json($listAddress));
+
+        let instanceCreate = $('#parent_select_modal_create').comboTree({
+            source: listAddress,
+            collapse: true,
+        });
+
+        let instanceEdit = $('#parent_select_modal_edit').comboTree({
+            source: listAddress,
             collapse: true,
         });
 
         function handleSubmitCreate() {
-            document.getElementsByName('parent_id')[0].value = instance.getSelectedIds();
+            document.getElementById('parent_id_create').value = instanceCreate.getSelectedIds();
+            return true;
+        }
+
+        function handleSubmitEdit() {
+            document.getElementById('parent_id_edit').value = instanceEdit.getSelectedIds();
             return true;
         }
 
