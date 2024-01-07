@@ -25,6 +25,12 @@
     {{--jquery--}}
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 
+    {{-- Combo Tree
+    Documentation: https://www.jqueryscript.net/form/Drop-Down-Combo-Tree.html
+    --}}
+    <script src="{{ asset('js/ComboTree/comboTreePlugin.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('js/ComboTree/comboTreeStyle.css') }}">
+
     @livewireStyles
 
 </head>
