@@ -2,12 +2,9 @@
 
 namespace App\Models;
 
-use App\Enums\RoleName;
-use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
 
 
 class User extends Authenticatable
@@ -42,7 +39,7 @@ class User extends Authenticatable
     ];
 
     protected $fillable = [
-        'code','holy_name', 'name', 'username', 'password', 'role_name', 'location_id', 'email', 'avatar', 'status'
+        'code', 'holy_name', 'name', 'username', 'password', 'role_name', 'location_id', 'email', 'avatar', 'status'
     ];
 
     // relationship 1 - 1 with user_info

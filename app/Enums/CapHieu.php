@@ -28,4 +28,28 @@ final class CapHieu extends Enum
         $reflectionClass = new ReflectionClass(static::class);
         return $reflectionClass->getConstants();
     }
+
+    public static function getListThieuNhi()
+    {
+        $allowedConstants = ['CHIEN_CON', 'AU_NHI', 'THIEU_NHI', 'NGHIA_SY', 'HIEP_SY'];
+
+        $reflectionClass = new ReflectionClass(static::class);
+        $constants = $reflectionClass->getConstants();
+
+        $filteredConstants = array_intersect_key($constants, array_flip($allowedConstants));
+
+        return $filteredConstants;
+    }
+
+    public static function getListHuynhTruong()
+    {
+        $allowedConstants = ['DU_TRUONG', 'HUYNH_TRUONG_C1', 'HUYNH_TRUONG_C2', 'HUYNH_TRUONG_C3', 'HLV_1', 'HLV_2', 'HLV_3', 'TRO_TA', 'TRO_UY', 'TUYEN_UY'];
+
+        $reflectionClass = new ReflectionClass(static::class);
+        $constants = $reflectionClass->getConstants();
+
+        $filteredConstants = array_intersect_key($constants, array_flip($allowedConstants));
+
+        return $filteredConstants;
+    }
 }

@@ -249,6 +249,15 @@
                                 <div id="collapseFifth" class="accordion-collapse collapse card p-4 mt-1"
                                      aria-labelledby="headingFifth" data-bs-parent="#accordionRental">
                                     <div class="form-group">
+                                        <label>Quyền</label>
+                                        <select class="form-control" name="role_name" {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}>
+                                            @foreach(\App\Enums\RoleName::getArray() as $key => $value)
+                                                <option
+                                                    value="{{ $value }}" {{ $user->role_name === $value ? 'selected' : '' }} >{{ $value  }} </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Chức vụ</label>
                                         <input type="text" value="{{ $user->userInfo->chuc_vu ?? '' }}"
                                                class="form-control" name="chuc_vu"
@@ -256,9 +265,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Cấp hiệu</label>
-                                        <input type="text" value="{{ $user->userInfo->cap_hieu ?? '' }}"
-                                               class="form-control" name="cap_hieu"
-                                               placeholder="Cấp hiệu">
+                                        <select class="form-control" name="cap_hieu">
+                                            @foreach(\App\Enums\CapHieu::getArray() as $key => $value)
+                                                <option
+                                                    value="{{ $value }}" {{ $user->userInfo->cap_hieu ?? '' === $value ? 'selected' : '' }}>{{ $value  }} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Ngày tuyên hứa Huynh trưởng cấp 1</label>

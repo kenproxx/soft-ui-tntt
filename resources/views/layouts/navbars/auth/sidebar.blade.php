@@ -150,18 +150,19 @@
                     <span class="nav-link-text ms-1">Huynh trưởng</span>
                 </a>
             </li>
-            <li class="nav-item pb-2">
-                <a class="nav-link {{ Route::currentRouteName() == 'doan-sinh.danh-sach-lop' ? 'active' : '' }}"
-                   href="{{ route('doan-sinh.danh-sach-lop') }}">
-                    <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center
+            @if(isOnlyRoleAdmin())
+                <li class="nav-item pb-2">
+                    <a class="nav-link {{ Route::currentRouteName() == 'doan-sinh.danh-sach-lop' ? 'active' : '' }}"
+                       href="{{ route('doan-sinh.danh-sach-lop') }}">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center
                         {{ in_array(request()->route()->getName(),['doan-sinh.huynh-truong']) ? 'text-white' : 'text-dark' }}"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Danh sách lớp</span>
-                </a>
-            </li>
-
+                        </div>
+                        <span class="nav-link-text ms-1">Danh sách lớp</span>
+                    </a>
+                </li>
+            @endif
             <li class="nav-item mt-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Laravel Examples</h6>
             </li>

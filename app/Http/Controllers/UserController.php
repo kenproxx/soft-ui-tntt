@@ -99,7 +99,7 @@ class UserController extends Controller
             return back();
         }
 
-        $param_user = $request->only(['name', 'holy_name']);
+        $param_user = $request->only(['name', 'holy_name', 'role_name']);
         $param_user_info = $request
             ->only(['sex', 'date_of_birth', 'my_phone', 'my_email',
                 'ten_bo', 'nghe_nghiep_bo', 'sdt_bo',
