@@ -30,7 +30,8 @@
         },
         "files": [
             "app/Helpers/CommonHelper.php",
-            "app/Helpers/AddressHelper.php"
+            "app/Helpers/AddressHelper.php",
+            "app/Helpers/UserHelper.php"
         ]
     },
     "autoload-dev": {
