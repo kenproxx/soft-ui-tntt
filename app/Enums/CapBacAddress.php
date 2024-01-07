@@ -7,7 +7,6 @@ use Spatie\Enum\Enum;
 
 final class CapBacAddress extends Enum
 {
-    const TOAN_QUOC = 'Toàn quốc';
     const GIAO_TINH = 'Giáo tỉnh';
     const GIAO_PHAN = 'Giáo phận';
     const GIAO_HAT = 'Giáo hạt';

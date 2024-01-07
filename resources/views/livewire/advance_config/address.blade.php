@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <select wire:model="level_search" class="form-control" id="level_create" name="cap_bac">
+                        <select wire:model="cap_bac_search" class="form-control" id="cap_bac" name="cap_bac_search">
                             <option value="">Tất cả</option>
                             @foreach(CapBacAddress::getArray() as $key => $value)
                                 <option value="{{ $value }}">{{ $value  }} </option>
@@ -58,9 +58,6 @@
                             Tên
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Slug
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Cấp bậc
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -90,9 +87,6 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->name }}</p>
                             </td>
                             <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">{{ $item->slug }}</p>
-                            </td>
-                            <td class="text-center">
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->cap_bac }}</p>
                             </td>
                             <td class="text-center">
@@ -109,36 +103,21 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->updated_at }}</p>
                             </td>
                             <td class="text-center">
-                                <div class="dropdown">
-                                    <a href="#" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown"
-                                       id="navbarDropdownMenuLink2">
-                                        <img
-                                            src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/icons/flags/US.png"/>
-                                        Thao tác
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                        <li>
-                                            <a href="#"
-                                               data-bs-toggle="modal"
-                                               data-bs-target="#modal-edit">
-                                                <i class="fas fa-edit text-secondary"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="mx-3"
-                                               data-bs-toggle="modal"
-                                               onclick="selectLocation('{{ $item->id }}')"
-                                               data-bs-target="#modal-set-user">
-                                                <i class="fas fa-user-cog text-secondary"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <span wire:click="delete('{{ $item->id }}')">
+
+                                <a href="#"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#modal-edit">
+                                    <i class="fas fa-edit text-secondary"></i>
+                                </a>
+                                <a href="#" class="mx-3"
+                                   data-bs-toggle="modal"
+                                   onclick="selectLocation('{{ $item->id }}')"
+                                   data-bs-target="#modal-set-user">
+                                    <i class="fas fa-user-cog text-secondary"></i>
+                                </a>
+                                <span wire:click="delete('{{ $item->id }}')">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
-                                        </li>
-                                    </ul>
-                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -233,7 +212,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('address.store') }}" method="post">
+                <form action="{{ route('address.store') }}" method="post" onsubmit="return handleSubmitCreate()">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -250,11 +229,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="level_create">Câp bậc cha</label>
-                            <select class="form-control" name="cap_bac" id="cap_bac_cha">
+                            <label for="level_create">Cấp bậc cha</label>
+                            <input type="text" class="parent_select_modal_address" placeholder="Select">
 
-                            </select>
                         </div>
+
+                        <input type="hidden" name="parent_id">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
@@ -274,13 +254,33 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn bg-gradient-primary">Save changes</button>
-                </div>
+                <form action="">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name_create">Tên</label>
+                            <input type="text" class="form-control" id="name_create" name="name"
+                                   placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="level_create">Cấp bậc cần tạo</label>
+                            <select class="form-control" name="cap_bac">
+                                @foreach(CapBacAddress::getArray() as $key => $value)
+                                    <option value="{{ $value }}">{{ $value  }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="level_create">Cấp bậc cha</label>
+                            <input type="text" class="parent_select_modal_address" placeholder="Select">
+                        </div>
+
+                        <input type="hidden" name="parent_id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -299,12 +299,12 @@
                     <input type="hidden" id="location_id" name="location_id">
                     <div class="modal-body">
                         <select class="form-control" id="selectUser" name="id">
-                            {{--                            @foreach($userAdmin as $user)--}}
-                            {{--                            <option--}}
-                            {{--                                value="{{ $user->id }}" {{ disableUserHasAdmin($user->location_id) }}>--}}
-                            {{--                                {{ $user->holy_name . ' ' . $user->name . ' | '  . $user->username . ' - ' . $user->email   }}--}}
-                            {{--                            </option>--}}
-                            {{--                            @endforeach--}}
+                            @foreach($userAdmin as $user)
+                                <option
+                                    value="{{ $user->id }}" {{ disableUserHasAdmin($user->location_id) }}>
+                                    {{ $user->holy_name . ' ' . $user->name . ' | '  . $user->username . ' - ' . $user->email   }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -349,6 +349,25 @@
             });
 
             selectUser.innerHTML = html;
+        }
+
+        function objectToArray(obj) {
+            return Object.values(obj).map(function (item) {
+                if (item.children && item.children.length > 0) {
+                    item.children = objectToArray(item.children);
+                }
+                return item;
+            });
+        }
+
+        var instance = $('.parent_select_modal_address').comboTree({
+            source: objectToArray(@json($listAddress)),
+            collapse: true,
+        });
+
+        function handleSubmitCreate() {
+            document.getElementsByName('parent_id')[0].value = instance.getSelectedIds();
+            return true;
         }
 
     </script>

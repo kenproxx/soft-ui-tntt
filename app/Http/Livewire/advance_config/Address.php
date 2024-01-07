@@ -9,7 +9,7 @@ use Livewire\Component;
 class Address extends Component
 {
     public $name_search;
-    public $level_search;
+    public $cap_bac_search;
     public $slug;
     public $page;
     public $perPage = 10;
@@ -20,6 +20,8 @@ class Address extends Component
 
     public function render()
     {
+
+        $listAddress = \App\Models\Address::all()->toHierarchy()->toArray();
 
         $addresses = \App\Models\Address::query();
 
@@ -32,8 +34,8 @@ class Address extends Component
             $this->currentPage = 1;
         }
 
-        if ($this->level_search) {
-            $addresses->where('cap_bac', 'like', '%' . $this->cap_bac . '%');
+        if ($this->cap_bac_search) {
+            $addresses->where('cap_bac', 'like', '%' . $this->cap_bac_search . '%');
             $this->currentPage = 1;
         }
 
@@ -52,7 +54,7 @@ class Address extends Component
         $userAdmin = User::where('role_name', RoleName::ADMIN)->get();
 
         return view('livewire.advance_config.address',
-            ['addresses' => $addresses, 'currentPage' => $this->currentPage, 'userAdmin' => $userAdmin]);
+            ['addresses' => $addresses, 'currentPage' => $this->currentPage, 'userAdmin' => $userAdmin, 'listAddress' => $listAddress]);
     }
 
     public function delete($id)
@@ -60,5 +62,6 @@ class Address extends Component
         $address = \App\Models\Address::find($id);
         $address->delete();
     }
+
 
 }

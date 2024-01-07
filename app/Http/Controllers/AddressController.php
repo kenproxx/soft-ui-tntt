@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ToastrEnum;
 use App\Models\Address;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -31,14 +32,26 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+            ]);
+        } catch (Exception $e) {
+            toastr()->addNotification('error', $e->getMessage(), 'Lỗi');
+            return back();
+        }
+
         $params = $request->only(['name', 'cap_bac']);
-        $params['slug'] = strtoupper(Str::studly($request->input('name')));
+        $params['slug'] = strtoupper(Str::slug($request->input('name')));
 
         $address = new Address();
         $address->fill($params);
-        $address->parent_id = null;
 
         $address->save();
+
+        if ($request->input('parent_id')) {
+            $address->makeChildOf(Address::find($request->input('parent_id')));
+        }
 
         return back();
     }
