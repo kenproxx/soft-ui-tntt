@@ -249,6 +249,12 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="level_create">Câp bậc cha</label>
+                            <select class="form-control" name="cap_bac" id="cap_bac_cha">
+
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
@@ -343,9 +349,7 @@
             });
 
             selectUser.innerHTML = html;
-
         }
-
 
     </script>
 </div>
