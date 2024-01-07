@@ -151,27 +151,26 @@
                                      aria-labelledby="headingTwo" data-bs-parent="#accordionRental">
                                     <div class="form-group">
                                         <label>Giáo phận</label>
-                                        <input type="text" value="{{ $user->userInfo->giao_phan_id ?? '' }}"
-                                               class="form-control" name="giao_phan_id"
-                                        >
+                                        <select class="form-control" id="giao_phan_id" name="giao_phan_id"
+                                                onchange="getListGiaoHat(this.value)">
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Giáo hạt</label>
-                                        <input type="text" value="{{ $user->userInfo->giao_hat_id ?? '' }}"
-                                               class="form-control" name="giao_hat_id"
-                                        >
+                                        <select class="form-control" id="giao_hat_id" name="giao_hat_id"
+                                                onchange="getListGiaoXu(this.value)">
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Giáo xứ</label>
-                                        <input type="text" value="{{ $user->userInfo->giao_xu_id ?? '' }}"
-                                               class="form-control" name="giao_xu_id"
-                                        >
+                                        <select class="form-control" id="giao_xu_id" name="giao_xu_id"
+                                                onchange="getListGiaoHo(this.value)">
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Giáo họ</label>
-                                        <input type="text" value="{{ $user->userInfo->giao_ho_id ?? '' }}"
-                                               class="form-control" name="giao_ho_id"
-                                        >
+                                        <select class="form-control" id="giao_ho_id" name="giao_ho_id">
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Địa chỉ</label>
@@ -275,4 +274,110 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function objectToArray(obj) {
+            return Object.values(obj).map(function (item) {
+                if (item.children && item.children.length > 0) {
+                    item.children = objectToArray(item.children);
+                }
+                return item;
+            });
+        }
+
+        const listAddress = [];
+
+        const isResetOption = -1;
+        const giaoPhanId = '{{ $user->userInfo->giao_phan_id ?? '' }}';
+        const giaoHatId = '{{ $user->userInfo->giao_hat_id ?? '' }}';
+        const giaoXuId = '{{ $user->userInfo->giao_xu_id ?? '' }}';
+        const giaoHoId = '{{ $user->userInfo->giao_ho_id ?? '' }}';
+
+        getListGiaoPhan();
+
+        async function getListGiaoPhan() {
+            const url = '{{ route('dia-chi.giao-phan') }}';
+            let response = await fetch(url);
+            response = await response.json();
+
+
+            renderJsonToHtml(response, 'giao_phan_id', giaoPhanId);
+
+            if (response.length === 0) {
+                getListGiaoHat(isResetOption);
+                return
+            }
+            getListGiaoHat();
+        }
+
+        async function getListGiaoHat() {
+            const id = $('#giao_phan_id').val();
+
+            let url = '{{ route('dia-chi.giao-hat', ['id' => ':id']) }}';
+            url = url.replace(':id', id)
+
+            let response = await fetch(url);
+            response = await response.json();
+
+            renderJsonToHtml(response, 'giao_hat_id', giaoHatId);
+
+            if (response.length === 0) {
+                getListGiaoXu(isResetOption);
+                return
+            }
+
+            getListGiaoXu(response[0].id);
+        }
+
+        async function getListGiaoXu() {
+            const id = $('#giao_hat_id').val();
+
+            let url = '{{ route('dia-chi.giao-xu', ['id' => ':id']) }}';
+            url = url.replace(':id', id)
+
+            let response = await fetch(url);
+            response = await response.json();
+
+            renderJsonToHtml(response, 'giao_xu_id', giaoXuId);
+
+            if (response.length === 0) {
+                getListGiaoHo(isResetOption);
+                return
+            }
+
+            getListGiaoHo(response[0].id);
+        }
+
+        async function getListGiaoHo() {
+            const id = $('#giao_xu_id').val();
+
+            let url = '{{ route('dia-chi.giao-ho', ['id' => ':id']) }}';
+            url = url.replace(':id', id)
+
+            let response = await fetch(url);
+            response = await response.json();
+
+            renderJsonToHtml(response, 'giao_ho_id', giaoHoId);
+        }
+
+        function renderJsonToHtml(data, idDiv, idCheck = null) {
+            let html = '';
+
+            if (data.length === 0) {
+                html += `<option value="" disabled selected>Không có dữ liệu</option>`;
+                $('#' + idDiv).html(html);
+                return;
+            }
+
+            data.forEach(function (item) {
+                if (idCheck && item.id == idCheck) {
+                    html += '<option value="' + item.id + '" selected>' + item.name + '</option>';
+                    return;
+                }
+                html += '<option value="' + item.id + '">' + item.name + '</option>';
+            })
+            $('#' + idDiv).html(html);
+        }
+
+    </script>
 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CapBacAddress;
 use App\Enums\ToastrEnum;
 use App\Models\Address;
 use App\Models\User;
@@ -109,5 +110,28 @@ class AddressController extends Controller
         toastr()->addNotification(ToastrEnum::SUCCESS, "Sửa thành công", ToastrEnum::THANH_CONG);
         return back();
 
+    }
+
+    public function getGiaoPhan()
+    {
+        $listGiaoPhan = Address::where([['depth', 1], ['cap_bac', CapBacAddress::GIAO_PHAN]])->orderBy('name', 'asc')->get();
+        return response()->json($listGiaoPhan);
+    }
+    public function getGiaoHatByGiaoPhan($id)
+    {
+        $listGiaoHat = Address::where([['cap_bac', CapBacAddress::GIAO_HAT], ['parent_id', $id]])->orderBy('name', 'asc')->get();
+        return response()->json($listGiaoHat);
+    }
+
+    public function getGiaoXuByGiaoHat($id)
+    {
+        $listGiaoXu = Address::where([['cap_bac', CapBacAddress::GIAO_XU], ['parent_id', $id]])->orderBy('name', 'asc')->get();
+        return response()->json($listGiaoXu);
+    }
+
+    public function getGiaoHoByGiaoXu($id)
+    {
+        $listGiaoHo = Address::where([['cap_bac', CapBacAddress::GIAO_HO], ['parent_id', $id]])->orderBy('name', 'asc')->get();
+        return response()->json($listGiaoHo);
     }
 }
