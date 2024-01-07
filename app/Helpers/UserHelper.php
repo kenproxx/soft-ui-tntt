@@ -1,15 +1,17 @@
 <?php
 
+use App\Enums\CapHieu;
+use App\Models\UserInfo;
 use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('isThieuNhi')) {
     function isThieuNhi($id = null)
     {
-        $allowedRoles = [\App\Enums\CapHieu::CHIEN_CON, \App\Enums\CapHieu::AU_NHI, \App\Enums\CapHieu::THIEU_NHI,
-            \App\Enums\CapHieu::NGHIA_SY, \App\Enums\CapHieu::HIEP_SY,];
+        $allowedRoles = [CapHieu::CHIEN_CON, CapHieu::AU_NHI, CapHieu::THIEU_NHI,
+            CapHieu::NGHIA_SY, CapHieu::HIEP_SY,];
 
         if ($id) {
-            $userInfo = \App\Models\UserInfo::where('user_id', $id)->first();
+            $userInfo = UserInfo::where('user_id', $id)->first();
             if (!$userInfo) {
                 return false;
             }
@@ -18,7 +20,7 @@ if (!function_exists('isThieuNhi')) {
             }
         } else {
             if (Auth::check()) {
-                $userInfo = \App\Models\UserInfo::where('user_id', Auth::id())->first();
+                $userInfo = UserInfo::where('user_id', Auth::id())->first();
                 if (!$userInfo) {
                     return false;
                 }
@@ -36,17 +38,17 @@ if (!function_exists('isThieuNhi')) {
 if (!function_exists('isHuynhTruong')) {
     function isHuynhTruong($id = null)
     {
-        $allowedRoles = [\App\Enums\CapHieu::CHIEN_CON, \App\Enums\CapHieu::AU_NHI, \App\Enums\CapHieu::THIEU_NHI,
-            \App\Enums\CapHieu::NGHIA_SY, \App\Enums\CapHieu::HIEP_SY,];
+        $allowedRoles = [CapHieu::CHIEN_CON, CapHieu::AU_NHI, CapHieu::THIEU_NHI,
+            CapHieu::NGHIA_SY, CapHieu::HIEP_SY,];
 
         if ($id) {
-            $userInfo = \App\Models\UserInfo::where('user_id', $id)->first();
+            $userInfo = UserInfo::where('user_id', $id)->first();
             if (in_array($userInfo->cap_hieu, $allowedRoles)) {
                 return false;
             }
         } else {
             if (Auth::check()) {
-                $userInfo = \App\Models\UserInfo::where('user_id', Auth::id())->first();
+                $userInfo = UserInfo::where('user_id', Auth::id())->first();
                 if (in_array($userInfo->cap_hieu, $allowedRoles)) {
                     return false;
                 }

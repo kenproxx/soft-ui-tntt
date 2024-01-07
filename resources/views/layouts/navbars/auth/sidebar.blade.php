@@ -150,7 +150,7 @@
                     <span class="nav-link-text ms-1">Huynh trưởng</span>
                 </a>
             </li>
-            @if(isOnlyRoleAdmin())
+            @if(isOnlyRoleAdmin() && accountOfGiaoXu())
                 <li class="nav-item pb-2">
                     <a class="nav-link {{ Route::currentRouteName() == 'doan-sinh.danh-sach-lop' ? 'active' : '' }}"
                        href="{{ route('doan-sinh.danh-sach-lop') }}">
