@@ -12,3 +12,8 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('edit/{id}', UserEdit::class)->name('user.edit');
     Route::post('update/{id}', [UserController::class, 'update'])->name('user.update');
 });
+
+Route::group(['prefix' => 'doan-sinh'], function () {
+    Route::get('thieu-nhi', \App\Http\Livewire\DoanSinh\ThieuNhiIndex::class)->name('doan-sinh.thieu-nhi');
+    Route::get('huynh-truong', \App\Http\Livewire\DoanSinh\HuynhTruongIndex::class)->name('doan-sinh.huynh-truong');
+});
