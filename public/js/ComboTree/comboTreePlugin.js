@@ -159,7 +159,7 @@
 
   ComboTree.prototype.createSourceItemHTML = function (sourceItem) {
     let itemHtml = "";
-    const isThereSubs = sourceItem.hasOwnProperty("subs");
+    const isThereSubs = sourceItem.hasOwnProperty("children");
     const collapse = sourceItem.hasOwnProperty("collapse")
       ? sourceItem.hasOwnProperty("collapse")
       : false;
@@ -188,11 +188,11 @@
       class="ct-list-item-title ${selectableClass}"
     >${
       this.options.isMultiple && isSelectable ? '<input type="checkbox" />' : ""
-    }${sourceItem.title}</span>`;
+    }${sourceItem.name}</span>`;
 
     if (isThereSubs)
       itemHtml += this.createSourceSubItemsHTML(
-        sourceItem.subs,
+        sourceItem.children,
         sourceItem.id,
         collapse
       );
@@ -395,7 +395,7 @@
     if ($(ctItem).data("selectable") == true) {
       this._selectedItem = {
         id: $(ctItem).attr("data-id"),
-        title: $(ctItem).text(),
+        name: $(ctItem).text(),
       };
 
       const check = this.isItemInArray(this._selectedItem, this.options.source);
@@ -419,7 +419,7 @@
     if ($(ctItem).data("selectable") == true) {
       this._selectedItem = {
         id: $(ctItem).attr("data-id"),
-        title: $(ctItem).text(),
+        name: $(ctItem).text(),
       };
 
       this.refreshInputVal();
@@ -465,10 +465,10 @@
   // recursive search for item in arr
   ComboTree.prototype.isItemInArray = function (item, arr) {
     for (let i = 0; i < arr.length; i++) {
-      if (item.id == arr[i].id && item.title == arr[i].title) return i + "";
+      if (item.id == arr[i].id && item.name == arr[i].name) return i + "";
 
-      if (arr[i].hasOwnProperty("subs")) {
-        const found = this.isItemInArray(item, arr[i].subs);
+      if (arr[i].hasOwnProperty("children")) {
+        const found = this.isItemInArray(item, arr[i].children);
         if (found) return found;
       }
     }
@@ -480,11 +480,11 @@
 
     if (this.options.isMultiple) {
       for (let i = 0; i < this._selectedItems.length; i++) {
-        tmpTitle += this._selectedItems[i].title;
+        tmpTitle += this._selectedItems[i].name;
         if (i < this._selectedItems.length - 1) tmpTitle += ", ";
       }
     } else {
-      tmpTitle = this._selectedItem.title;
+      tmpTitle = this._selectedItem.name;
     }
 
     this._input.val(tmpTitle);
@@ -564,7 +564,7 @@
 
         selectedItem = {
           id: selected.data("id"),
-          title: selected.text(),
+          name: selected.text(),
         };
         selectedItems.push(selectedItem);
       }
@@ -581,9 +581,9 @@
     if (itemId && source) {
       for (let i = 0; i < source.length; i++) {
         if (source[i].id == itemId)
-          return { id: source[i].id, title: source[i].title };
-        if (source[i].hasOwnProperty("subs")) {
-          let found = this.findItembyId(itemId, source[i].subs);
+          return { id: source[i].id, name: source[i].name };
+        if (source[i].hasOwnProperty("children")) {
+          let found = this.findItembyId(itemId, source[i].children);
           if (found) return found;
         }
       }
@@ -613,14 +613,14 @@
     if (this.options.isMultiple && this._selectedItems.length > 0) {
       const tmpArr = [];
       for (i = 0; i < this._selectedItems.length; i++)
-        tmpArr.push(this._selectedItems[i].title);
+        tmpArr.push(this._selectedItems[i].name);
 
       return tmpArr;
     } else if (
       !this.options.isMultiple &&
       this._selectedItem.hasOwnProperty("id")
     ) {
-      return this._selectedItem.title;
+      return this._selectedItem.name;
     }
     return null;
   };
@@ -701,7 +701,7 @@
         let $itemElem = $(inputCheck).parent("span").first();
         let item = {
           id: $itemElem.data("id"),
-          title: $itemElem.text(),
+          name: $itemElem.text(),
         };
         $(inputCheck).prop("checked", true);
         _this._selectedItems.push(item);
