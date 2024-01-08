@@ -56,8 +56,9 @@ class UserManagement extends Component
         // limit address offset by page
         $users = $users->slice(($this->currentPage - 1) * $this->perPage, $this->perPage);
 
+        $listAddress = \App\Models\Address::all()->toHierarchy()->toArray();
 
-        return view('livewire.advance_config.user.index', ['users' => $users]);
+        return view('livewire.advance_config.user.index', ['users' => $users, 'listAddress' => $listAddress]);
     }
 
 }

@@ -69,16 +69,16 @@
                             Ảnh đại diện
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Tên
+                            Tên thánh
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Username
+                            Tên gọi
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Email
+                            Tên đăng nhập
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Quyền
+                            Cấp bậc
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Ngày tạo
@@ -100,16 +100,16 @@
                                 </div>
                             </td>
                             <td class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">{{ $user->holy_name }}</p>
+                            </td>
+                            <td class="text-center">
                                 <p class="text-xs font-weight-bold mb-0">{{ $user->name }}</p>
                             </td>
                             <td class="text-center">
                                 <p class="text-xs font-weight-bold mb-0">{{ $user->username }}</p>
                             </td>
                             <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">{{ $user->email }}</p>
-                            </td>
-                            <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">{{ $user->role_name }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $user->cap_hieu }}</p>
                             </td>
                             <td class="text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{ $user->created_at }}</span>

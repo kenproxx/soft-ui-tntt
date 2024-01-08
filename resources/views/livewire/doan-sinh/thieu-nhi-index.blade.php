@@ -10,6 +10,7 @@
             padding-left: revert;
         }
     </style>
+
     <div class="card mx-4 mb-4">
         <form class="p-4">
             <div class="row">
@@ -78,7 +79,7 @@
                             Email
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Quyền
+                            Cấp bậc
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Ngày tạo
@@ -109,7 +110,7 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ $user->email }}</p>
                             </td>
                             <td class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">{{ $user->role_name }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $user->cap_hieu }}</p>
                             </td>
                             <td class="text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{ $user->created_at }}</span>

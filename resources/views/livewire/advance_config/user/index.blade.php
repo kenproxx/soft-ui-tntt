@@ -31,8 +31,14 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input wire:model="location_search" type="search" class="form-control"
-                               placeholder="Chọn vị trí">
+{{--                        <select wire:model="location_search" class="form-control">--}}
+{{--                            <option value="">Tất cả</option>--}}
+{{--                            @foreach(getElementAddressAndChild() as $address)--}}
+{{--                                <option value="{{ $address->id }}">{{ $address->name  }} </option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+                        <input type="text" id="parent_select_search" wire:model="location_search"  placeholder="Select">
+
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -254,5 +260,24 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function objectToArray(obj) {
+            return Object.values(obj).map(function (item) {
+                if (item.children && item.children.length > 0) {
+                    item.children = objectToArray(item.children);
+                }
+                return item;
+            });
+        }
+
+        const listAddress = objectToArray(@json($listAddress));
+
+        let instanceEdit = $('#parent_select_search').comboTree({
+            source: listAddress,
+            collapse: true,
+        });
+
+    </script>
 
 </div>

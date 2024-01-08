@@ -59,3 +59,47 @@ if (!function_exists('adminOfHigherGiaoXu')) {
         return false;
     }
 }
+if (!function_exists('getIdAddressAndChild')) {
+    function getIdAddressAndChild($id = null)
+    {
+        {
+            if ($id) {
+                $address = Address::find($id);
+            } else {
+                if (isOnlyRoleSuperAdmin()){
+                    $address = Address::all()->toHierarchy()->pluck('id')->toArray();
+                    return $address;
+                }
+                $locationId = Auth::user()->location_id;
+                if (!$locationId) {
+                    return [];
+                }
+                $address = Address::find($locationId);
+            }
+
+            $addressChild = $address->getDescendantsAndSelf()->pluck('id')->toArray();
+            return $addressChild;
+        }
+    }
+}
+if (!function_exists('getElementAddressAndChild')) {
+    function getElementAddressAndChild($id = null)
+    {
+        if ($id) {
+            $address = Address::find($id);
+        } else {
+            if (isOnlyRoleSuperAdmin()){
+                $address = Address::all()->toHierarchy();
+                return $address;
+            }
+            $locationId = Auth::user()->location_id;
+            if (!$locationId) {
+                return [];
+            }
+            $address = Address::find($locationId);
+        }
+
+        $addressChild = $address->getDescendants();
+        return $addressChild;
+    }
+}
