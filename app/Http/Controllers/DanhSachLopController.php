@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CapHieu;
+use App\Enums\ToastrEnum;
 use App\Models\DanhSachLop;
-use App\Models\User;
-use Exception;
+use App\Models\DanhSachLopDetail;
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,7 +41,7 @@ class DanhSachLopController extends Controller
         if ($params['ma_lop']) {
             $checkMaLop = DanhSachLop::where('ma_lop', $params['ma_lop'])->first();
             if ($checkMaLop) {
-                toastr()->addNotification('error', 'Mã lớp đã tồn tại', 'Lỗi');
+                toastr()->addNotification(ToastrEnum::ERROR, 'Mã lớp đã tồn tại', ToastrEnum::LOI);
                 return back();
             }
         } else {
@@ -51,7 +53,7 @@ class DanhSachLopController extends Controller
 
         $danhSachLop->save();
 
-        toastr()->addNotification('success', 'Thêm lớp thành công', 'Thành công');
+        toastr()->addNotification(ToastrEnum::SUCCESS, 'Thêm lớp thành công', ToastrEnum::THANH_CONG);
         return back();
     }
 
@@ -94,5 +96,54 @@ class DanhSachLopController extends Controller
     public function destroy(DanhSachLop $danhSachLop)
     {
         //
+    }
+
+    public function addMemberToClass(Request $request)
+    {
+        $idClass = $request->input('idClass');
+
+        if (!$idClass) {
+            toastr()->addNotification(ToastrEnum::ERROR, 'Không tìm thấy lớp', ToastrEnum::LOI);
+            return back();
+        }
+
+        $nganh = DanhSachLop::where('id', $idClass)->first()->nganh;
+        $listUser = explode(',', $request->input('list-user'));
+
+        foreach ($listUser as $idUser) {
+            $checkExist = DanhSachLopDetail::where('lop_id', $idClass)->where('user_id', $idUser)->first();
+            if (!$checkExist) {
+                $danhSachLop = new DanhSachLopDetail();
+                $danhSachLop->lop_id = $idClass;
+                $danhSachLop->user_id = $idUser;
+                $danhSachLop->save();
+                $this->setNganhUserTheoLop($idUser, $nganh);
+            } else {
+                if ($checkExist->lop_id != $idClass) {
+                    $checkExist->lop_id = $idClass;
+                    $checkExist->save();
+                    $this->setNganhUserTheoLop($idUser, $nganh);
+                }
+            }
+        }
+
+        toastr()->addNotification(ToastrEnum::SUCCESS, 'Thêm thành viên vào lớp thành công', ToastrEnum::THANH_CONG);
+        return back();
+    }
+
+    private function setNganhUserTheoLop($idUser, $nganh)
+    {
+        // set Ngành cho user theo ngành của lớp nếu là thieu nhi
+        $user = UserInfo::where('user_id', $idUser)->first();
+
+        if (!$user) {
+            $user = new UserInfo();
+        }
+        $capHuynhTruong = CapHieu::getListHuynhTruong();
+
+        if (!in_array($user->cap_hieu, $capHuynhTruong)) {
+            $user->cap_hieu = $nganh;
+            $user->save();
+        }
     }
 }

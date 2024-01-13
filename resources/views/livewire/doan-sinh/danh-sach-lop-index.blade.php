@@ -115,7 +115,7 @@
                                     <i class="fas fa-user-edit text-secondary" data-bs-toggle="modal"
                                        data-bs-target="#modal-edit"></i>
                                 </a>
-                                <span data-bs-toggle="tooltip"
+                                <span data-bs-toggle="tooltip" onclick="setValueIdClass('{{ $class->id }}')"
                                       data-bs-original-title="Thêm thành viên" class="mx-3">
                                             <i class="far fa-address-book text-secondary" data-bs-toggle="modal"
                                                data-bs-target="#modal-add-user"></i>
@@ -297,13 +297,14 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('doan-sinh.danh-sach-lop.store') }}" method="post" onsubmit="return handleSubmitAddUser()">
+                <form action="{{ route('doan-sinh.danh-sach-lop.add-member') }}" method="post" onsubmit="return handleSubmitAddUser()">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="password">Thêm thành viên vào lớp</label>
                             <input type="text" id="select-user" placeholder="Select">
                         </div>
+                        <input type="hidden" name="idClass" id="id-class">
                         <input type="hidden" name="list-user">
                     </div>
                     <div class="modal-footer">
@@ -323,6 +324,10 @@
             collapse: true,
             isMultiple: true,
         });
+
+        function setValueIdClass(id) {
+            $('#id-class').val(id);
+        }
 
         function objectToArray(obj) {
             return Object.values(obj).map(function (item) {
