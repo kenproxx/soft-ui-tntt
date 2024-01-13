@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class DanhSachLop extends Model
 {
@@ -17,4 +18,9 @@ class DanhSachLop extends Model
         'nganh',
         'location_id',
     ];
+
+    public static function checkUserHaveClass()
+    {
+        return DanhSachLopDetail::where('user_id', Auth::id())->first();
+    }
 }

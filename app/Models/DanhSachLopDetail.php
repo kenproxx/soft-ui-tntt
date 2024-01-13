@@ -11,4 +11,8 @@ class DanhSachLopDetail extends Model
     use HasFactory;
     use CreatedUpdatedBy;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
