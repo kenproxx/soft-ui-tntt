@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\DoanSinh;
 
 use App\Enums\CapHieu;
+use App\Enums\RoleName;
 use App\Models\DanhSachLop;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,7 @@ class DanhSachLopIndex extends Component
         // limit address offset by page
         $listClass = $listClass->slice(($this->currentPage - 1) * $this->perPage, $this->perPage);
 
-        $listUser = User::all();
+        $listUser = User::where('role_name', RoleName::USER)->whereIn('location_id', getIdAddressAndChild())->get();
 
         return view('livewire.doan-sinh.danh-sach-lop-index', [
             'listClass' => $listClass,
