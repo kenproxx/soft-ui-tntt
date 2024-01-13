@@ -17,4 +17,5 @@ Route::group(['prefix' => 'doan-sinh'], function () {
     Route::get('thieu-nhi', \App\Http\Livewire\DoanSinh\ThieuNhiIndex::class)->name('doan-sinh.thieu-nhi');
     Route::get('huynh-truong', \App\Http\Livewire\DoanSinh\HuynhTruongIndex::class)->name('doan-sinh.huynh-truong');
     Route::get('danh-sach-lop', \App\Http\Livewire\DoanSinh\DanhSachLopIndex::class)->name('doan-sinh.danh-sach-lop');
+    Route::post('danh-sach-lop/store', [\App\Http\Controllers\DanhSachLopController::class, 'store'])->name('doan-sinh.danh-sach-lop.store');
 });

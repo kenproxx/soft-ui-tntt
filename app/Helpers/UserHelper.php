@@ -58,3 +58,23 @@ if (!function_exists('isHuynhTruong')) {
         return true;
     }
 }
+if (!function_exists('getNameUserById')) {
+    function getNameUserById($id = null)
+    {
+        if (!$id) {
+            return '';
+        }
+        $user = \App\Models\User::find($id);
+        return $user->name;
+    }
+}
+if (!function_exists('getFullNameUserById')) {
+    function getFullNameUserById($id = null)
+    {
+        if (!$id) {
+            return '';
+        }
+        $user = \App\Models\User::find($id);
+        return $user->holy_name . ' ' . $user->name;
+    }
+}

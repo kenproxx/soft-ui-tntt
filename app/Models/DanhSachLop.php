@@ -11,4 +11,10 @@ class DanhSachLop extends Model
     use HasFactory;
     use CreatedUpdatedBy;
 
+    protected $fillable = [
+        'ma_lop',
+        'ten_lop',
+        'nganh',
+        'location_id',
+    ];
 }

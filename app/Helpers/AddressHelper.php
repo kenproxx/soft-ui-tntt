@@ -103,3 +103,13 @@ if (!function_exists('getElementAddressAndChild')) {
         return $addressChild;
     }
 }
+if (!function_exists('getNameAddressById')) {
+    function getNameAddressById($id = null)
+    {
+        if (!$id) {
+            return '';
+        }
+        $address = Address::find($id);
+        return $address->name;
+    }
+}
