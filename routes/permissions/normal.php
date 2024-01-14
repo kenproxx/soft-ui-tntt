@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AddressController;
+use App\Http\Livewire\DoanSinh\ThongTinDoan;
 use App\Http\Livewire\DoanSinh\ThongTinLop;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,5 @@ Route::group(['prefix' => 'thong-tin-dia-chi'], function () {
 
 Route::group(['prefix' => 'doan-sinh'], function () {
     Route::get('thong-tin-lop/{idClass?}', ThongTinLop::class)->name('doan-sinh.thong-tin-lop');
+    Route::get('thong-tin-doan', ThongTinDoan::class)->name('doan-sinh.thong-tin-doan');
 });
