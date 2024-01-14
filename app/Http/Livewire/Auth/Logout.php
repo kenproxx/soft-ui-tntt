@@ -11,7 +11,7 @@ class Logout extends Component
     {
         auth()->logout();
         toastr()->addNotification(ToastrEnum::SUCCESS, 'Đăng xuất thành công', ToastrEnum::THANH_CONG);
-        return redirect('/login');
+        return redirect()->route('login');
     }
 
     public function render()

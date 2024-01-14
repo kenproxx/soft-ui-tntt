@@ -6,6 +6,9 @@ use App\Http\Livewire\Auth\ResetPassword;
 use App\Http\Livewire\Auth\SignUp;
 use App\Http\Livewire\Billing;
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\Exception\Error403;
+use App\Http\Livewire\Exception\Error404;
+use App\Http\Livewire\Exception\Error500;
 use App\Http\Livewire\LaravelExamples\UserManagement;
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\Profile;
@@ -30,15 +33,15 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/sign-up', SignUp::class)->name('sign-up');
-Route::get('/login', Login::class)->name('login');
+Route::get('/dang-ky', SignUp::class)->name('sign-up');
+Route::get('/dang-nhap', Login::class)->name('login');
 
 Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
 
 Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password')->middleware('signed');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+    Route::get('/trang-chu', Dashboard::class)->name('dashboard');
     Route::get('/billing', Billing::class)->name('billing');
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/tables', Tables::class)->name('tables');
@@ -61,4 +64,11 @@ Route::middleware('auth')->group(function () {
     Route::middleware('isSuperAdmin')->group(function () {
         require_once __DIR__.'/permissions/super_admin.php';
     });
+});
+
+
+Route::group(['prefix' => 'exception'], function () {
+    Route::get('403', Error403::class)->name('exception.403');
+    Route::get('404', Error404::class)->name('exception.404');
+    Route::get('500', Error500::class)->name('exception.500');
 });
