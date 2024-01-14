@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Enums\ToastrEnum;
 use App\Models\User;
 use Livewire\Component;
 
@@ -30,8 +31,10 @@ class Login extends Component
         if (auth()->attempt(['username' => $this->username, 'password' => $this->password], $this->remember_me)) {
             $user = User::where(["username" => $this->username])->first();
             auth()->login($user, $this->remember_me);
+            toastr()->addNotification(ToastrEnum::SUCCESS, 'Đăng nhập thành công', ToastrEnum::THANH_CONG);
             return redirect()->intended('/dashboard');
         } else {
+            toastr()->addNotification(ToastrEnum::ERROR, 'Đăng nhập thất bại', ToastrEnum::LOI);
             return $this->addError('username', trans('auth.failed'));
         }
     }
