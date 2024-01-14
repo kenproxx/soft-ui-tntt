@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\DoanSinh;
 
+use App\Models\DanhSachLop;
 use App\Models\DanhSachLopDetail;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -33,13 +34,16 @@ class ThongTinLop extends Component
 
         $classMember = DanhSachLopDetail::where('lop_id', $lop_id->lop_id)->with('user')->orderBy('created_at', 'desc')->get();
 
+        $classInfo = DanhSachLop::find($lop_id->lop_id);
+
         $this->totalPage = ceil(count($classMember) / $this->perPage);
 
         // limit address offset by page
         $classMember = $classMember->slice(($this->currentPage - 1) * $this->perPage, $this->perPage);
 
         return view('livewire.doan-sinh.thong-tin-lop', [
-            'classMember' => $classMember
+            'classMember' => $classMember,
+            'classInfo' => $classInfo,
         ]);
     }
 

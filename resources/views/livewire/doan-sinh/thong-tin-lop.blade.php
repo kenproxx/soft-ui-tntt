@@ -11,51 +11,18 @@
         }
     </style>
 
-    <div class="card mx-4 mb-4">
-        <form class="p-4">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input wire:model="keyword_search" type="search" class="form-control"
-                               placeholder="Nhập vào tên, tên đăng nhập, code, hoặc email">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <select wire:model="role_search" class="form-control">
-                            <option value="">Tất cả</option>
-                            @foreach(RoleName::getArray() as $key => $value)
-                                <option value="{{ $value }}">{{ $value  }} </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input wire:model="location_search" type="search" class="form-control"
-                               placeholder="Chọn vị trí">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <button type="button" wire:click="render" class="btn bg-gradient-primary">
-                        Tìm kiếm
-                    </button>
-                </div>
-            </div>
-
-        </form>
-    </div>
-
     <div class="card mb-4 mx-4">
         <div class="card-header pb-0">
             <div class="d-flex flex-row justify-content-between">
                 <div>
                     <h5 class="mb-0">
-                        Danh sách tài khoản
+                        Danh sách thành viên trong lớp {{ $classInfo->ten_lop }}
                     </h5>
                 </div>
+                @if(isHuynhTruong())
                 <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal"
                    data-bs-target="#modal-create">+ Tạo mới tài khoản</a>
+                @endif
             </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
@@ -78,9 +45,11 @@
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Ngày tạo
                         </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Thao tác
-                        </th>
+                        @if(isHuynhTruong())
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Thao tác
+                            </th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -104,17 +73,19 @@
                                 <span
                                     class="text-secondary text-xs font-weight-bold">{{ $user->user->created_at }}</span>
                             </td>
-                            <td class="text-center">
-                                <a href="{{ route('user.edit', $user->user->id) }}" class="mx-3"
-                                   data-bs-toggle="tooltip"
-                                   data-bs-original-title="Sửa">
-                                    <i class="fas fa-user-edit text-secondary"></i>
-                                </a>
-                                <span data-bs-toggle="tooltip"
-                                      data-bs-original-title="Xóa">
+                            @if(isHuynhTruong())
+                                <td class="text-center">
+                                    <a href="{{ route('user.edit', $user->user->id) }}" class="mx-3"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-original-title="Sửa">
+                                        <i class="fas fa-user-edit text-secondary"></i>
+                                    </a>
+                                    <span data-bs-toggle="tooltip"
+                                          data-bs-original-title="Xóa">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
-                            </td>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>
