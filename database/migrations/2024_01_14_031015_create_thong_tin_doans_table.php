@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('location_id');
             $table->string('name');
-            $table->string('chuc_vu');
-            $table->string('avatar');
+            $table->date('ngay_bon_mang_doan')->nullable();
+            $table->mediumText('logo_doan')->nullable();
             $table->string('sdt');
 
             $table->unsignedBigInteger('created_by')->nullable();
