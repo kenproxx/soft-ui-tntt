@@ -20,3 +20,7 @@ Route::group(['prefix' => 'doan-sinh'], function () {
     Route::get('thong-tin-doan', ThongTinDoan::class)->name('doan-sinh.thong-tin-doan');
     Route::get('thong-tin-doan/sua', ThongTinDoanEdit::class)->name('doan-sinh.thong-tin-doan.edit');
 });
+
+Route::group(['prefix' => 'mail'], function () {
+    Route::get('send', [\App\Http\Controllers\SendMailController::class, 'sendMail'])->name('mail.send');
+});

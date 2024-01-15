@@ -29,6 +29,10 @@ if (!function_exists('accountOfBelowGiaoXu')) {
         $allowedRoles = [CapBacAddress::GIAO_HO, CapBacAddress::GIAO_DIEM];
         $address = Address::find(Auth::user()->location_id);
 
+        if (!$address) {
+            return false;
+        }
+
         if (Auth::check() && in_array($address->cap_bac, $allowedRoles)) {
             return true;
         }
@@ -41,6 +45,10 @@ if (!function_exists('accountOfGiaoXu')) {
         $allowedRoles = [CapBacAddress::GIAO_XU];
         $address = Address::find(Auth::user()->location_id);
 
+        if (!$address) {
+            return false;
+        }
+
         if (Auth::check() && in_array($address->cap_bac, $allowedRoles)) {
             return true;
         }
@@ -52,6 +60,10 @@ if (!function_exists('adminOfHigherGiaoXu')) {
     {
         $allowedRoles = [CapBacAddress::GIAO_HAT, CapBacAddress::GIAO_TINH, CapBacAddress::GIAO_PHAN];
         $address = Address::find(Auth::user()->location_id);
+
+        if (!$address) {
+            return false;
+        }
 
         if (Auth::check() && in_array($address->cap_bac, $allowedRoles)) {
             return true;
