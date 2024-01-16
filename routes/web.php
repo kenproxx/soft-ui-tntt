@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect()->route('login');
 });
 
 Route::get('/dang-ky', SignUp::class)->name('sign-up');

@@ -20,7 +20,7 @@ class Login extends Component
     public function mount()
     {
         if (auth()->user()) {
-            redirect('/dashboard');
+            redirect()->route('dashboard');
         }
         $this->fill(['username' => 'admin@softui.com', 'password' => 'secret']);
     }
@@ -32,7 +32,7 @@ class Login extends Component
             $user = User::where(["username" => $this->username])->first();
             auth()->login($user, $this->remember_me);
             toastr()->addNotification(ToastrEnum::SUCCESS, 'Đăng nhập thành công', ToastrEnum::THANH_CONG);
-            return redirect()->intended('/dashboard');
+            redirect()->route('dashboard');
         } else {
             toastr()->addNotification(ToastrEnum::ERROR, 'Đăng nhập thất bại', ToastrEnum::LOI);
             return $this->addError('username', trans('auth.failed'));

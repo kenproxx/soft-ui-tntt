@@ -22,7 +22,7 @@ class SignUp extends Component
     public function mount()
     {
         if (auth()->user()) {
-            redirect('/dashboard');
+            redirect()->route('dashboard');
         }
     }
 
@@ -38,7 +38,7 @@ class SignUp extends Component
 
         auth()->login($user);
 
-        return redirect('/dashboard');
+        redirect()->route('dashboard');
     }
 
     public function render()
