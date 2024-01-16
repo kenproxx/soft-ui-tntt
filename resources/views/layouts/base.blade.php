@@ -34,7 +34,6 @@
     @livewireStyles
 
 </head>
-<x-spinner/>
 
 <body class="g-sidenav-show bg-gray-100">
 
