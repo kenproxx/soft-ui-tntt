@@ -11,7 +11,6 @@ class Address extends Model
 {
     use WorksAsNestedSet;
     use CreatedUpdatedBy;
-    use SoftDeletes;
 
     ////////////////////////////////////////////////////////////////////////////
 

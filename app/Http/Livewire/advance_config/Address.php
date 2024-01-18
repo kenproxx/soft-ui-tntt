@@ -23,7 +23,7 @@ class Address extends Component
 
         $listAddress = \App\Models\Address::all()->toHierarchy()->toArray();
 
-        $addresses = \App\Models\Address::withTrashed();
+        $addresses = \App\Models\Address::query();
 
         if ($this->name_search) {
             $addresses->where(function ($query) {

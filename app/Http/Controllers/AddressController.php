@@ -95,7 +95,7 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        $address = Address::find($id);
+        $address = Address::where('id', $id)->first();
 
         if (!$address) {
             toastr()->addNotification(ToastrEnum::ERROR, "Không tìm thấy địa chỉ", ToastrEnum::LOI);
@@ -103,9 +103,14 @@ class AddressController extends Controller
         }
 
         $listIDAddress = getIdAddressAndChild($id);
-        \App\Models\Address::whereIn('id', $listIDAddress)->delete();
+        if ($address->deleted_at) {
+            \App\Models\Address::whereIn('id', $listIDAddress)->update(['deleted_at' => null]);
+            toastr()->addNotification(ToastrEnum::SUCCESS, "Khôi phục thành công", ToastrEnum::THANH_CONG);
+        } else{
+            \App\Models\Address::whereIn('id', $listIDAddress)->update(['deleted_at' => now()]);
+            toastr()->addNotification(ToastrEnum::SUCCESS, "Xóa thành công", ToastrEnum::THANH_CONG);
+        }
 
-        toastr()->addNotification(ToastrEnum::SUCCESS, "Xóa thành công", ToastrEnum::THANH_CONG);
         return back();
     }
 

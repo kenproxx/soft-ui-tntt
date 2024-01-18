@@ -128,7 +128,7 @@
                                     <i class="fas fa-user-cog text-secondary"></i>
                                 </a>
                                 <span onclick="confirmDelete('{{ $item->id }}')">
-                                    <i class="cursor-pointer fas fa-trash text-secondary"></i>
+                                    <i class="cursor-pointer fas {{ $item->deleted_at ? 'fa-lock-open' : 'fa-lock' }} text-secondary"></i>
                                 </span>
                                 <button wire:click="delete('{{ $item->id }}')" hidden id="deleteAddress"></button>
 
