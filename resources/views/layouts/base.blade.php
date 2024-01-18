@@ -36,11 +36,39 @@
 
     @livewireStyles
 
+    <style>
+        .loading-overlay-master {
+            display: none;
+            background: rgba(255, 255, 255, 0.7);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 9998;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-overlay-master.is-active {
+            display: flex;
+        }
+    </style>
+
+    <script>
+        function loadingMasterPage() {
+            $('#loading-master-page').toggleClass('is-active')
+        }
+    </script>
+
 </head>
+<div class="loading-overlay-master" id="loading-master-page">
+    <span class="spinner-border" id="span-loading-master-page"></span>
+</div>
 
-<body class="g-sidenav-show bg-gray-100">
-
+<body class="g-sidenav-show bg-gray-100 ">
 {{ $slot }}
+</body>
 
 <!--   Core JS Files   -->
 <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
@@ -56,6 +84,18 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
+    randomClassLoading();
+
+    function randomClassLoading() {
+        var spinner = document.getElementById('span-loading-master-page');
+        var classColor = ['text-primary', 'text-secondary', 'text-success', 'text-danger', 'text-warning', 'text-info', 'text-success'];
+
+        // Randomly select a class from the array
+        var randomClassColor = classColor[Math.floor(Math.random() * classColor.length)];
+
+        // Set the selected class to the spinner
+        spinner.classList.add(randomClassColor);
+    }
 </script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -68,6 +108,5 @@
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
 @livewireScripts
-</body>
 
 </html>

@@ -343,6 +343,7 @@
 
         loadUserToSet();
 
+
         function confirmDelete(id) {
             swal("Xác nhận ẩn địa chỉ này và tất cả địa chỉ con?", {
                 dangerMode: true,
@@ -352,6 +353,7 @@
                 // 'willDelete' là một biến boolean, có giá trị là true nếu người dùng nhấn nút "OK", và false nếu nhấn nút "Cancel"
                 if (willDelete) {
                     // Hàm sẽ được gọi khi người dùng nhấn nút "OK"
+                    loadingMasterPage();
                     deleteAddress(id);
                 }
             });
@@ -375,6 +377,7 @@
         }
 
         async function showDetailAddress() {
+            loadingMasterPage();
             let url = '{{ route('address.show', ['id' => ':id']) }}';
             url = url.replace(':id', currentLocationId);
 
@@ -386,9 +389,12 @@
             document.getElementById('name_edit').value = address.name;
             document.getElementById('cap_bac_edit').value = address.cap_bac;
             alert('Vui lòng cập nhật lại thông tin địa chỉ cha');
+            loadingMasterPage();
         }
 
         function loadUserToSet() {
+            loadingMasterPage();
+
             let listUserAdmin = @json($userAdmin);
 
             let selectUser = document.getElementById('selectUser');
@@ -411,6 +417,7 @@
             });
 
             selectUser.innerHTML = html;
+            loadingMasterPage();
         }
 
         function objectToArray(obj) {
@@ -435,11 +442,13 @@
         });
 
         function handleSubmitCreate() {
+            loadingMasterPage();
             document.getElementById('parent_id_create').value = instanceCreate.getSelectedIds();
             return true;
         }
 
         function handleSubmitEdit() {
+            loadingMasterPage();
             document.getElementById('parent_id_edit').value = instanceEdit.getSelectedIds();
             return true;
         }
