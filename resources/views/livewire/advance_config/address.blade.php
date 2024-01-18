@@ -55,7 +55,7 @@
                             <input type="checkbox" name="checkAll" class="checkAll"/>
                         </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            ID
+                            STT
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Tên
@@ -130,8 +130,6 @@
                                 <span onclick="confirmDelete('{{ $item->id }}')">
                                     <i class="cursor-pointer fas {{ $item->deleted_at ? 'fa-lock-open' : 'fa-lock' }} text-secondary"></i>
                                 </span>
-                                <button wire:click="delete('{{ $item->id }}')" hidden id="deleteAddress"></button>
-
                             </td>
                         </tr>
                     @endforeach
@@ -446,11 +444,6 @@
             return true;
         }
 
-        /**
-         * Enable Check All Functionality
-         * @param  {string} element - ID or class of table
-         * @return {[none]}         none
-         */
         function enableCheckAll(element) {
             var $table = $(element),
                 $notCheckAllCheckbox = $table.find(':checkbox').not('.checkAll');

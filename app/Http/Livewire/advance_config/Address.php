@@ -17,17 +17,13 @@ class Address extends Component
     public $totalPage = 1;
     public $currentLocationId;
 
-
     public function render()
     {
-
-        $listAddress = \App\Models\Address::all()->toHierarchy()->toArray();
-
         $addresses = \App\Models\Address::query();
 
         if ($this->name_search) {
-            $addresses->where(function ($query) {
-                $textSearch = '%' . $this->name_search . '%';
+            $textSearch = '%' . $this->name_search . '%';
+            $addresses->where(function ($query) use ($textSearch) {
                 $query->where('name', 'like', $textSearch)
                     ->orWhere('slug', 'like', $textSearch);
             });
@@ -40,28 +36,21 @@ class Address extends Component
         }
 
         $addresses->orderBy('created_at', 'desc');
-        $addresses = $addresses->get();
 
-        if ($this->name_search) {
-            $this->currentPage = 1;
-        }
+        $totalAddresses = $addresses->count();
 
-        $this->totalPage = ceil(count($addresses) / $this->perPage);
+        $this->totalPage = ceil($totalAddresses / $this->perPage);
 
-        // limit address offset by page
-        $addresses = $addresses->slice(($this->currentPage - 1) * $this->perPage, $this->perPage);
+        $addresses = $addresses->skip(($this->currentPage - 1) * $this->perPage)
+            ->take($this->perPage)
+            ->get();
 
         $userAdmin = User::where('role_name', RoleName::ADMIN)->get();
+
+        $listAddress = \App\Models\Address::all()->toHierarchy()->toArray();
 
         return view('livewire.advance_config.address',
             ['addresses' => $addresses, 'currentPage' => $this->currentPage, 'userAdmin' => $userAdmin, 'listAddress' => $listAddress]);
     }
-
-    public function delete($id)
-    {
-        $address = \App\Models\Address::find($id);
-        $address->delete();
-    }
-
 
 }
