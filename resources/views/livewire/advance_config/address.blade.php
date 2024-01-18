@@ -17,7 +17,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <input wire:model="name_search" type="search" class="form-control" id="exampleFormControlInput1"
-                               placeholder="name@example.com">
+                               placeholder="Tìm kiếm theo tên">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -106,12 +106,14 @@
 
                                 <a href="#"
                                    data-bs-toggle="modal"
-                                   data-bs-target="#modal-edit">
+                                   data-bs-target="#modal-edit"
+                                   onclick="selectLocation('{{ $item->id }}', SHOW)"
+                                >
                                     <i class="fas fa-edit text-secondary"></i>
                                 </a>
                                 <a href="#" class="mx-3"
                                    data-bs-toggle="modal"
-                                   onclick="selectLocation('{{ $item->id }}')"
+                                   onclick="selectLocation('{{ $item->id }}', SET_USER)"
                                    data-bs-target="#modal-set-user">
                                     <i class="fas fa-user-cog text-secondary"></i>
                                 </a>
@@ -208,7 +210,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Tạo mới địa chỉ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -218,7 +220,7 @@
                         <div class="form-group">
                             <label for="name_create">Tên</label>
                             <input type="text" class="form-control" id="name_create" name="name"
-                                   placeholder="name@example.com">
+                                   placeholder="Nhập vào tên đầy đủ, ví dụ: Giáo tỉnh Hà Nội, Giáo phận Bắc Ninh">
                         </div>
                         <div class="form-group">
                             <label for="level_create">Cấp bậc cần tạo</label>
@@ -237,35 +239,38 @@
                         <input type="hidden" name="parent_id" id="parent_id_create">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn bg-gradient-primary">Save
-                            changes
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn bg-gradient-primary">
+                            Lưu
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa địa chỉ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" onsubmit="return handleSubmitEdit()">
+                <form action="{{ route('address.update') }}" method="post" onsubmit="return handleSubmitEdit()">
+                    @csrf
+                    <input type="hidden" name="id" id="id_edit">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name_create">Tên</label>
-                            <input type="text" class="form-control" id="name_create" name="name"
-                                   placeholder="name@example.com">
+                            <input type="text" class="form-control" id="name_edit" name="name"
+                                   placeholder="Nhập vào tên đầy đủ, ví dụ: Giáo tỉnh Hà Nội, Giáo phận Bắc Ninh">
                         </div>
                         <div class="form-group">
                             <label for="level_create">Cấp bậc cần tạo</label>
-                            <select class="form-control" name="cap_bac">
+                            <select class="form-control" name="cap_bac" id="cap_bac_edit">
                                 @foreach(CapBacAddress::getArray() as $key => $value)
                                     <option value="{{ $value }}">{{ $value  }} </option>
                                 @endforeach
@@ -279,20 +284,21 @@
                         <input type="hidden" name="parent_id" id="parent_id_edit">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn bg-gradient-primary">Lưu</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="modal-set-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Set user quản lý</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -310,8 +316,8 @@
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn bg-gradient-primary">Lưu</button>
                     </div>
                 </form>
             </div>
@@ -321,11 +327,32 @@
     <script>
 
         let currentLocationId;
+        const SHOW = 'SHOW';
+        const SET_USER = 'SET_USER';
 
-        function selectLocation(id) {
+        loadUserToSet();
+
+        function selectLocation(id, type) {
             document.getElementById('location_id').value = id;
             currentLocationId = id;
-            loadUserToSet();
+
+            if (type === SHOW) {
+                showDetailAddress();
+            }
+        }
+
+        async function showDetailAddress() {
+            let url = '{{ route('address.show', ['id' => ':id']) }}';
+            url = url.replace(':id', currentLocationId);
+
+            let address = await fetch(url)
+                .then(response => response.json())
+                .catch(error => console.log(error));
+
+            document.getElementById('id_edit').value = address.id;
+            document.getElementById('name_edit').value = address.name;
+            document.getElementById('cap_bac_edit').value = address.cap_bac;
+            alert('Vui lòng cập nhật lại thông tin địa chỉ cha');
         }
 
         function loadUserToSet() {
@@ -336,7 +363,7 @@
 
             let html = '';
 
-            html += `<option value=""></option>`;
+            html += `<option value="" selected>Chọn User Quản lý địa chỉ này</option>`;
 
             listUserAdmin.forEach(user => {
                 const isSelected = currentLocationId === user.location_id ? 'selected' : '';

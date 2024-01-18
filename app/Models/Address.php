@@ -71,7 +71,7 @@ class Address extends Model
     //  */
     // protected $scopeColumnNames = [];
 
-    protected $fillable = ['name', 'cap_bac', 'slug'];
+    protected $fillable = ['name', 'cap_bac', 'slug', 'parent_id'];
 
     ////////////////////////////////////////////////////////////////////////////
 

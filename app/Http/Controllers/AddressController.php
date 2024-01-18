@@ -60,9 +60,18 @@ class AddressController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Address $address)
+    public function show($id)
     {
-        //
+        $address = Address::find($id);
+
+        if (!$address) {
+            toastr()->addNotification(ToastrEnum::ERROR, "Không tìm thấy địa chỉ", ToastrEnum::LOI);
+            return back();
+        }
+
+        $address->load('children');
+
+        return response()->json($address);
     }
 
     /**
@@ -76,9 +85,9 @@ class AddressController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Address $address)
+    public function update(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
