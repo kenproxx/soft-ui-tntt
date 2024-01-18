@@ -29,46 +29,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+Route::middleware('throttle:60,2')->group(function () {
 
-Route::get('/dang-ky', SignUp::class)->name('sign-up');
-Route::get('/dang-nhap', Login::class)->name('login');
-
-Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
-
-Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password')->middleware('signed');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/trang-chu', Dashboard::class)->name('dashboard');
-    Route::get('/billing', Billing::class)->name('billing');
-    Route::get('/profile', Profile::class)->name('profile');
-    Route::get('/tables', Tables::class)->name('tables');
-    Route::get('/static-sign-in', StaticSignIn::class)->name('sign-in');
-    Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
-    Route::get('/rtl', Rtl::class)->name('rtl');
-    Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
-    Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
-
-
-
-    Route::middleware('isNormal')->group(function () {
-        require_once __DIR__.'/permissions/normal.php';
+    Route::get('/', function () {
+        return redirect()->route('login');
     });
 
-    Route::middleware('isAdmin')->group(function () {
-        require_once __DIR__.'/permissions/admin.php';
+    Route::get('/dang-ky', SignUp::class)->name('sign-up');
+    Route::get('/dang-nhap', Login::class)->name('login');
+
+    Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
+
+    Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password')->middleware('signed');
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/trang-chu', Dashboard::class)->name('dashboard');
+        Route::get('/billing', Billing::class)->name('billing');
+        Route::get('/profile', Profile::class)->name('profile');
+        Route::get('/tables', Tables::class)->name('tables');
+        Route::get('/static-sign-in', StaticSignIn::class)->name('sign-in');
+        Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
+        Route::get('/rtl', Rtl::class)->name('rtl');
+        Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
+        Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
+
+
+        Route::middleware('isNormal')->group(function () {
+            require_once __DIR__ . '/permissions/normal.php';
+        });
+
+        Route::middleware('isAdmin')->group(function () {
+            require_once __DIR__ . '/permissions/admin.php';
+        });
+
+        Route::middleware('isSuperAdmin')->group(function () {
+            require_once __DIR__ . '/permissions/super_admin.php';
+        });
     });
 
-    Route::middleware('isSuperAdmin')->group(function () {
-        require_once __DIR__.'/permissions/super_admin.php';
+    Route::group(['prefix' => 'exception'], function () {
+        Route::get('403', Error403::class)->name('exception.403');
+        Route::get('404', Error404::class)->name('exception.404');
+        Route::get('500', Error500::class)->name('exception.500');
     });
-});
-
-
-Route::group(['prefix' => 'exception'], function () {
-    Route::get('403', Error403::class)->name('exception.403');
-    Route::get('404', Error404::class)->name('exception.404');
-    Route::get('500', Error500::class)->name('exception.500');
 });
