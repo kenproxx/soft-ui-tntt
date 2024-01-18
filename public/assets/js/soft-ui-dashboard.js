@@ -20456,9 +20456,9 @@
                 i.event.bind(i[scrollbarY], 'mousedown', function (e) {
                     bindMoves(e);
                 });
-                i.event.bind(i[scrollbarY], 'touchstart', function (e) {
-                    bindMoves(e, true);
-                });
+                // i.event.bind(i[scrollbarY], 'touchstart', function (e) {
+                //     bindMoves(e, true);
+                // });
             }
 
             function keyboard(i) {
@@ -20757,7 +20757,7 @@
                 }
 
                 if (typeof window.onwheel !== 'undefined') {
-                    i.event.bind(element, 'wheel', mousewheelHandler);
+                    // i.event.bind(element, 'wheel', mousewheelHandler);
                 } else if (typeof window.onmousewheel !== 'undefined') {
                     i.event.bind(element, 'mousewheel', mousewheelHandler);
                 }
@@ -20964,7 +20964,7 @@
                 }
 
                 if (env.supportsTouch) {
-                    i.event.bind(element, 'touchstart', touchStart);
+                    // i.event.bind(element, 'touchstart', touchStart);
                     i.event.bind(element, 'touchmove', touchMove);
                     i.event.bind(element, 'touchend', touchEnd);
                 } else if (env.supportsIePointer) {

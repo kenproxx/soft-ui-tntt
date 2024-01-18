@@ -31,6 +31,9 @@
     <script src="{{ asset('js/ComboTree/comboTreePlugin.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('js/ComboTree/comboTreeStyle.css') }}">
 
+    {{-- Sweet Alert --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     @livewireStyles
 
 </head>

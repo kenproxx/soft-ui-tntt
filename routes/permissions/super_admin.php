@@ -9,6 +9,7 @@ Route::group(['prefix' => 'dia-chi'], function () {
     Route::post('luu', [AddressController::class, 'store'])->name('address.store');
     Route::get('xem/{id}', [AddressController::class, 'show'])->name('address.show');
     Route::post('cap-nhat', [AddressController::class, 'update'])->name('address.update');
+    Route::post('xoa/{id}', [AddressController::class, 'destroy'])->name('address.destroy');
 
     Route::post('set-user', [AddressController::class, 'handSetUserAddress'])->name('address.set.user');
 });

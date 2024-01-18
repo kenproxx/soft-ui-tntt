@@ -40,7 +40,7 @@
         <div class="card-header pb-0">
             <div class="d-flex flex-row justify-content-between">
                 <div>
-                    <h5 class="mb-0">All Users</h5>
+                    <h5 class="mb-0">Danh sách địa chỉ</h5>
                 </div>
                 <a href="#" class="btn bg-gradient-primary btn-sm mb-0" data-bs-toggle="modal"
                    data-bs-target="#modal-create" type="button">+&nbsp; Tạo mới địa chỉ</a>
@@ -76,6 +76,9 @@
                             Ngày sửa
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Trạng thái
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Thao tác
                         </th>
                     </tr>
@@ -83,7 +86,7 @@
                     <tbody>
                     @foreach($addresses as $index => $item)
                         <tr>
-                            <td class="ps-4"><input type="checkbox" name="selected" id="selected" class=""/></td>
+                            <td class="ps-4"><input type="checkbox" name="selected" id="selected"/></td>
                             <td class="ps-4">
                                 <p class="text-xs font-weight-bold mb-0">{{ ++$index }}</p>
                             </td>
@@ -107,6 +110,9 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ $item->updated_at }}</p>
                             </td>
                             <td class="text-center">
+                                <p class="text-xs font-weight-bold mb-0">{{ $item->deleted_at ? 'Ẩn' : 'Hiện' }}</p>
+                            </td>
+                            <td class="text-center">
 
                                 <a href="#"
                                    data-bs-toggle="modal"
@@ -121,9 +127,11 @@
                                    data-bs-target="#modal-set-user">
                                     <i class="fas fa-user-cog text-secondary"></i>
                                 </a>
-                                <span wire:click="delete('{{ $item->id }}')">
-                                            <i class="cursor-pointer fas fa-trash text-secondary"></i>
-                                        </span>
+                                <span onclick="confirmDelete('{{ $item->id }}')">
+                                    <i class="cursor-pointer fas fa-trash text-secondary"></i>
+                                </span>
+                                <button wire:click="delete('{{ $item->id }}')" hidden id="deleteAddress"></button>
+
                             </td>
                         </tr>
                     @endforeach
@@ -193,8 +201,6 @@
                                 </label>
                             </li>
                         @endfor
-
-
                         <li class="page-item" disabled="">
                             <a class="page-link" href="javascript:" aria-label="Next">
                                 <span aria-hidden="true"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
@@ -328,13 +334,38 @@
         </div>
     </div>
 
-    <script>
+    <form id="form-delete" method="post" hidden>
+        @csrf
+    </form>
 
+    <script>
         let currentLocationId;
         const SHOW = 'SHOW';
         const SET_USER = 'SET_USER';
 
         loadUserToSet();
+
+        function confirmDelete(id) {
+            swal("Xác nhận ẩn địa chỉ này và tất cả địa chỉ con?", {
+                dangerMode: true,
+                buttons: true,
+
+            }).then((willDelete) => {
+                // 'willDelete' là một biến boolean, có giá trị là true nếu người dùng nhấn nút "OK", và false nếu nhấn nút "Cancel"
+                if (willDelete) {
+                    // Hàm sẽ được gọi khi người dùng nhấn nút "OK"
+                    deleteAddress(id);
+                }
+            });
+        }
+
+        function deleteAddress(id) {
+            let url = '{{ route('address.destroy', ['id' => ':id']) }}';
+            url = url.replace(':id', id);
+
+            document.getElementById('form-delete').action = url;
+            document.getElementById('form-delete').submit();
+        }
 
         function selectLocation(id, type) {
             document.getElementById('location_id').value = id;
@@ -413,17 +444,6 @@
         function handleSubmitEdit() {
             document.getElementById('parent_id_edit').value = instanceEdit.getSelectedIds();
             return true;
-        }
-
-        /**
-         * Check if passed value is a string
-         */
-        function isString(arg) {
-            if (typeof arg == 'string' || arg instanceof String) {
-                return true;
-            } else {
-                return false;
-            }
         }
 
         /**
