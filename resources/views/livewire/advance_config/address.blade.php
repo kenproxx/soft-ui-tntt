@@ -48,9 +48,12 @@
         </div>
         <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
+                <table class="table align-items-center mb-0" id="table-list">
                     <thead>
                     <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            <input type="checkbox" name="checkAll" class="checkAll"/>
+                        </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             ID
                         </th>
@@ -80,6 +83,7 @@
                     <tbody>
                     @foreach($addresses as $index => $item)
                         <tr>
+                            <td class="ps-4"><input type="checkbox" name="selected" id="selected" class=""/></td>
                             <td class="ps-4">
                                 <p class="text-xs font-weight-bold mb-0">{{ ++$index }}</p>
                             </td>
@@ -411,5 +415,41 @@
             return true;
         }
 
+        /**
+         * Check if passed value is a string
+         */
+        function isString(arg) {
+            if (typeof arg == 'string' || arg instanceof String) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        /**
+         * Enable Check All Functionality
+         * @param  {string} element - ID or class of table
+         * @return {[none]}         none
+         */
+        function enableCheckAll(element) {
+            var $table = $(element),
+                $notCheckAllCheckbox = $table.find(':checkbox').not('.checkAll');
+
+            // "check all" checkbox functionality
+            $table.find('.checkAll').click(function () {
+                $notCheckAllCheckbox.prop('checked', this.checked);
+            });
+
+            /* The "check all" checkbox is only checked if all rows are checked */
+            $notCheckAllCheckbox.change(function () {
+                var numOfChecked = $notCheckAllCheckbox.filter(':checked').length,
+                    numOfCheckboxes = $notCheckAllCheckbox.length,
+                    isAllChecked = numOfChecked === numOfCheckboxes;
+                $table.find('.checkAll').prop('checked', isAllChecked);
+            });
+        }
+
+        var table2 = $('#table-list');
+        enableCheckAll(table2); // passing in an object
     </script>
 </div>
