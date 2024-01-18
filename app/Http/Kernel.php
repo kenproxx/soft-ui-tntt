@@ -60,10 +60,11 @@ class Kernel extends HttpKernel
             ShareErrorsFromSession::class,
             VerifyCsrfToken::class,
             SubstituteBindings::class,
+            ThrottleRequests::class . ':60,2,ip',
         ],
 
         'api' => [
-            'throttle:api',
+            ThrottleRequests::class . ':60,2,ip',
             SubstituteBindings::class,
         ],
     ];
