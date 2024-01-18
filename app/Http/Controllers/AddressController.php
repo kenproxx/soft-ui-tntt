@@ -93,9 +93,20 @@ class AddressController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Address $address)
+    public function destroy($id)
     {
-        //
+        $address = Address::find($id);
+
+        if (!$address) {
+            toastr()->addNotification(ToastrEnum::ERROR, "Không tìm thấy địa chỉ", ToastrEnum::LOI);
+            return back();
+        }
+
+        $listIDAddress = getIdAddressAndChild($id);
+        \App\Models\Address::whereIn('id', $listIDAddress)->delete();
+
+        toastr()->addNotification(ToastrEnum::SUCCESS, "Xóa thành công", ToastrEnum::THANH_CONG);
+        return back();
     }
 
     public function handSetUserAddress(Request $request)

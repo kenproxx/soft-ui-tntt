@@ -5,11 +5,13 @@ namespace App\Models;
 use App\Traits\CreatedUpdatedBy;
 use Baum\NestedSet\Node as WorksAsNestedSet;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Address extends Model
 {
     use WorksAsNestedSet;
     use CreatedUpdatedBy;
+    use SoftDeletes;
 
     ////////////////////////////////////////////////////////////////////////////
 
