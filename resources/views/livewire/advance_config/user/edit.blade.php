@@ -151,25 +151,25 @@
                                      aria-labelledby="headingTwo" data-bs-parent="#accordionRental">
                                     <div class="form-group">
                                         <label>Giáo phận</label>
-                                        <select class="form-control" id="giao_phan_id" name="giao_phan_id"
+                                        <select class="form-control" id="giao_phan_id" name="giao_phan_id" {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}
                                                 onchange="getListGiaoHat(this.value)">
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Giáo hạt</label>
-                                        <select class="form-control" id="giao_hat_id" name="giao_hat_id"
+                                        <select class="form-control" id="giao_hat_id" name="giao_hat_id" {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}
                                                 onchange="getListGiaoXu(this.value)">
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Giáo xứ</label>
-                                        <select class="form-control" id="giao_xu_id" name="giao_xu_id"
+                                        <select class="form-control" id="giao_xu_id" name="giao_xu_id" {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}
                                                 onchange="getListGiaoHo(this.value)">
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Giáo họ</label>
-                                        <select class="form-control" id="giao_ho_id" name="giao_ho_id">
+                                        <select class="form-control" id="giao_ho_id" name="giao_ho_id" {{ isAdminRole() ? '' : 'disabled' }}>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -259,22 +259,23 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Chức vụ</label>
-                                        <input type="text" value="{{ $user->userInfo->chuc_vu ?? '' }}"
+                                        <input type="text" value="{{ $user->userInfo->chuc_vu ?? '' }}" {{ isAdminRole() ? '' : 'disabled' }}
                                                class="form-control" name="chuc_vu"
                                                placeholder="Chức vụ">
                                     </div>
                                     <div class="form-group">
                                         <label>Cấp hiệu</label>
-                                        <select class="form-control" name="cap_hieu">
+                                        <select class="form-control" name="cap_hieu" {{ isAdminRole() ? '' : 'disabled' }}>
+                                            <option value="" selected>Chưa có cấp hiệu</option>
                                             @foreach(\App\Enums\CapHieu::getArray() as $key => $value)
                                                 <option
-                                                    value="{{ $value }}" {{ $user->userInfo->cap_hieu ?? '' === $value ? 'selected' : '' }}>{{ $value  }} </option>
+                                                    value="{{ $value }}" {{ $user->userInfo->cap_hieu === $value ? 'selected' : '' }}>{{ $value  }} </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Ngày tuyên hứa Huynh trưởng cấp 1</label>
-                                        <input type="date" value="{{ $user->userInfo->ngay_tuyen_hua_ht_1 ?? '' }}"
+                                        <input type="date" value="{{ $user->userInfo->ngay_tuyen_hua_ht_1 ?? '' }}" {{ isAdminRole() ? '' : 'disabled' }}
                                                class="form-control" name="ngay_tuyen_hua_ht_1"
                                         >
                                     </div>

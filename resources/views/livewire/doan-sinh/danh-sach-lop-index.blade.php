@@ -112,8 +112,7 @@
                             <td class="text-center">
                                 <a href="{{ route('user.edit', $class->id) }}" data-bs-toggle="tooltip"
                                    data-bs-original-title="Sửa">
-                                    <i class="fas fa-user-edit text-secondary" data-bs-toggle="modal"
-                                       data-bs-target="#modal-edit"></i>
+                                    <i class="fas fa-user-edit text-secondary"></i>
                                 </a>
                                 <span data-bs-toggle="tooltip" onclick="setValueIdClass('{{ $class->id }}')"
                                       data-bs-original-title="Thêm thành viên" class="mx-3">
