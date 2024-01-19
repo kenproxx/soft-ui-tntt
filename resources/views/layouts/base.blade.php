@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Hỗ trợ việc quản trị TNTT của các xứ đoàn">
     <meta name="keywords"
-          content="tntt, thiếu nhi thánh thể, quản trị tntt, quản trị thiếu nhi thánh thể"/>
+          content="tntt, thiếu nhi thánh thể, quản trị tntt, quản trị thiếu nhi thánh thể, quan tri tntt, thieu nhi thanh the, quan tri thieu nhi thanh the"/>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CC21DGLW9B"></script>
