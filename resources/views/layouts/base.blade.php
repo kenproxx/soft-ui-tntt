@@ -2,23 +2,27 @@
 <html lang="en">
 
 <head>
+    <!-- Metas -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Hỗ trợ việc quản trị TNTT của các xứ đoàn">
+    <meta name="keywords"
+          content="tntt, thiếu nhi thánh thể, quản trị tntt, quản trị thiếu nhi thánh thể"/>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CC21DGLW9B"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-CC21DGLW9B');
     </script>
 
-    <!-- Metas -->
-    @if(env('IS_DEMO'))
-        <x-demo-metas></x-demo-metas>
-    @endif
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo-tntt.png') }}">
     <title>
