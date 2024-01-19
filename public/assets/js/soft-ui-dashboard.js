@@ -20757,7 +20757,7 @@
                 }
 
                 if (typeof window.onwheel !== 'undefined') {
-                    // i.event.bind(element, 'wheel', mousewheelHandler);
+                    i.event.bind(element, 'wheel', mousewheelHandler);
                 } else if (typeof window.onmousewheel !== 'undefined') {
                     i.event.bind(element, 'mousewheel', mousewheelHandler);
                 }
