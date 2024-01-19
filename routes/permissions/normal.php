@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\SendMailController;
+use App\Http\Controllers\ThongTinDoanController;
 use App\Http\Livewire\DoanSinh\ThongTinDoan;
 use App\Http\Livewire\DoanSinh\ThongTinDoanEdit;
 use App\Http\Livewire\DoanSinh\ThongTinLop;
@@ -18,8 +20,9 @@ Route::group(['prefix' => 'doan-sinh'], function () {
     Route::get('thong-tin-lop/{idClass?}', ThongTinLop::class)->name('doan-sinh.thong-tin-lop');
     Route::get('thong-tin-doan', ThongTinDoan::class)->name('doan-sinh.thong-tin-doan');
     Route::get('thong-tin-doan/sua', ThongTinDoanEdit::class)->name('doan-sinh.thong-tin-doan.edit');
+    Route::post('thong-tin-doan/cap-nhat', [ThongTinDoanController::class, 'update'])->name('doan-sinh.thong-tin-doan.update');
 });
 
 Route::group(['prefix' => 'mail'], function () {
-    Route::get('send', [\App\Http\Controllers\SendMailController::class, 'sendMail'])->name('mail.send');
+    Route::get('send', [SendMailController::class, 'sendMail'])->name('mail.send');
 });

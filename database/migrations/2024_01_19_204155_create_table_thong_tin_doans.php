@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('thong_tin_doans', function (Blueprint $table) {
             $table->id();
+            $table->string('address_id');
             $table->string('ten_thanh_vien');
             $table->string('chuc_vu')->nullable();
             $table->mediumText('avatar')->nullable();
