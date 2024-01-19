@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('addresses', function (Blueprint $table) {
-            //
+            $table->string('ten_doan')->nullable();
+            $table->date('ngay_bon_mang_doan')->nullable();
+            $table->mediumText('logo_doan')->nullable();
         });
     }
 
@@ -22,7 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('addresses', function (Blueprint $table) {
-            //
+            $table->dropColumn('ten_doan');
+            $table->dropColumn('ngay_bon_mang_doan');
+            $table->dropColumn('logo_doan');
         });
     }
 };

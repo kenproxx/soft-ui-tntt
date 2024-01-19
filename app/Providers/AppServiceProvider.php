@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191); // add: default varchar(191)
+        Schema::defaultStringLength(254); // add: default varchar(254)
     }
 }

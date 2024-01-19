@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,11 +12,11 @@ return new class extends Migration
     {
         Schema::create('thong_tin_doans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('location_id');
-            $table->string('name');
-            $table->date('ngay_bon_mang_doan')->nullable();
-            $table->mediumText('logo_doan')->nullable();
-            $table->string('sdt');
+            $table->string('ten_thanh_vien');
+            $table->string('chuc_vu')->nullable();
+            $table->mediumText('avatar')->nullable();
+            $table->string('sdt')->nullable();
+            $table->string('stt')->nullable();
 
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
