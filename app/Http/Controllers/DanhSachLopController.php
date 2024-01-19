@@ -111,7 +111,7 @@ class DanhSachLopController extends Controller
         $listUser = explode(',', $request->input('list-user'));
 
         foreach ($listUser as $idUser) {
-            $checkExist = DanhSachLopDetail::where('lop_id', $idClass)->where('user_id', $idUser)->first();
+            $checkExist = DanhSachLopDetail::where('user_id', $idUser)->first();
             if (!$checkExist) {
                 $danhSachLop = new DanhSachLopDetail();
                 $danhSachLop->lop_id = $idClass;
