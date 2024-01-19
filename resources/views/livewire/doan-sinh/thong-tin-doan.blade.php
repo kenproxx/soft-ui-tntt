@@ -14,7 +14,6 @@
 
         .pe {
             float: left;
-            width: calc(100% / 3);
             overflow: hidden;
             padding: 40px 0;
             transition: 0.4s;
@@ -67,46 +66,25 @@
     <div class="team-section">
         <div class="card m-4">
             <div class="row">
-                <h2 class="py-4">Meet our team Designed by <a href="https://www.instagram.com/atulkprajapati2000/">Atul Prajapati</a>
+                <h2 class="py-4">Thông tin Ban điều hành</a>
                 </h2>
-                <div class="pers ">
+                <div class="pers d-sm-flex justify-content-center">
 
-                    <div class="col-6 col-sm-6 col-md-4 col-xl-3 pe">
-                        <img src="https://pbs.twimg.com/profile_images/969390093411774465/uJ5LaoyJ_400x400.jpg"
-                             alt="rafeh">
-                        <div class="p-name">Rafeh Qazi</div>
-                        <div class="p-des">Designer</div>
-                        <div class="p-sm">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-tumblr"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-xl-3 pe">
-                        <img src="https://pbs.twimg.com/profile_images/969390093411774465/uJ5LaoyJ_400x400.jpg"
-                             alt="rafeh">
-                        <div class="p-name">Rafeh Qazi</div>
-                        <div class="p-des">Designer</div>
-                        <div class="p-sm">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-tumblr"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-xl-3 pe">
-                        <img src="https://pbs.twimg.com/profile_images/969390093411774465/uJ5LaoyJ_400x400.jpg"
-                             alt="rafeh">
-                        <div class="p-name">Rafeh Qazi</div>
-                        <div class="p-des">Designer</div>
-                        <div class="p-sm">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-tumblr"></i></a>
-                        </div>
-                    </div>
+                    @if(count($listInfo) === 0)
+                        <h3 class="">
+                            Chưa có thông tin đoàn của bạn
+                        </h3>
+                    @else
+                        @foreach($listInfo as $info)
+                            <div class="col-12 col-sm-6 col-md-4 col-xl-3 pe">
+                                <img src="https://pbs.twimg.com/profile_images/969390093411774465/uJ5LaoyJ_400x400.jpg"
+                                     alt="rafeh">
+                                <div class="p-name">{{ $info->ten_thanh_vien ?? '' }}</div>
+                                <div class="p-des">{{ $info->chuc_vu ?? '' }}</div>
+                                <div class="p-name">SDT: {{ $info->sdt ?? '' }}</div>
+                            </div>
+                        @endforeach
+                    @endif
 
 
                 </div>
