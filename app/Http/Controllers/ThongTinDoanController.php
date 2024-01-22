@@ -68,7 +68,7 @@ class ThongTinDoanController extends Controller
         }
 
         toastr()->addNotification(ToastrEnum::SUCCESS, "Cập nhật thông tin thành công", ToastrEnum::THANH_CONG);
-        return redirect()->route('doan-sinh.thong-tin-doan');
+        return redirect()->route('doan-sinh.thong-tin-doan.edit');
 
     }
 
