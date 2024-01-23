@@ -269,7 +269,7 @@
                                             <option value="" selected>Chưa có cấp hiệu</option>
                                             @foreach(\App\Enums\CapHieu::getArray() as $key => $value)
                                                 <option
-                                                    value="{{ $value }}" {{ $user->userInfo->cap_hieu === $value ? 'selected' : '' }}>{{ $value  }} </option>
+                                                    value="{{ $value }}" {{ $user->userInfo->cap_hieu ?? '' === $value ? 'selected' : '' }}>{{ $value  }} </option>
                                             @endforeach
                                         </select>
                                     </div>

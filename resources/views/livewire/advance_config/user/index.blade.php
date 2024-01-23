@@ -31,13 +31,13 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-{{--                        <select wire:model="location_search" class="form-control">--}}
-{{--                            <option value="">Tất cả</option>--}}
-{{--                            @foreach(getElementAddressAndChild() as $address)--}}
-{{--                                <option value="{{ $address->id }}">{{ $address->name  }} </option>--}}
-{{--                            @endforeach--}}
-{{--                        </select>--}}
-                        <input type="text" id="parent_select_search" wire:model="location_search"  placeholder="Select">
+                        {{--                        <select wire:model="location_search" class="form-control">--}}
+                        {{--                            <option value="">Tất cả</option>--}}
+                        {{--                            @foreach(getElementAddressAndChild() as $address)--}}
+                        {{--                                <option value="{{ $address->id }}">{{ $address->name  }} </option>--}}
+                        {{--                            @endforeach--}}
+                        {{--                        </select>--}}
+                        <input type="text" id="parent_select_search" wire:model="location_search" placeholder="Select">
 
                     </div>
                 </div>
@@ -121,14 +121,19 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{ $user->created_at }}</span>
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('user.edit', $user->id) }}"  class="mx-3" data-bs-toggle="tooltip"
+                                <a href="{{ route('user.edit', $user->id) }}" onclick="loadingMasterPage()" class="mx-3"
+                                   data-bs-toggle="tooltip"
                                    data-bs-original-title="Sửa">
                                     <i class="fas fa-user-edit text-secondary"></i>
                                 </a>
+
                                 <span data-bs-toggle="tooltip"
-                                      data-bs-original-title="Xóa">
+                                      data-bs-original-title="Xóa" onclick="handleDestroyUser(this)">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
+                                <form action="{{ route('user.destroy', ['id' => $user->id]) }}" method="post">
+                                    @csrf
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -277,6 +282,21 @@
             source: listAddress,
             collapse: true,
         });
+
+        function handleDestroyUser(element) {
+            swal("Xác nhận xóa tài khoản này?", {
+                dangerMode: true,
+                buttons: ["Hủy", "Đồng ý"],
+
+            }).then((willDelete) => {
+                // 'willDelete' là một biến boolean, có giá trị là true nếu người dùng nhấn nút "OK", và false nếu nhấn nút "Cancel"
+                if (willDelete) {
+                    // Hàm sẽ được gọi khi người dùng nhấn nút "OK"
+                    loadingMasterPage();
+                    $(element).next().submit();
+                }
+            });
+        }
 
     </script>
 

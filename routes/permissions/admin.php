@@ -10,10 +10,11 @@ use App\Http\Livewire\DoanSinh\ThieuNhiIndex;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'tai-khoan'], function () {
-    Route::get('index', UserManagement::class)->name('user.index');
-    Route::post('store', [UserController::class, 'store'])->name('user.store');
+    Route::get('', UserManagement::class)->name('user.index');
+    Route::post('luu', [UserController::class, 'store'])->name('user.store');
     Route::get('sua/{id}', UserEdit::class)->name('user.edit');
-    Route::post('update/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::post('cap-nhat/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::post('xoa/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
 Route::group(['prefix' => 'doan-sinh'], function () {

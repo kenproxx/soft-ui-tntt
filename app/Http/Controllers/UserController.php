@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ToastrEnum;
+use App\Models\DanhSachLopDetail;
 use App\Models\User;
 use App\Models\UserInfo;
 use Exception;
@@ -136,8 +138,16 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserInfo $userInfo)
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $result = $user->delete();
+
+        if ($result) {
+            toastr()->addNotification(ToastrEnum::SUCCESS, 'Xóa thành công', ToastrEnum::THANH_CONG);
+        } else {
+            toastr()->addNotification(ToastrEnum::ERROR, 'Xóa thất bại', ToastrEnum::LOI);
+        }
+        return redirect()->route('user.index');
     }
 }

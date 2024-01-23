@@ -347,8 +347,7 @@
         function confirmDelete(id) {
             swal("Xác nhận ẩn địa chỉ này và tất cả địa chỉ con?", {
                 dangerMode: true,
-                buttons: true,
-
+                buttons: ["Hủy", "Đồng ý"],
             }).then((willDelete) => {
                 // 'willDelete' là một biến boolean, có giá trị là true nếu người dùng nhấn nút "OK", và false nếu nhấn nút "Cancel"
                 if (willDelete) {
