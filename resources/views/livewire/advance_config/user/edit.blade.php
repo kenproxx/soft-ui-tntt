@@ -1,6 +1,6 @@
 <div class="main-content" id="#user_management">
     <div class=" mb-4 mx-4">
-        <form action="{{ route('user.update', $user->id) }}" method="post">
+        <form action="{{ route('user.update', $user->id) }}" method="post" onsubmit="loadingMasterPage()">
             @csrf
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn bg-gradient-primary">
@@ -151,25 +151,29 @@
                                      aria-labelledby="headingTwo" data-bs-parent="#accordionRental">
                                     <div class="form-group">
                                         <label>Giáo phận</label>
-                                        <select class="form-control" id="giao_phan_id" name="giao_phan_id" {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}
-                                                onchange="getListGiaoHat(this.value)">
+                                        <select class="form-control" id="giao_phan_id" name="giao_phan_id"
+                                                {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}
+                                                onchange="hanldeLoadOnChange(GIAO_HAT)">
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Giáo hạt</label>
-                                        <select class="form-control" id="giao_hat_id" name="giao_hat_id" {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}
-                                                onchange="getListGiaoXu(this.value)">
+                                        <select class="form-control" id="giao_hat_id" name="giao_hat_id"
+                                                {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}
+                                                onchange="hanldeLoadOnChange(GIAO_XU)">
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Giáo xứ</label>
-                                        <select class="form-control" id="giao_xu_id" name="giao_xu_id" {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}
-                                                onchange="getListGiaoHo(this.value)">
+                                        <select class="form-control" id="giao_xu_id" name="giao_xu_id"
+                                                {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}
+                                                onchange="hanldeLoadOnChange(GIAO_HO)">
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Giáo họ</label>
-                                        <select class="form-control" id="giao_ho_id" name="giao_ho_id" {{ isAdminRole() ? '' : 'disabled' }}>
+                                        <select class="form-control" id="giao_ho_id"
+                                                name="giao_ho_id" {{ isAdminRole() ? '' : 'disabled' }}>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -250,7 +254,8 @@
                                      aria-labelledby="headingFifth" data-bs-parent="#accordionRental">
                                     <div class="form-group">
                                         <label>Quyền</label>
-                                        <select class="form-control" name="role_name" {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}>
+                                        <select class="form-control"
+                                                name="role_name" {{ isOnlyRoleSuperAdmin() ? '' : 'disabled' }}>
                                             @foreach(\App\Enums\RoleName::getArray() as $key => $value)
                                                 <option
                                                     value="{{ $value }}" {{ $user->role_name === $value ? 'selected' : '' }} >{{ $value  }} </option>
@@ -259,13 +264,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Chức vụ</label>
-                                        <input type="text" value="{{ $user->userInfo->chuc_vu ?? '' }}" {{ isAdminRole() ? '' : 'disabled' }}
+                                        <input type="text" value="{{ $user->userInfo->chuc_vu ?? '' }}"
+                                               {{ isAdminRole() ? '' : 'disabled' }}
                                                class="form-control" name="chuc_vu"
                                                placeholder="Chức vụ">
                                     </div>
                                     <div class="form-group">
                                         <label>Cấp hiệu</label>
-                                        <select class="form-control" name="cap_hieu" {{ isAdminRole() ? '' : 'disabled' }}>
+                                        <select class="form-control"
+                                                name="cap_hieu" {{ isAdminRole() ? '' : 'disabled' }}>
                                             <option value="" selected>Chưa có cấp hiệu</option>
                                             @foreach(\App\Enums\CapHieu::getArray() as $key => $value)
                                                 <option
@@ -275,7 +282,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Ngày tuyên hứa Huynh trưởng cấp 1</label>
-                                        <input type="date" value="{{ $user->userInfo->ngay_tuyen_hua_ht_1 ?? '' }}" {{ isAdminRole() ? '' : 'disabled' }}
+                                        <input type="date" value="{{ $user->userInfo->ngay_tuyen_hua_ht_1 ?? '' }}"
+                                               {{ isAdminRole() ? '' : 'disabled' }}
                                                class="form-control" name="ngay_tuyen_hua_ht_1"
                                         >
                                     </div>
@@ -306,7 +314,38 @@
         const giaoXuId = '{{ $user->userInfo->giao_xu_id ?? '' }}';
         const giaoHoId = '{{ $user->userInfo->giao_ho_id ?? '' }}';
 
-        getListGiaoPhan();
+        const GIAO_PHAN = '{{ \App\Enums\CapBacAddress::GIAO_PHAN }}';
+        const GIAO_HAT = '{{ \App\Enums\CapBacAddress::GIAO_HAT }}';
+        const GIAO_XU = '{{ \App\Enums\CapBacAddress::GIAO_XU }}';
+        const GIAO_HO = '{{ \App\Enums\CapBacAddress::GIAO_HO }}';
+
+        loadingMasterPage();
+
+        // dom ready
+        $(function () {
+            hanldeLoadFirst();
+        });
+
+        async function hanldeLoadFirst() {
+            await getListGiaoPhan();
+            loadingMasterPage();
+        }
+
+        async function hanldeLoadOnChange(type) {
+            loadingMasterPage();
+            switch (type) {
+                case GIAO_HAT:
+                    await getListGiaoHat();
+                    break;
+                case GIAO_XU:
+                    await getListGiaoXu();
+                    break;
+                case GIAO_HO:
+                    await getListGiaoHo();
+                    break;
+            }
+            loadingMasterPage();
+        }
 
         async function getListGiaoPhan() {
             const url = '{{ route('dia-chi.giao-phan') }}';
@@ -314,17 +353,17 @@
             response = await response.json();
 
 
-            renderJsonToHtml(response, 'giao_phan_id', giaoPhanId);
+            await renderJsonToHtml(response, 'giao_phan_id', giaoPhanId);
 
-            if (response.length === 0) {
-                getListGiaoHat(isResetOption);
-                return
-            }
-            getListGiaoHat();
+            await getListGiaoHat();
         }
 
         async function getListGiaoHat() {
             const id = $('#giao_phan_id').val();
+
+            if (!id) {
+                return;
+            }
 
             let url = '{{ route('dia-chi.giao-hat', ['id' => ':id']) }}';
             url = url.replace(':id', id)
@@ -332,18 +371,17 @@
             let response = await fetch(url);
             response = await response.json();
 
-            renderJsonToHtml(response, 'giao_hat_id', giaoHatId);
+            await renderJsonToHtml(response, 'giao_hat_id', giaoHatId);
 
-            if (response.length === 0) {
-                getListGiaoXu(isResetOption);
-                return
-            }
-
-            getListGiaoXu(response[0].id);
+            getListGiaoXu();
         }
 
         async function getListGiaoXu() {
             const id = $('#giao_hat_id').val();
+
+            if (!id) {
+                return;
+            }
 
             let url = '{{ route('dia-chi.giao-xu', ['id' => ':id']) }}';
             url = url.replace(':id', id)
@@ -351,18 +389,17 @@
             let response = await fetch(url);
             response = await response.json();
 
-            renderJsonToHtml(response, 'giao_xu_id', giaoXuId);
+            await renderJsonToHtml(response, 'giao_xu_id', giaoXuId);
 
-            if (response.length === 0) {
-                getListGiaoHo(isResetOption);
-                return
-            }
-
-            getListGiaoHo(response[0].id);
+            getListGiaoHo();
         }
 
         async function getListGiaoHo() {
             const id = $('#giao_xu_id').val();
+
+            if (!id) {
+                return;
+            }
 
             let url = '{{ route('dia-chi.giao-ho', ['id' => ':id']) }}';
             url = url.replace(':id', id)
@@ -370,14 +407,15 @@
             let response = await fetch(url);
             response = await response.json();
 
-            renderJsonToHtml(response, 'giao_ho_id', giaoHoId);
+            await renderJsonToHtml(response, 'giao_ho_id', giaoHoId);
         }
+
 
         function renderJsonToHtml(data, idDiv, idCheck = null) {
             let html = '';
+            html += `<option value="0" selected>Không có dữ liệu</option>`;
 
             if (data.length === 0) {
-                html += `<option value="" disabled selected>Không có dữ liệu</option>`;
                 $('#' + idDiv).html(html);
                 return;
             }

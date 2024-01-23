@@ -225,7 +225,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('user.store') }}" method="post">
+                <form action="{{ route('user.store') }}" method="post" onsubmit="loadingMasterPage()">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -241,6 +241,7 @@
                         <div class="form-group">
                             <label for="password">Mật khẩu</label>
                             <input type="password" class="form-control" id="password" name="password" required
+                                   minlength="6"
                                    placeholder="Mật khẩu">
                         </div>
                         <div class="form-group">
