@@ -45,16 +45,7 @@ class Cloudinaries
         try {
             $base64Encoded = base64_encode(file_get_contents($file->path()));
 
-            $result = (new UploadApi([
-                'cloud' => [
-                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME') ?? 'dw4k3ntno',
-                    'api_key' => env('CLOUDINARY_API_KEY') ?? '414414734545937',
-                    'api_secret' => env('CLOUDINARY_API_SECRET') ?? '-NLIWfF3GC7VyoQmuWsOEek9oEI'
-                ],
-                'url' => [
-                    'secure' => true]]))->upload($base64Encoded, [
-                'folder' => '',
-                'resource_type' => 'image']);
+            $result = $this->cloudinary->uploadApi()->upload($base64Encoded);
 
             return response()->json([
                 'message' => 'Upload Success',
