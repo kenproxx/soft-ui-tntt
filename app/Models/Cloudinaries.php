@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
+use Cloudinary\Api\Admin\AdminApi;
+use Cloudinary\Api\Upload\UploadApi;
 use Cloudinary\Cloudinary;
-use Cloudinary\Configuration\Configuration;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Cloudinaries
 {
@@ -29,6 +28,53 @@ class Cloudinaries
     {
         try {
             $result = $this->cloudinary->uploadApi()->upload($file);
+            return response()->json([
+                'message' => 'Upload Success',
+                'data' => $result
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Upload Failed',
+                'data' => $th->getMessage()
+            ], 500);
+        }
+    }
+
+    public function upload2($file)
+    {
+        try {
+            $result = (new UploadApi([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME') ?? 'dw4k3ntno',
+                    'api_key' => env('CLOUDINARY_API_KEY') ?? '414414734545937',
+                    'api_secret' => env('CLOUDINARY_API_SECRET') ?? '-NLIWfF3GC7VyoQmuWsOEek9oEI'
+                ],
+                'url' => [
+                    'secure' => true]]))->upload($file, [
+                'folder' => '',
+                'resource_type' => 'image']);
+
+            return response()->json([
+                'message' => 'Upload Success',
+                'data' => $result
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Upload Failed',
+                'data' => $th->getMessage()
+            ], 500);
+        }
+    }
+
+    public function deletePath($url)
+    {
+        try {
+            $public_ids = ['c3kmanrx0kolxh78ptgf'];
+            $result = (new AdminApi())->deleteAssets($public_ids,
+                ["resource_type" => "image", "type" => "upload"]);
+            echo json_encode($result, JSON_PRETTY_PRINT);
+
+            $result = $this->cloudinary->uploadApi()->upload($url);
             return response()->json([
                 'message' => 'Upload Success',
                 'data' => $result

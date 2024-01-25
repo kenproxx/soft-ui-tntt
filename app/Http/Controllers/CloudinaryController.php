@@ -14,6 +14,13 @@ class CloudinaryController extends Controller
         $cloudinary = new Cloudinaries();
         return $cloudinary->upload($file);
     }
+    public function upload2(Request $request)
+    {
+        $file = $request->file('file');
+        $cloudinary = new Cloudinaries();
+
+        return $cloudinary->upload2($file);
+    }
 
     public function uploadByURL($url)
     {
