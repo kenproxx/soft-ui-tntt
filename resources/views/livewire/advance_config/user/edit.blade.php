@@ -1,6 +1,6 @@
 <div class="main-content" id="#user_management">
     <div class=" mb-4 mx-4">
-        <form action="{{ route('user.update', $user->id) }}" method="post" onsubmit="loadingMasterPage()">
+        <form action="{{ route('user.update', $user->id) }}" method="post" onsubmit="loadingMasterPage()" enctype="multipart/form-data">
             @csrf
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn bg-gradient-primary">

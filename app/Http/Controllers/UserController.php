@@ -92,6 +92,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $file = $request->file('avatar');
+        if ($file) {
+            $request->validate([
+                'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $result1 = $file->store('images', 'public');
+
+            $urlFile = asset('storage/' . $result1);
+
+            dd((new CloudinaryController())->uploadByURL($urlFile));
+            return back();
+        }
+
+
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
