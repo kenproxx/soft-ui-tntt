@@ -1,16 +1,101 @@
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
     <div class="container-fluid py-4">
         <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Chiên con</p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        $53,000
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <img class="icon-shape object-cover" src="https://xdttns.com/wp-content/uploads/2021/09/thieu-nhi-thanh-the-chien-non-2.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Ấu nhi</p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        2,300
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Thiếu nhi</p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        +3,462
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Nghĩa sỹ</p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        $103,430
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Hiệp sỹ</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         $53,000
-                                        <span class="text-success text-sm font-weight-bolder">+55%</span>
                                     </h5>
                                 </div>
                             </div>
@@ -29,10 +114,9 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Trợ tá</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         2,300
-                                        <span class="text-success text-sm font-weight-bolder">+3%</span>
                                     </h5>
                                 </div>
                             </div>
@@ -51,10 +135,9 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Dự trưởng</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         +3,462
-                                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
                                     </h5>
                                 </div>
                             </div>
@@ -67,16 +150,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Huynh trưởng</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         $103,430
-                                        <span class="text-success text-sm font-weight-bolder">+5%</span>
                                     </h5>
                                 </div>
                             </div>
