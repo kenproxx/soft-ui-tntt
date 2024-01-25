@@ -88,7 +88,7 @@ class UserController extends Controller
 
                 $param_user['avatar'] = $urlCloudinary . $public_id;
             }
-            File::delete('storage/' . $result1);
+            File::delete(public_path('storage/' . $result1));
         }
 
         $user = User::find($id);
