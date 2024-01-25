@@ -43,6 +43,8 @@ class Cloudinaries
     public function upload2($file)
     {
         try {
+            $base64Encoded = base64_encode(file_get_contents($file->path()));
+
             $result = (new UploadApi([
                 'cloud' => [
                     'cloud_name' => env('CLOUDINARY_CLOUD_NAME') ?? 'dw4k3ntno',
@@ -50,7 +52,7 @@ class Cloudinaries
                     'api_secret' => env('CLOUDINARY_API_SECRET') ?? '-NLIWfF3GC7VyoQmuWsOEek9oEI'
                 ],
                 'url' => [
-                    'secure' => true]]))->upload($file, [
+                    'secure' => true]]))->upload($base64Encoded, [
                 'folder' => '',
                 'resource_type' => 'image']);
 
