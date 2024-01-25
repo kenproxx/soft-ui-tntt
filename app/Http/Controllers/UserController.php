@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ToastrEnum;
-use App\Models\DanhSachLopDetail;
 use App\Models\User;
 use App\Models\UserInfo;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -95,13 +96,20 @@ class UserController extends Controller
         $file = $request->file('avatar');
         if ($file) {
             $request->validate([
-                'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
             $result1 = $file->store('images', 'public');
 
             $urlFile = asset('storage/' . $result1);
 
-            dd((new CloudinaryController())->uploadByURL($urlFile));
+            $result2 = (new CloudinaryController())->uploadByURL($urlFile);
+
+            $urlCloudinary = 'https://res.cloudinary.com/dw4k3ntno/image/upload/v1706190182/';
+
+            dd($result2['data']['public_id']);
+
+            File::delete('storage/' . $result1);
+
             return back();
         }
 
