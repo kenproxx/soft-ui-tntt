@@ -93,27 +93,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $file = $request->file('avatar');
-        if ($file) {
-            $request->validate([
-                'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-            $result1 = $file->store('images', 'public');
-
-            $urlFile = asset('storage/' . $result1);
-
-            $result2 = (new CloudinaryController())->uploadByURL($urlFile);
-
-            $urlCloudinary = 'https://res.cloudinary.com/dw4k3ntno/image/upload/v1706190182/';
-
-            dd($result2['data']['public_id']);
-
-            File::delete('storage/' . $result1);
-
-            return back();
-        }
-
-
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
@@ -133,6 +112,27 @@ class UserController extends Controller
                 'ngay_them_suc', 'nguoi_them_suc', 'nguoi_do_dau_them_suc',
                 'chuc_vu', 'cap_hieu', 'ngay_tuyen_hua_ht_1'
             ]);
+
+
+        $file = $request->file('avatar');
+        if ($file) {
+            $request->validate([
+                'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $result1 = $file->store('images', 'public');
+
+            $urlFile = asset('storage/' . $result1);
+
+            $result2 = (new CloudinaryController())->uploadByURL($urlFile);
+
+            $urlCloudinary = 'https://res.cloudinary.com/dw4k3ntno/image/upload/v1706190182/';
+
+            $public_id = json_decode($result2->getContent())->data->public_id;
+
+            File::delete('storage/' . $result1);
+
+            $param_user['avatar'] = $urlCloudinary . $public_id;
+        }
 
         $user = User::find($id);
         $user->fill($param_user);
