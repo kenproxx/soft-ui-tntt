@@ -102,7 +102,7 @@
                             </td>
                             <td>
                                 <div>
-                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3">
+                                    <img src="{{ $user->avatar ?? '../assets/img/team-2.jpg' }}" class="avatar avatar-sm me-3">
                                 </div>
                             </td>
                             <td class="text-center">

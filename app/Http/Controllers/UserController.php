@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -28,48 +27,6 @@ class UserController extends Controller
     public function create()
     {
         //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        try {
-            $request->validate([
-                'username' => 'required|string|min:4|max:20|unique:users',
-                'name' => 'required|string|max:255',
-                'role_name' => 'required',
-                'password' => 'required|min:6|max:12',
-            ]);
-        } catch (Exception $e) {
-            toastr()->addNotification('error', $e->getMessage(), 'Lỗi');
-            return back();
-        }
-
-        $params = $request->only(['name', 'username', 'role_name']);
-        $params['password'] = Hash::make($request->input('password'));
-        $params['code'] = $this->generateUniqueCode();
-
-        if (isOnlyRoleAdmin()) {
-            $params['location_id'] = Auth::user()->location_id;
-        }
-
-        $user = new User();
-        $user->fill($params);
-
-        $user->save();
-
-        return back();
-    }
-
-    private function generateUniqueCode()
-    {
-        do {
-            $code = generateRandomString();
-        } while (User::where('code', $code)->exists());
-
-        return $code;
     }
 
     /**
@@ -113,7 +70,6 @@ class UserController extends Controller
                 'chuc_vu', 'cap_hieu', 'ngay_tuyen_hua_ht_1'
             ]);
 
-
         $file = $request->file('avatar');
         if ($file) {
             $request->validate([
@@ -125,13 +81,14 @@ class UserController extends Controller
 
             $result2 = (new CloudinaryController())->uploadByURL($urlFile);
 
-            $urlCloudinary = 'https://res.cloudinary.com/dw4k3ntno/image/upload/v1706190182/';
+            if ($result2->getStatusCode() == 200) {
+                $urlCloudinary = 'https://res.cloudinary.com/dw4k3ntno/image/upload/v1706190182/';
 
-            $public_id = json_decode($result2->getContent())->data->public_id;
+                $public_id = json_decode($result2->getContent())->data->public_id;
 
+                $param_user['avatar'] = $urlCloudinary . $public_id;
+            }
             File::delete('storage/' . $result1);
-
-            $param_user['avatar'] = $urlCloudinary . $public_id;
         }
 
         $user = User::find($id);
@@ -155,6 +112,48 @@ class UserController extends Controller
         }
         return redirect()->route('user.index');
 
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        try {
+            $request->validate([
+                'username' => 'required|string|min:4|max:20|unique:users',
+                'name' => 'required|string|max:255',
+                'role_name' => 'required',
+                'password' => 'required|min:6|max:12',
+            ]);
+        } catch (Exception $e) {
+            toastr()->addNotification('error', $e->getMessage(), 'Lỗi');
+            return back();
+        }
+
+        $params = $request->only(['name', 'username', 'role_name']);
+        $params['password'] = Hash::make($request->input('password'));
+        $params['code'] = $this->generateUniqueCode();
+
+        if (isOnlyRoleAdmin()) {
+            $params['location_id'] = Auth::user()->location_id;
+        }
+
+        $user = new User();
+        $user->fill($params);
+
+        $user->save();
+
+        return back();
+    }
+
+    private function generateUniqueCode()
+    {
+        do {
+            $code = generateRandomString();
+        } while (User::where('code', $code)->exists());
+
+        return $code;
     }
 
     /**
