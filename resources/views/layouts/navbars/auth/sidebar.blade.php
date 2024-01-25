@@ -260,4 +260,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#sidenav-collapse-main ul.navbar-nav li').click(function () {
+                loadingMasterPage();
+            });
+        });
+
+    </script>
 </aside>

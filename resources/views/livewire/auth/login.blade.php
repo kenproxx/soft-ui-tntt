@@ -8,35 +8,31 @@
                             <form wire:submit.prevent="login" action="#" method="POST" role="form text-left">
                                 <div class="mb-3">
                                     <label for="email">Tên đăng nhập</label>
-                                    <div class="@error('email')border border-danger rounded-3 @enderror">
-                                        <input wire:model="username" id="username" type="username" class="form-control"
+                                    <div>
+                                        <input wire:model="username" id="username" type="text" class="form-control"
                                                placeholder="username" aria-label="username"
                                                aria-describedby="email-addon">
                                     </div>
-                                    @error('username')
-                                    <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="password">Mật khẩu</label>
-                                    <div class="@error('password')border border-danger rounded-3 @enderror">
+                                    <div>
                                         <input wire:model="password" id="password" type="password" class="form-control"
                                                placeholder="Password" aria-label="Password"
                                                aria-describedby="password-addon">
                                     </div>
-                                    @error('password')
-                                    <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="form-check form-switch">
                                     <input wire:model="remember_me" class="form-check-input" type="checkbox"
                                            id="rememberMe">
                                     <label class="form-check-label" for="rememberMe">
-                                    Ghi nhớ đăng nhập
+                                        Ghi nhớ đăng nhập
                                     </label>
                                 </div>
                                 <div class="text-center">
                                     <button type="submit"
                                             class="btn bg-gradient-info w-100 mt-4 mb-0">
-                                    Đăng nhập
+                                        Đăng nhập
                                     </button>
                                 </div>
                             </form>
@@ -44,14 +40,14 @@
                         <div class="card-footer text-center pt-0 px-lg-2 px-1">
                             <small class="text-muted">
                                 Bạn quên mật khẩu? Nhấn vào đây
-                                <a
+                                <a onclick="loadingMasterPage()"
                                     href="{{ route('forgot-password') }}"
                                     class="text-info text-gradient font-weight-bold">đây</a></small>
                             <p class="mb-4 text-sm mx-auto">
                                 Không có tài khoản?
-                                <a href="{{ route('sign-up') }}"
+                                <a href="{{ route('sign-up') }}" onclick="loadingMasterPage()"
                                    class="text-info text-gradient font-weight-bold">
-                                Đăng ký ngay
+                                    Đăng ký ngay
                                 </a>
                             </p>
                         </div>

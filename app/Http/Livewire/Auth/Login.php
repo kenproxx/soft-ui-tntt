@@ -22,7 +22,6 @@ class Login extends Component
         if (auth()->user()) {
             redirect()->route('dashboard');
         }
-        $this->fill(['username' => 'admin@softui.com', 'password' => 'secret']);
     }
 
     public function login()
@@ -34,8 +33,7 @@ class Login extends Component
             toastr()->addNotification(ToastrEnum::SUCCESS, 'Đăng nhập thành công', ToastrEnum::THANH_CONG);
             redirect()->route('dashboard');
         } else {
-            toastr()->addNotification(ToastrEnum::ERROR, 'Đăng nhập thất bại', ToastrEnum::LOI);
-            return $this->addError('username', trans('auth.failed'));
+            toastr()->addNotification(ToastrEnum::ERROR, trans('auth.failed'), ToastrEnum::LOI);
         }
     }
 

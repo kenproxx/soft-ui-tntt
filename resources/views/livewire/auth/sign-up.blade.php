@@ -69,7 +69,7 @@
                             <p class="text-sm mt-3 mb-0">
                                 Đã có tài khoản?
                                 <a
-                                    href="{{ route('login') }}"
+                                    href="{{ route('login') }}" onclick="loadingMasterPage()"
                                     class="text-dark font-weight-bolder">
                                     Đăng nhập
                                 </a>
