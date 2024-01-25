@@ -10,17 +10,19 @@ class Cloudinaries
 {
 
     private $cloudinary;
+    private $configurations;
     public function __construct()
     {
         if (!$this->cloudinary) {
-            $this->cloudinary = new Cloudinary([
+            $this->configurations = [
                 'cloud' => [
                     'cloud_name' => env('CLOUDINARY_CLOUD_NAME') ?? 'dw4k3ntno',
                     'api_key' => env('CLOUDINARY_API_KEY') ?? '414414734545937',
                     'api_secret' => env('CLOUDINARY_API_SECRET') ?? '-NLIWfF3GC7VyoQmuWsOEek9oEI'
                 ],
                 'url' => [
-                    'secure' => true]]);
+                    'secure' => true]];
+            $this->cloudinary = new Cloudinary($this->configurations);
         }
     }
 
@@ -40,41 +42,18 @@ class Cloudinaries
         }
     }
 
-    public function upload2($file)
+    public function deletePath($public_ids)
     {
         try {
-            $base64Encoded = base64_encode(file_get_contents($file->path()));
-
-            $result = $this->cloudinary->uploadApi()->upload($base64Encoded);
+            $result = (new AdminApi($this->configurations))->deleteAssets($public_ids);
 
             return response()->json([
-                'message' => 'Upload Success',
+                'message' => 'Delete Success',
                 'data' => $result
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'message' => 'Upload Failed',
-                'data' => $th->getMessage()
-            ], 500);
-        }
-    }
-
-    public function deletePath($url)
-    {
-        try {
-            $public_ids = ['c3kmanrx0kolxh78ptgf'];
-            $result = (new AdminApi())->deleteAssets($public_ids,
-                ["resource_type" => "image", "type" => "upload"]);
-            echo json_encode($result, JSON_PRETTY_PRINT);
-
-            $result = $this->cloudinary->uploadApi()->upload($url);
-            return response()->json([
-                'message' => 'Upload Success',
-                'data' => $result
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'message' => 'Upload Failed',
+                'message' => 'Delete Failed',
                 'data' => $th->getMessage()
             ], 500);
         }

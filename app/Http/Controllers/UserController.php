@@ -70,6 +70,8 @@ class UserController extends Controller
                 'chuc_vu', 'cap_hieu', 'ngay_tuyen_hua_ht_1'
             ]);
 
+        $user = User::find($id);
+
         $file = $request->file('avatar');
         if ($file) {
             $request->validate([
@@ -86,12 +88,16 @@ class UserController extends Controller
 
                 $public_id = json_decode($result2->getContent())->data->public_id;
 
+                $currentPublic_id = explode('/', $user->avatar);
+                $currentPublic_id = end($currentPublic_id);
+
+                (new CloudinaryController())->deleteByPublicId($currentPublic_id);
+
                 $param_user['avatar'] = $urlCloudinary . $public_id;
             }
             File::delete(public_path('storage/' . $result1));
         }
 
-        $user = User::find($id);
         $user->fill($param_user);
         $result1 = $user->save();
 

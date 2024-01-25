@@ -44,7 +44,6 @@ Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password')
 
 Route::group(['prefix' => 'file1'], function () {
     Route::post('send', [CloudinaryController::class, 'upload'])->name('file.upload');
-    Route::post('send2', [CloudinaryController::class, 'upload2'])->name('file.upload2');
 });
 
 Route::middleware('auth')->group(function () {
