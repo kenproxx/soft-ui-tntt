@@ -74,6 +74,13 @@
         function loadingMasterPage() {
             $('#loading-master-page').toggleClass('is-active')
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Call loadingMasterPage again after the page has fully loaded after 3 seconds
+            setTimeout(function () {
+                loadingMasterPage();
+            }, 1000);
+        });
     </script>
 
 </head>
@@ -81,7 +88,7 @@
     <span class="spinner-border" id="span-loading-master-page"></span>
 </div>
 
-<body class="g-sidenav-show bg-gray-100 ">
+<body class="g-sidenav-show bg-gray-100 " onload="loadingMasterPage()">
 {{ $slot }}
 </body>
 
