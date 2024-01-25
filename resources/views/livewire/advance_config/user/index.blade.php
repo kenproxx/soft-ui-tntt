@@ -30,16 +30,6 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                        {{--                        <select wire:model="location_search" class="form-control">--}}
-                        {{--                            <option value="">Tất cả</option>--}}
-                        {{--                            @foreach(getElementAddressAndChild() as $address)--}}
-                        {{--                                <option value="{{ $address->id }}">{{ $address->name  }} </option>--}}
-                        {{--                            @endforeach--}}
-                        {{--                        </select>--}}
-                        <input type="text" id="parent_select_search" wire:model="location_search" placeholder="Select">
-
-                    </div>
                 </div>
                 <div class="col-md-6">
                     <button type="button" wire:click="render" class="btn bg-gradient-primary">
@@ -69,7 +59,7 @@
                     <thead>
                     <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            ID
+                            STT
                         </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                             Ảnh đại diện
