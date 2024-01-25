@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CloudinaryController;
 use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\ResetPassword;
@@ -40,6 +41,10 @@ Route::get('/dang-nhap', Login::class)->name('login');
 Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
 
 Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password')->middleware('signed');
+
+Route::group(['prefix' => 'file1'], function () {
+    Route::post('send', [CloudinaryController::class, 'upload'])->name('file.upload');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/trang-chu', Dashboard::class)->name('dashboard');
