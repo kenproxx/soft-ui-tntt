@@ -46,16 +46,7 @@ class Cloudinaries
     {
         try {
             $result = (new AdminApi($this->configurations))->deleteAssets($public_ids);
-
-            return response()->json([
-                'message' => 'Delete Success',
-                'data' => $result
-            ], 200);
         } catch (\Throwable $th) {
-            return response()->json([
-                'message' => 'Delete Failed',
-                'data' => $th->getMessage()
-            ], 500);
         }
     }
 }

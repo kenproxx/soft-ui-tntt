@@ -72,29 +72,29 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-        $file = $request->file('avatar');
+        $file = $request->hasFile('avatar');
         if ($file) {
             $request->validate([
                 'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
+
+            $file = $request->file('avatar');
             $result1 = $file->store('images', 'public');
 
             $urlFile = asset('storage/' . $result1);
 
-            $result2 = (new CloudinaryController())->uploadByURL($urlFile);
+            $urlImage = (new CloudinaryController())->uploadByURL($urlFile);
 
-            if ($result2->getStatusCode() == 200) {
-                $urlCloudinary = 'https://res.cloudinary.com/dw4k3ntno/image/upload/v1706190182/';
-
-                $public_id = json_decode($result2->getContent())->data->public_id;
+            /* nếu upload ảnh thành công, thì gán vào param, đồng thời xóa ảnh cũ trên cloud */
+            if ($urlImage) {
+                $param_user['avatar'] = $urlImage;
 
                 $currentPublic_id = explode('/', $user->avatar);
                 $currentPublic_id = end($currentPublic_id);
 
                 (new CloudinaryController())->deleteByPublicId($currentPublic_id);
-
-                $param_user['avatar'] = $urlCloudinary . $public_id;
             }
+
             File::delete(public_path('storage/' . $result1));
         }
 

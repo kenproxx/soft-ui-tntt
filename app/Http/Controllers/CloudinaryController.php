@@ -18,13 +18,23 @@ class CloudinaryController extends Controller
     public function uploadByURL($url)
     {
         $cloudinary = new Cloudinaries();
-        return $cloudinary->upload($url);
+        $result =  $cloudinary->upload($url);
+
+        if ($result->getStatusCode() == 200) {
+            $urlCloudinary = 'https://res.cloudinary.com/dw4k3ntno/image/upload/v1706190182/';
+
+            /* lấy public_id của ảnh*/
+            $public_id = json_decode($result->getContent())->data->public_id;
+
+            return $urlCloudinary . $public_id;
+        }
+        return '';
     }
 
     public function deleteByPublicId($public_id)
     {
         $cloudinary = new Cloudinaries();
-        return $cloudinary->deletePath($public_id);
+        $cloudinary->deletePath($public_id);
     }
 
 }

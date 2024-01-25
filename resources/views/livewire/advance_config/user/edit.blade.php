@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Ảnh đại diện</label>
-                                        <input type="file" class="form-control" name="avatar">
+                                        <input type="file" class="form-control" accept="image/*" name="avatar">
                                     </div>
                                 </div>
                             </div>
