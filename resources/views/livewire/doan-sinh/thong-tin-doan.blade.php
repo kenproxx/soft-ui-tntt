@@ -77,8 +77,9 @@
                     @else
                         @foreach($listInfo as $info)
                             <div class="col-12 col-sm-6 col-md-4 col-xl-3 pe">
-                                <img src="https://pbs.twimg.com/profile_images/969390093411774465/uJ5LaoyJ_400x400.jpg"
-                                     alt="rafeh">
+                                <img
+                                    src="{{ $info->avatar ? $info->avatar : 'https://pbs.twimg.com/profile_images/969390093411774465/uJ5LaoyJ_400x400.jpg' }}"
+                                    loading="lazy">
                                 <div class="p-name">{{ $info->ten_thanh_vien ?? '' }}</div>
                                 <div class="p-des">{{ $info->chuc_vu ?? '' }}</div>
                                 <div class="p-name">SDT: {{ $info->sdt ?? '' }}</div>

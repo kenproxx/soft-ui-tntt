@@ -56,7 +56,17 @@ class ThongTinDoanController extends Controller
     {
         $length = count($request->name);
         $address_id = Auth::user()->location_id;
-        ThongTinDoan::where('address_id', $address_id)->delete();
+
+        /* xóa ảnh cũ trên cloud*/
+        $oldInfo = ThongTinDoan::where('address_id', $address_id)->get();
+        foreach ($oldInfo as $item) {
+            $currentPublic_id = explode('/', $item->avatar);
+            $currentPublic_id = end($currentPublic_id);
+
+            (new CloudinaryController())->deleteByPublicId($currentPublic_id);
+            $item->delete();
+        }
+
         for ($i = 0; $i < $length; $i++) {
             $thongTinDoan = new ThongTinDoan();
             $thongTinDoan->ten_thanh_vien = $request->name[$i];
@@ -64,6 +74,8 @@ class ThongTinDoanController extends Controller
             $thongTinDoan->sdt = $request->sdt[$i];
             $thongTinDoan->address_id = $address_id;
             $thongTinDoan->stt = $i + 1;
+            $thongTinDoan->avatar = (new CloudinaryController())->uploadByFileImage($request->avatar[$i]);
+
             $thongTinDoan->save();
         }
 

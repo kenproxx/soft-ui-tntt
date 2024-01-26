@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cloudinaries;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class CloudinaryController extends Controller
 {
@@ -35,6 +36,21 @@ class CloudinaryController extends Controller
     {
         $cloudinary = new Cloudinaries();
         $cloudinary->deletePath($public_id);
+    }
+
+    public function uploadByFileImage($file)
+    {
+        $result1 = $file->store('images', 'public');
+
+        $urlFile = asset('storage/' . $result1);
+
+        $urlImage = $this->uploadByURL($urlFile);
+
+        /* nếu upload ảnh thành công, xóa ảnh cũ trên cloud */
+        File::delete(public_path('storage/' . $result1));
+
+        return $urlImage;
+
     }
 
 }

@@ -1,5 +1,5 @@
 <div class="card m-4">
-    <form onsubmit="handleSubmitForm(this)">
+    <form action="{{ route('doan-sinh.thong-tin-doan.update') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div id="content" class="p-4">
             <div class="row">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-12 col-sm-6 col-xl-3 ">
                         <label>Ảnh</label>
-                        <input name="avatar[]" type="file" class="form-control" required>
+                        <input name="avatar[]" type="file" accept="image/*" class="form-control" required>
                     </div>
                     <div class="col-12 col-sm-6 col-xl-3 ">
                         <label>Số điện thoại</label>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-12 col-sm-6 col-xl-3 ">
                             <label>Ảnh</label>
-                            <input name="avatar[]" type="file" class="form-control" required>
+                            <input name="avatar[]" type="file" accept="image/*" class="form-control" required>
                         </div>
                         <div class="col-12 col-sm-6 col-xl-3 ">
                             <label>Số điện thoại</label>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-xl-3 ">
                     <label>Ảnh</label>
-                    <input name="avatar[]" type="file" class="form-control" required>
+                    <input name="avatar[]" type="file" accept="image/*" class="form-control" required>
                 </div>
                 <div class="col-12 col-sm-6 col-xl-3 ">
                     <label>Số điện thoại</label>
@@ -95,13 +95,15 @@
 
         async function handleSubmitForm(form) {
             loadingMasterPage();
-            const formData = $(form).serialize();
-
+            const formData = new FormData(form);
+            console.log(formData)
             await $.post({
                 url: '{{ route('doan-sinh.thong-tin-doan.update') }}',
                 data: formData,
+                contentType: false,
+                processData: false,
             });
-            window.location.reload();
+            // window.location.reload();
         }
     </script>
 </div>
