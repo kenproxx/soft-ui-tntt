@@ -198,4 +198,39 @@ class UserController extends Controller
         toastr()->addNotification(ToastrEnum::ERROR, 'username không tồn tại.', ToastrEnum::LOI);
         return back();
     }
+
+    public function uploadAvatar(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $file = $request->file('avatar');
+        $result1 = $file->store('images', 'public');
+
+        $urlFile = asset('storage/' . $result1);
+
+        $urlImage = (new CloudinaryController())->uploadByURL($urlFile);
+
+        File::delete(public_path('storage/' . $result1));
+
+        if (!$urlImage) {
+            toastr()->addNotification(ToastrEnum::ERROR, 'Upload ảnh thất bại', ToastrEnum::LOI);
+            return back();
+        }
+
+        /* nếu upload ảnh thành công, thì gán vào param, */
+
+        $currentPublic_id = explode('/', Auth::user()->avatar);
+        $currentPublic_id = end($currentPublic_id);
+
+        (new CloudinaryController())->deleteByPublicId($currentPublic_id);
+
+        $user = User::find(Auth::user()->id);
+        $user->avatar = $urlImage;
+        $user->save();
+
+        toastr()->addNotification(ToastrEnum::SUCCESS, 'Cập nhật ảnh đại diện thành công', ToastrEnum::THANH_CONG);
+        return back();
+    }
 }

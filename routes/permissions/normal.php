@@ -4,9 +4,11 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CloudinaryController;
 use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\ThongTinDoanController;
+use App\Http\Controllers\UserController;
 use App\Http\Livewire\DoanSinh\ThongTinDoan;
 use App\Http\Livewire\DoanSinh\ThongTinDoanEdit;
 use App\Http\Livewire\DoanSinh\ThongTinLop;
+use App\Http\Livewire\Profile;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'thong-tin-dia-chi'], function () {
@@ -30,4 +32,9 @@ Route::group(['prefix' => 'mail'], function () {
 
 Route::group(['prefix' => 'file'], function () {
     Route::post('send', [CloudinaryController::class, 'upload'])->name('file.upload');
+});
+
+Route::group(['prefix' => 'trang-ca-nhan'], function () {
+    Route::get('', Profile::class)->name('profile');
+    Route::post('avatar', [UserController::class, 'uploadAvatar'])->name('profile.upload.avatar');
 });

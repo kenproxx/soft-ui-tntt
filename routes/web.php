@@ -50,7 +50,6 @@ Route::group(['prefix' => 'file1'], function () {
 Route::middleware('auth')->group(function () {
     Route::get('/trang-chu', Dashboard::class)->name('dashboard');
     Route::get('/billing', Billing::class)->name('billing');
-    Route::get('/profile', Profile::class)->name('profile');
     Route::get('/tables', Tables::class)->name('tables');
     Route::get('/static-sign-in', StaticSignIn::class)->name('sign-in');
     Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');

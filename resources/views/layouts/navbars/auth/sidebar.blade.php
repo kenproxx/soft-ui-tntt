@@ -205,7 +205,7 @@
             </li>
 
             <li class="nav-item mt-2">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Example pages</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Cá nhân</h6>
             </li>
 
             <li class="nav-item">
@@ -236,7 +236,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Profile</span>
+                    <span class="nav-link-text ms-1">Thông tin cá nhân</span>
                 </a>
             </li>
         </ul>
