@@ -103,7 +103,7 @@
                         <span class="nav-link-text ms-1">Tài khoản</span>
                     </a>
                 </li>
-                @if((accountOfGiaoXu() || accountOfHigherGiaoXu()) && isAdminRole())
+                @if(isOnlyRoleSuperAdmin() || (accountOfGiaoXu() || accountOfHigherGiaoXu()) && isAdminRole())
                     <li class="nav-item pb-2">
                         <a class="nav-link {{ Route::currentRouteName() == 'doan-sinh.thong-tin-doan.edit' ? 'active' : '' }}"
                            href="{{ route('doan-sinh.thong-tin-doan.edit') }}">

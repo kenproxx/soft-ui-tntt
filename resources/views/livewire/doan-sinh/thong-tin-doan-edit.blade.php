@@ -1,5 +1,6 @@
 <div class="card m-4">
-    <form action="{{ route('doan-sinh.thong-tin-doan.update') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('doan-sinh.thong-tin-doan.update') }}" method="post" onsubmit="loadingMasterPage()"
+          enctype="multipart/form-data">
         @csrf
         <div id="content" class="p-4">
             <div class="row">
@@ -91,19 +92,6 @@
 
         function removeInput(input) {
             $(input).parent('div.form-group.row.border-top').remove()
-        }
-
-        async function handleSubmitForm(form) {
-            loadingMasterPage();
-            const formData = new FormData(form);
-            console.log(formData)
-            await $.post({
-                url: '{{ route('doan-sinh.thong-tin-doan.update') }}',
-                data: formData,
-                contentType: false,
-                processData: false,
-            });
-            // window.location.reload();
         }
     </script>
 </div>

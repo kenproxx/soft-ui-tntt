@@ -31,10 +31,6 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <input wire:model="location_search" type="search" class="form-control"
-                               placeholder="Chọn vị trí">
-                    </div>
                 </div>
                 <div class="col-md-6">
                     <button type="button" wire:click="render" class="btn bg-gradient-primary">
@@ -97,7 +93,8 @@
                             </td>
                             <td>
                                 <div>
-                                    <img src="{{ $user->avatar ?? '../assets/img/team-2.jpg' }}" class="avatar avatar-sm me-3 object-cover" loading="lazy">
+                                    <img src="{{ $user->avatar ?? '../assets/img/team-2.jpg' }}"
+                                         class="avatar avatar-sm me-3 object-cover" loading="lazy">
                                 </div>
                             </td>
                             <td class="text-center">
@@ -116,7 +113,7 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{ $user->created_at }}</span>
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('user.edit', $user->id) }}"  class="mx-3" data-bs-toggle="tooltip"
+                                <a href="{{ route('user.edit', $user->id) }}" class="mx-3" data-bs-toggle="tooltip"
                                    data-bs-original-title="Sửa">
                                     <i class="fas fa-user-edit text-secondary"></i>
                                 </a>
@@ -248,7 +245,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Hủy</button>
                         <button type="submit" class="btn bg-gradient-primary">Lưu</button>
                     </div>
                 </form>

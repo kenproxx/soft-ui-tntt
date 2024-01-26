@@ -30,10 +30,6 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <input wire:model="location_search" type="search" class="form-control"
-                               placeholder="Chọn vị trí">
-                    </div>
                 </div>
                 <div class="col-md-6">
                     <button type="button" wire:click="render" class="btn bg-gradient-primary">
@@ -247,7 +243,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Hủy</button>
                         <button type="submit" class="btn bg-gradient-primary">Lưu</button>
                     </div>
                 </form>
