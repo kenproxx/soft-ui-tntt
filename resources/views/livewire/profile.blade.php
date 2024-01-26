@@ -4,7 +4,7 @@
         <span class="mask bg-gradient-primary opacity-6"></span>
     </div>
     <form action="{{ route('profile.upload.avatar') }}" method="post" hidden="" enctype="multipart/form-data"
-          id="avatarForm">
+          id="avatarForm" onsubmit="loadingMasterPage()">
         @csrf
         <input type="file" id="avatarInput" name="avatar" accept="image/*" onchange="submitAvatarForm()">
     </form>
@@ -13,7 +13,7 @@
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
                     <img src="{{ auth()->user()->avatar ? auth()->user()->avatar : asset('assets/img/logo-tntt.png') }}"
-                         alt="..." class="w-100 border-radius-lg shadow-sm">
+                         alt="..." class="w-100 border-radius-lg shadow-sm h-100 object-cover">
                     <a onclick="selectAvatar()"
                        class="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
                         <i class="fa fa-pen top-0" data-bs-toggle="tooltip" data-bs-placement="top"
