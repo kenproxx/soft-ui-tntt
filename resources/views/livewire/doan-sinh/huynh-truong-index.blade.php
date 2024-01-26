@@ -63,7 +63,7 @@
                     <thead>
                     <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            ID
+                            STT
                         </th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                             Ảnh đại diện
@@ -96,7 +96,7 @@
                             </td>
                             <td>
                                 <div>
-                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3">
+                                    <img src="{{ $user->avatar ?? '../assets/img/team-2.jpg' }}" class="avatar avatar-sm me-3 object-cover" loading="lazy">
                                 </div>
                             </td>
                             <td class="text-center">
