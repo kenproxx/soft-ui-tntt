@@ -51,4 +51,14 @@ class User extends Authenticatable
         return $this->hasOne(UserInfo::class, 'user_id', 'id');
     }
 
+    /**
+     * Route notifications for the mail channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForMail()
+    {
+        return $this->email;
+    }
+
 }

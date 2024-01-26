@@ -6,62 +6,27 @@
                 <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                     <div class="card card-plain mt-8">
                         <div class="card-header pb-0 text-left bg-transparent">
-                            @if ($showDemoNotification)
-                                <div wire:model="showDemoNotification"
-                                     class="mt-3 alert alert-primary alert-dismissible fade show" role="alert">
-                                    <span
-                                        class="alert-text text-white">{{ __(' You are in a demo version, you can\'t update the
-                                        profile.') }}</span>
-                                    <button wire:click="$set('showDemoNotification', false)" type="button"
-                                            class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    </button>
-                                </div>
-                            @endif
-                            <h4 class="mb-0">{{ __('Forgot your password? Enter your email here') }}</h4>
+                            <h4 class="mb-0">
+                                Nhập tên đăng nhập của bạn
+                            </h4>
                         </div>
                         <div class="card-body">
-                            <form wire:submit.prevent="recoverPassword" action="#" method="POST" role="form text-left">
+                            <form action="{{ route('quen-mat-khau.yeu-cau') }}" method="POST" onsubmit="loadingMasterPage()" role="form text-left">
+                                @csrf
                                 <div>
-                                    <label for="email">{{ __('Email') }}</label>
-                                    <div class="@error('email')border border-danger rounded-3 @enderror">
-                                        <input wire:model="email" id="email" type="email" class="form-control"
-                                               placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                                    <label for="email">Tên đăng nhập</label>
+                                    <div>
+                                        <input id="username" type="text" class="form-control" name="username"
+                                               placeholder="username" aria-label="username" aria-describedby="email-addon">
                                     </div>
-                                    @error('email')
-                                    <div class="text-danger">{{ $message }}</div> @enderror
                                 </div>
                                 <div class="text-center">
                                     <button type="submit"
-                                            class="btn bg-gradient-info w-100 mt-4 mb-0">{{ __('Recover your
-                                    password') }}</button>
+                                            class="btn bg-gradient-info w-100 mt-4 mb-0">
+                                        Gửi yêu cầu
+                                    </button>
                                 </div>
                             </form>
-                            @if ($showSuccesNotification)
-                                <div wire:model="showSuccesNotification"
-                                     class="mt-3 alert alert-primary alert-dismissible fade show" role="alert">
-                                    <span class="alert-icon text-white"><i class="ni ni-like-2"></i></span>
-                                    <span
-                                        class="alert-text text-white">{{ __(' An email for resetting your password has been
-                                        sent!') }}</span>
-                                    <button wire:click="$set('showSuccesNotification', false)" type="button"
-                                            class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    </button>
-                                </div>
-                            @endif
-
-                            @if ($showFailureNotification)
-                                <div wire:model="showFailureNotification"
-                                     class="mt-3 alert alert-primary alert-dismissible fade show" role="alert">
-                                    <span class="alert-text text-white">
-                                        {{ __('You are not registered as a user. Please sign
-                                        up') }}
-                                        <a class="text-info" href="{{ route('sign-up') }}">here</a></span>
-                                    <button wire:click="$set('showFailureNotification', false)" type="button"
-                                            class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                    </button>
-                                </div>
-                            @endif
-
                         </div>
                     </div>
                 </div>

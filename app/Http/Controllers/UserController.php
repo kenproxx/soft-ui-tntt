@@ -177,4 +177,25 @@ class UserController extends Controller
         }
         return redirect()->route('user.index');
     }
+
+    public function recoverPassword(Request $request)
+    {
+        try {
+            $request->validate([
+                'username' => 'required|exists:users,username',
+            ]);
+        } catch (Exception $e) {
+            toastr()->addNotification(ToastrEnum::ERROR, $e->getMessage(), ToastrEnum::LOI);
+            return back();
+        }
+
+        $user = User::where('username', $request->input('username'))->first();
+        if ($user) {
+            $user->notify(new \App\Notifications\ResetPassword($user->id));
+            toastr()->addNotification(ToastrEnum::SUCCESS, 'Đã gửi liên kết đổi mật khẩu về email của bạn, vui lòng kiểm tra', ToastrEnum::THANH_CONG);
+            return redirect()->route('login');
+        }
+        toastr()->addNotification(ToastrEnum::ERROR, 'username không tồn tại.', ToastrEnum::LOI);
+        return back();
+    }
 }

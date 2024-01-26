@@ -39,7 +39,10 @@
     {{-- If the user is not authenticated (if the user is a guest) --}}
     @guest
         {{-- If the user is on the login page --}}
-        @if (!auth()->check() && in_array(request()->route()->getName(),['login'],))
+        @if (in_array(request()->route()->getName(),['exception.403', 'exception.404', 'exception.500'],))
+            {{ $slot }}
+
+        @elseif (!auth()->check() && in_array(request()->route()->getName(),['login'],))
             @include('layouts.navbars.guest.login')
             {{ $slot }}
 

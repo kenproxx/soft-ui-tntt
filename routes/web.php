@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CloudinaryController;
+use App\Http\Controllers\UserController;
 use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\ResetPassword;
@@ -75,4 +76,8 @@ Route::group(['prefix' => 'exception'], function () {
     Route::get('403', Error403::class)->name('exception.403');
     Route::get('404', Error404::class)->name('exception.404');
     Route::get('500', Error500::class)->name('exception.500');
+});
+
+Route::group(['prefix' => 'quen-mat-khau'], function () {
+    Route::post('', [UserController::class, 'recoverPassword'])->name('quen-mat-khau.yeu-cau');
 });

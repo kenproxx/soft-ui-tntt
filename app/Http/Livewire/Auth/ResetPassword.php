@@ -2,25 +2,21 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Enums\ToastrEnum;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class ResetPassword extends Component
 {
-    public $email = '';
+    public $username = '';
     public $password = '';
     public $passwordConfirmation = '';
-
-    public $showSuccesNotification = false;
-    public $showFailureNotification = false;
-
-    public $showDemoNotification = false;
 
     public $urlID = '';
 
     protected $rules = [
-        'email' => 'required|email',
+        'username' => 'required|exists:users,username',
         'password' => 'required|min:6|same:passwordConfirmation'
     ];
 
@@ -33,15 +29,16 @@ class ResetPassword extends Component
     public function resetPassword()
     {
         $this->validate();
-        $existingUser = User::where('email', $this->email)->first();
+        $existingUser = User::where('username', $this->username)->first();
         if ($existingUser && $existingUser->id == $this->urlID) {
             $existingUser->update([
                 'password' => Hash::make($this->password)
             ]);
-            $this->showSuccesNotification = true;
-            $this->showFailureNotification = false;
+
+            toastr()->addNotification(ToastrEnum::SUCCESS, 'Đổi mật khẩu thành công', ToastrEnum::THANH_CONG);
+            return redirect()->route('login');
         } else {
-            $this->showFailureNotification = true;
+            toastr()->addNotification(ToastrEnum::ERROR, 'Đây không phải là username cần đổi mật khẩu', ToastrEnum::LOI);
         }
     }
 

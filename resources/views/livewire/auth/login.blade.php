@@ -39,7 +39,7 @@
                         </div>
                         <div class="card-footer text-center pt-0 px-lg-2 px-1">
                             <small class="text-muted">
-                                Bạn quên mật khẩu? Nhấn vào đây
+                                Bạn quên mật khẩu? Nhấn vào
                                 <a onclick="loadingMasterPage()"
                                     href="{{ route('forgot-password') }}"
                                     class="text-info text-gradient font-weight-bold">đây</a></small>
