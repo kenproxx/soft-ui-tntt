@@ -41,6 +41,11 @@
           href="https://cdn.jsdelivr.net/gh/kenproxx/soft-ui-tntt@master/public/assets/css/soft-ui-dashboard.css"
           rel="stylesheet"/>
 
+    {{-- Custom CSS --}}
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
+
+    {{-- Bootstrap 5 --}}
+
     {{--jquery--}}
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 
@@ -56,25 +61,6 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     @livewireStyles
-
-    <style>
-        .loading-overlay-master {
-            display: none;
-            background: rgba(255, 255, 255, 0.7);
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            top: 0;
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .loading-overlay-master.is-active {
-            display: flex;
-        }
-    </style>
 
     <script>
         function loadingMasterPage() {
