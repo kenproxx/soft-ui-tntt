@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,6 +45,9 @@ class Handler extends ExceptionHandler
     public function render($request, Exception|Throwable $exception)
     {
         if ($this->isHttpException($exception)) {
+            if ($exception instanceof MethodNotAllowedHttpException) {
+                return redirect()->route('exception.404');
+            }
             if ($exception->getStatusCode() == 404) {
                 return redirect()->route('exception.404');
             }
@@ -50,6 +55,9 @@ class Handler extends ExceptionHandler
                 return redirect()->route('exception.403');
             }
             if ($exception->getStatusCode() == 500) {
+                return redirect()->route('exception.500');
+            }
+            if ($exception instanceof TokenMismatchException) {
                 return redirect()->route('exception.500');
             }
         }
