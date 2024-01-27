@@ -25608,3 +25608,7 @@ pre[class*=language-] {
         overflow: auto !important;
     }
 }
+
+.object-cover {
+    object-fit: cover;
+}

@@ -38,7 +38,7 @@
           rel="stylesheet"/>
     <!-- CSS Files -->
     <link id="pagestyle"
-          href="https://cdn.jsdelivr.net/gh/kenproxx/soft-ui-tntt@master/public/assets/css/soft-ui-dashboard.min.css"
+          href="https://cdn.jsdelivr.net/gh/kenproxx/soft-ui-tntt@master/public/assets/css/soft-ui-dashboard.css"
           rel="stylesheet"/>
 
     {{-- Custom CSS --}}
@@ -115,7 +115,7 @@
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="https://cdn.jsdelivr.net/gh/kenproxx/soft-ui-tntt@master/public/assets/js/soft-ui-dashboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kenproxx/soft-ui-tntt@master/public/assets/js/soft-ui-dashboard.js"></script>
 
 <!-- Font Awesome Icons -->
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
