@@ -79,7 +79,8 @@ if (!function_exists('getIdAddressAndChild')) {
                 $address = Address::find($id);
             } else {
                 if (isOnlyRoleSuperAdmin()){
-                    $address = Address::all()->toHierarchy()->pluck('id')->toArray();
+                    $address = Address::all()->pluck('id')->toArray();
+
                     return $address;
                 }
                 $locationId = Auth::user()->location_id;
@@ -88,6 +89,7 @@ if (!function_exists('getIdAddressAndChild')) {
                 }
                 $address = Address::find($locationId);
             }
+
 
             $addressChild = $address->getDescendantsAndSelf()->pluck('id')->toArray();
             return $addressChild;

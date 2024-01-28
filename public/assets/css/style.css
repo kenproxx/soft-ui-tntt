@@ -18,3 +18,33 @@
 .line-height-100 {
     line-height: 100% !important;
 }
+
+.bg-gradient-pink {
+    background-image: linear-gradient(310deg, #f3a4b5 0%, #faafbf 100%);
+}
+
+.bg-gradient-cyan {
+    background: linear-gradient(35deg, #3ea947 0%, #58c261 100%) !important
+}
+
+.bg-gradient-blue {
+    background: linear-gradient(35deg, #005e9e 0%, #3384bd 100%) !important
+}
+
+.bg-gradient-yellow {
+    background: linear-gradient(35deg, #f7c508 0%, #ecd47c 100%) !important
+}
+
+.bg-gradient-brown {
+    background: linear-gradient(35deg, #893500 0%, #cb5f1a 100%) !important
+}
+
+.bg-gradient-red {
+    background: linear-gradient(35deg, #ff020b 0%, #fa5a5e 100%) !important
+}
+
+
+
+
+
+

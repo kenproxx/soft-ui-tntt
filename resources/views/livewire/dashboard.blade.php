@@ -1,4 +1,27 @@
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    <style>
+        .icon-cross {
+            position: relative;
+            width: 50%;
+            top: 7px;
+        }
+
+        .icon-cross-dt {
+            top: 9px !important;
+        }
+
+        .solid-yellow {
+            border: 3px solid #f7c508;
+        }
+
+        .solid-red {
+            border: 3px solid #ff020b;
+        }
+
+        .solid-blue {
+            border: 3px solid #005e9e;
+        }
+    </style>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-xl-3 col-sm-6 mb-4">
@@ -9,13 +32,14 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Chiên con</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        $53,000
+                                        {{ $countChienCon }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <img class="icon-shape object-cover" src="https://xdttns.com/wp-content/uploads/2021/09/thieu-nhi-thanh-the-chien-non-2.jpg" alt="">
+                                <div
+                                    class="icon icon-shape bg-pink bg-gradient-pink shadow text-center border-radius-md solid-red">
+                                    <img class="icon-cross" src="{{ asset('assets/img/logos/cross-red.svg') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -30,13 +54,15 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Ấu nhi</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        2,300
+                                        {{ $countAuNhi }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                <div
+                                    class="icon icon-shape bg-gradient-cyan shadow text-center border-radius-md solid-yellow">
+                                    <img class="icon-cross" src="{{ asset('assets/img/logos/cross-yellow.svg') }}"
+                                         alt="">
                                 </div>
                             </div>
                         </div>
@@ -51,13 +77,15 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Thiếu nhi</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        +3,462
+                                        {{ $countThieuNhi }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                                <div
+                                    class="icon icon-shape bg-gradient-blue shadow text-center border-radius-md solid-yellow">
+                                    <img class="icon-cross" src="{{ asset('assets/img/logos/cross-yellow.svg') }}"
+                                         alt="">
                                 </div>
                             </div>
                         </div>
@@ -72,13 +100,14 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Nghĩa sỹ</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        $103,430
+                                        {{ $countNghiaSy }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                                <div
+                                    class="icon icon-shape bg-gradient-yellow shadow text-center border-radius-md solid-red">
+                                    <img class="icon-cross" src="{{ asset('assets/img/logos/cross-red.svg') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -95,13 +124,15 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Hiệp sỹ</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        $53,000
+                                        {{ $countHiepSy }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                <div
+                                    class="icon icon-shape bg-gradient-brown shadow text-center border-radius-md solid-yellow">
+                                    <img class="icon-cross" src="{{ asset('assets/img/logos/cross-yellow.svg') }}"
+                                         alt="">
                                 </div>
                             </div>
                         </div>
@@ -116,13 +147,14 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Trợ tá</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        2,300
+                                        {{ $countTroTa }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                <div
+                                    class="icon icon-shape bg-gradient-red shadow text-center border-radius-md solid-blue">
+                                    <img class="icon-cross" src="{{ asset('assets/img/logos/cross-blue.svg') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -137,13 +169,14 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Dự trưởng</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        +3,462
+                                        {{ $countDuTruong }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                                <div class="icon icon-shape bg-gradient-red shadow text-center border-radius-md ">
+                                    <img class="icon-cross icon-cross-dt"
+                                         src="{{ asset('assets/img/logos/cross-yellow.svg') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -158,13 +191,15 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Huynh trưởng</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        $103,430
+                                        {{ $countHuynhTruong }}
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                                <div
+                                    class="icon icon-shape bg-gradient-red shadow text-center border-radius-md solid-yellow">
+                                    <img class="icon-cross" src="{{ asset('assets/img/logos/cross-yellow.svg') }}"
+                                         alt="">
                                 </div>
                             </div>
                         </div>
