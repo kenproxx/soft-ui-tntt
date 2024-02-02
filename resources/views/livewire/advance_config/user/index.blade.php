@@ -92,7 +92,8 @@
                             </td>
                             <td>
                                 <div>
-                                    <img src="{{ $user->avatar ?? '../assets/img/team-2.jpg' }}" class="avatar avatar-sm me-3 object-cover" loading="lazy">
+                                    <img src="{{ $user->avatar ?? '../assets/img/team-2.jpg' }}"
+                                         class="avatar avatar-sm me-3 object-cover" loading="lazy">
                                 </div>
                             </td>
                             <td class="text-center">
@@ -111,19 +112,16 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{ $user->created_at }}</span>
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('user.edit', $user->id) }}" onclick="loadingMasterPage()" class="mx-3"
+                                <a href="{{ route('user.edit', $user->id) }}" target="_blank" class="mx-3"
                                    data-bs-toggle="tooltip"
                                    data-bs-original-title="Sửa">
                                     <i class="fas fa-user-edit text-secondary"></i>
                                 </a>
-
                                 <span data-bs-toggle="tooltip"
-                                      data-bs-original-title="Xóa" onclick="handleDestroyUser(this)">
+                                      data-bs-original-title="Xóa" onclick="handleDestroyUser(this, '{{ $user->id }}')">
                                             <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                         </span>
-                                <form action="{{ route('user.destroy', ['id' => $user->id]) }}" method="post">
-                                    @csrf
-                                </form>
+
                             </td>
                         </tr>
                     @endforeach
@@ -257,6 +255,10 @@
         </div>
     </div>
 
+    <form method="post" id="form-delete">
+        @csrf
+    </form>
+
     <script>
         function objectToArray(obj) {
             return Object.values(obj).map(function (item) {
@@ -267,14 +269,7 @@
             });
         }
 
-        const listAddress = objectToArray(@json($listAddress));
-
-        let instanceEdit = $('#parent_select_search').comboTree({
-            source: listAddress,
-            collapse: true,
-        });
-
-        function handleDestroyUser(element) {
+        function handleDestroyUser(element, id) {
             swal("Xác nhận xóa tài khoản này?", {
                 dangerMode: true,
                 buttons: ["Hủy", "Đồng ý"],
@@ -284,7 +279,13 @@
                 if (willDelete) {
                     // Hàm sẽ được gọi khi người dùng nhấn nút "OK"
                     loadingMasterPage();
-                    $(element).next().submit();
+
+                    let url = '{{ route('user.destroy', ['id' => ':id']) }}';
+                    url = url.replace(':id', id);
+
+                    let form = document.getElementById('form-delete');
+                    form.action = url;
+                    form.submit();
                 }
             });
         }

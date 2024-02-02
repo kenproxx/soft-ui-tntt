@@ -18,9 +18,16 @@ if (!function_exists('generateRandomString')) {
     }
 }
 if (!function_exists('isNormalRole')) {
-    function isNormalRole()
+    function isNormalRole($id = null)
     {
         $allowedRoles = [RoleName::USER, RoleName::ADMIN, RoleName::SUPER_ADMIN];
+
+        if ($id) {
+            $user = User::find($id);
+            if ($user && in_array($user->role_name, $allowedRoles)) {
+                return true;
+            }
+        }
 
         if (Auth::check() && in_array(Auth::user()->role_name, $allowedRoles)) {
             return true;
@@ -29,9 +36,16 @@ if (!function_exists('isNormalRole')) {
     }
 }
 if (!function_exists('isAdminRole')) {
-    function isAdminRole()
+    function isAdminRole($id = null)
     {
         $allowedRoles = [RoleName::ADMIN, RoleName::SUPER_ADMIN];
+
+        if ($id) {
+            $user = User::find($id);
+            if ($user && in_array($user->role_name, $allowedRoles)) {
+                return true;
+            }
+        }
 
         if (Auth::check() && in_array(Auth::user()->role_name, $allowedRoles)) {
             return true;
@@ -40,8 +54,15 @@ if (!function_exists('isAdminRole')) {
     }
 }
 if (!function_exists('isSuperAdminRole')) {
-    function isSuperAdminRole()
+    function isSuperAdminRole($id = null)
     {
+        if ($id) {
+            $user = User::find($id);
+            if ($user && $user->role_name === RoleName::SUPER_ADMIN) {
+                return true;
+            }
+        }
+
         if (Auth::check() && Auth::user()->role_name === RoleName::SUPER_ADMIN) {
             return true;
         }
