@@ -38,6 +38,7 @@ Route::get('/', function () {
 
 Route::get('/dang-ky', SignUp::class)->name('sign-up');
 Route::get('/dang-nhap', Login::class)->name('login');
+Route::get('/export', [\App\Http\Controllers\ExportExcelController::class, 'export']);
 
 Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
 
