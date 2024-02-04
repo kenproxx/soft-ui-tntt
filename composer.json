@@ -6,12 +6,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "ext-fileinfo": "*",
+        "ext-gd": "*",
         "baum/baum": "3.x-dev",
         "cloudinary/cloudinary_php": "^2.12",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^10.0",
         "laravel/tinker": "^2.6",
         "livewire/livewire": "^2.8",
+        "maatwebsite/excel": "^3.1",
+        "phpoffice/phpspreadsheet": "*",
         "spatie/laravel-enum": "^3.0",
         "yoeunes/toastr": "^2.3"
     },
