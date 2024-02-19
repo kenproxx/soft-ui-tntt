@@ -208,6 +208,7 @@ class UserController extends Controller
         $file = $request->file('avatar');
         $result1 = $file->store('images', 'public');
 
+//        (new ZipArchiveController())->compressFile($result1);
         $urlFile = asset('storage/' . $result1);
 
         $urlImage = (new CloudinaryController())->uploadByURL($urlFile);

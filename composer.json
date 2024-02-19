@@ -8,6 +8,7 @@
         "php": "^8.0",
         "ext-fileinfo": "*",
         "ext-gd": "*",
+        "ext-zip": "*",
         "baum/baum": "3.x-dev",
         "cloudinary/cloudinary_php": "^2.12",
         "guzzlehttp/guzzle": "^7.4",
