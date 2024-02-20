@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\advance_config;
 
+use App\Http\Controllers\ExportExcelController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -17,6 +18,20 @@ class UserManagement extends Component
     public $totalPage = 1;
 
     public function render()
+    {
+        $users = $this->searchUser();
+
+        $this->totalPage = ceil(count($users) / $this->perPage);
+
+        // limit address offset by page
+        $users = $users->slice(($this->currentPage - 1) * $this->perPage, $this->perPage);
+
+        $listAddress = \App\Models\Address::all()->toHierarchy()->toArray();
+
+        return view('livewire.advance_config.user.index', ['users' => $users, 'listAddress' => $listAddress]);
+    }
+
+    private function searchUser()
     {
         $users = User::query();
         if ($this->keyword_search) {
@@ -41,24 +56,20 @@ class UserManagement extends Component
         }
 
         if (isOnlyRoleAdmin()) {
-            if (!Auth::user()->location_id) {
-                return view('livewire.advance_config.user.index', ['users' => []]);
-            }
             $users->where('location_id', Auth::user()->location_id);
         }
 
         $users->orderBy('created_at', 'desc');
-        $users = $users->get();
+        return $users->get();
+    }
 
+    public function exportExcel()
+    {
+        $file_name = 'danh_sach_toan_doan-' . now() . ' ___ ' . now()->timestamp;
 
-        $this->totalPage = ceil(count($users) / $this->perPage);
+        $listUser = $this->searchUser();
 
-        // limit address offset by page
-        $users = $users->slice(($this->currentPage - 1) * $this->perPage, $this->perPage);
-
-        $listAddress = \App\Models\Address::all()->toHierarchy()->toArray();
-
-        return view('livewire.advance_config.user.index', ['users' => $users, 'listAddress' => $listAddress]);
+        return (new ExportExcelController())->exportExcel_User($listUser, $file_name);
     }
 
 }
