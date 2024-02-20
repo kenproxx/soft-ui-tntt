@@ -38,7 +38,7 @@ class AddressController extends Controller
                 'name' => 'required|string|max:255',
             ]);
         } catch (Exception $e) {
-            toastr()->addNotification('error', $e->getMessage(), 'Lỗi');
+            toastr()->addNotification(ToastrEnum::ERROR, $e->getMessage(), ToastrEnum::LOI);
             return back();
         }
 

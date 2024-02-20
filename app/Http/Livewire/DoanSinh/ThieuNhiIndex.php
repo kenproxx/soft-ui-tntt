@@ -3,9 +3,9 @@
 namespace App\Http\Livewire\DoanSinh;
 
 use App\Enums\CapHieu;
+use App\Enums\ToastrEnum;
 use App\Exports\UserExport;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ThieuNhiIndex extends Component
@@ -21,7 +21,6 @@ class ThieuNhiIndex extends Component
     {
 
         $users = $this->searchUser();
-
 
         $this->totalPage = ceil(count($users) / $this->perPage);
 
@@ -53,9 +52,6 @@ class ThieuNhiIndex extends Component
         }
 
         if (isOnlyRoleAdmin()) {
-            if (!Auth::user()->location_id) {
-                return view('livewire.advance_config.user.index', ['users' => []]);
-            }
             $users->whereIn('location_id', getIdAddressAndChild());
         }
 
@@ -66,7 +62,6 @@ class ThieuNhiIndex extends Component
 
         $users->orderBy('created_at', 'desc');
         $users->select('users.*', 'user_infos.cap_hieu');
-
         return $users->get();
     }
 
@@ -75,6 +70,12 @@ class ThieuNhiIndex extends Component
         $excel = app('excel');
 
         $listUser = $this->searchUser();
-        return $excel->download( new UserExport($listUser), 'users.xlsx');
+
+        if (count($listUser) == 0) {
+            toastr()->addNotification(ToastrEnum::ERROR, 'Không có dữ liệu để export', ToastrEnum::LOI);
+            return back();
+        }
+
+        return $excel->download(new UserExport($listUser), 'users.xlsx');
     }
 }
