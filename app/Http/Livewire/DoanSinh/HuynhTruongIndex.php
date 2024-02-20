@@ -3,8 +3,7 @@
 namespace App\Http\Livewire\DoanSinh;
 
 use App\Enums\CapHieu;
-use App\Enums\ToastrEnum;
-use App\Exports\UserExport;
+use App\Http\Controllers\ExportExcelController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -73,15 +72,10 @@ class HuynhTruongIndex extends Component
 
     public function exportExcel()
     {
-        $excel = app('excel');
+        $file_name = 'danh_sach_huynh_truong-' . now() . ' ___ ' . now()->timestamp;
 
         $listUser = $this->searchUser();
 
-        if (count($listUser) == 0) {
-            toastr()->addNotification(ToastrEnum::ERROR, 'Không có dữ liệu để export', ToastrEnum::LOI);
-            return back();
-        }
-
-        return $excel->download(new UserExport($listUser), 'users.xlsx');
+        return (new ExportExcelController())->exportExcel_User($listUser, $file_name);
     }
 }
