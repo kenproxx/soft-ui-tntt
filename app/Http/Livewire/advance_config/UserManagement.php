@@ -19,7 +19,7 @@ class UserManagement extends Component
 
     public function render()
     {
-        $users = $this->searchUser();
+        $users = $this->searchUser()->get();
 
         $this->totalPage = ceil(count($users) / $this->perPage);
 
@@ -60,14 +60,14 @@ class UserManagement extends Component
         }
 
         $users->orderBy('created_at', 'desc');
-        return $users->get();
+        return $users;
     }
 
     public function exportExcel()
     {
         $file_name = 'danh_sach_toan_doan-' . now() . ' ___ ' . now()->timestamp;
 
-        $listUser = $this->searchUser();
+        $listUser = $this->searchUser()->with('userInfo')->get();
 
         return (new ExportExcelController())->exportExcel_User($listUser, $file_name);
     }
