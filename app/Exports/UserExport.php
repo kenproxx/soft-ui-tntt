@@ -64,6 +64,11 @@ class UserExport implements FromCollection, WithHeadings, WithMapping, ShouldAut
 
     public function map($row): array
     {
+        $giao_phan_name = getNameAddressById($row->userInfo->giao_phan_id);
+        $giao_hat_name = getNameAddressById($row->userInfo->giao_hat_id);
+        $giao_xu_name = getNameAddressById($row->userInfo->giao_xu_id);
+        $giao_ho_name = getNameAddressById($row->userInfo->giao_ho_id);
+
         return [
             $row->id,
             $row->holy_name,
@@ -74,10 +79,12 @@ class UserExport implements FromCollection, WithHeadings, WithMapping, ShouldAut
             $row->userInfo->my_email,
             $row->userInfo->cap_hieu,
             $row->userInfo->chuc_vu,
-            $row->userInfo->giao_phan_id,
-            $row->userInfo->giao_hat_id,
-            $row->userInfo->giao_xu_id,
-            $row->userInfo->giao_ho_id,
+
+            $giao_phan_name,
+            $giao_hat_name,
+            $giao_xu_name,
+            $giao_ho_name,
+
             $row->userInfo->dia_chi,
             $row->userInfo->ten_bo,
             $row->userInfo->sdt_bo,

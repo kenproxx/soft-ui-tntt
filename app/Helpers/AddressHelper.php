@@ -78,7 +78,7 @@ if (!function_exists('getIdAddressAndChild')) {
             if ($id) {
                 $address = Address::find($id);
             } else {
-                if (isOnlyRoleSuperAdmin()){
+                if (isOnlyRoleSuperAdmin()) {
                     $address = Address::all()->pluck('id')->toArray();
 
                     return $address;
@@ -102,7 +102,7 @@ if (!function_exists('getElementAddressAndChild')) {
         if ($id) {
             $address = Address::find($id);
         } else {
-            if (isOnlyRoleSuperAdmin()){
+            if (isOnlyRoleSuperAdmin()) {
                 $address = Address::all()->toHierarchy();
                 return $address;
             }
@@ -124,6 +124,11 @@ if (!function_exists('getNameAddressById')) {
             return '';
         }
         $address = Address::find($id);
-        return $address->name;
+
+        if (!$address) {
+            return $id;
+        }
+
+        return $address->name ?? $id;
     }
 }
