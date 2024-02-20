@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\DoanSinh;
 
 use App\Enums\CapHieu;
+use App\Enums\ToastrEnum;
+use App\Exports\UserExport;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -18,6 +20,20 @@ class HuynhTruongIndex extends Component
     public $totalPage = 1;
 
     public function render()
+    {
+        $users = $this->searchUser();
+
+        $this->totalPage = ceil(count($users) / $this->perPage);
+
+        // limit address offset by page
+        $users = $users->slice(($this->currentPage - 1) * $this->perPage, $this->perPage);
+        return view('livewire.doan-sinh.huynh-truong-index',
+            [
+                'users' => $users
+            ]);
+    }
+
+    private function searchUser()
     {
         $users = User::query();
         if ($this->keyword_search) {
@@ -42,9 +58,6 @@ class HuynhTruongIndex extends Component
         }
 
         if (isOnlyRoleAdmin()) {
-            if (!Auth::user()->location_id) {
-                return view('livewire.advance_config.user.index', ['users' => []]);
-            }
             $users->where('location_id', Auth::user()->location_id);
         }
 
@@ -54,15 +67,21 @@ class HuynhTruongIndex extends Component
 
         $users->orderBy('created_at', 'desc');
         $users->select('users.*', 'user_infos.cap_hieu');
-        $users = $users->get();
 
-        $this->totalPage = ceil(count($users) / $this->perPage);
+        return $users->get();
+    }
 
-        // limit address offset by page
-        $users = $users->slice(($this->currentPage - 1) * $this->perPage, $this->perPage);
-        return view('livewire.doan-sinh.huynh-truong-index',
-            [
-                'users' => $users
-            ]);
+    public function exportExcel()
+    {
+        $excel = app('excel');
+
+        $listUser = $this->searchUser();
+
+        if (count($listUser) == 0) {
+            toastr()->addNotification(ToastrEnum::ERROR, 'Không có dữ liệu để export', ToastrEnum::LOI);
+            return back();
+        }
+
+        return $excel->download(new UserExport($listUser), 'users.xlsx');
     }
 }

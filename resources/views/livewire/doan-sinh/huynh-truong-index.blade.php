@@ -49,8 +49,13 @@
                         Danh sách tài khoản
                     </h5>
                 </div>
-                <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal"
-                   data-bs-target="#modal-create">+ Tạo mới tài khoản</a>
+                <div>
+                    <a href="#" class="btn bg-gradient-info btn-sm mb-0" type="button" wire:click="exportExcel">Xuất Excel</a>
+                    <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal"
+                       data-bs-target="#modal-create">+ Tạo mới tài khoản</a>
+                </div>
+
+
             </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
