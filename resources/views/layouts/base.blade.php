@@ -37,8 +37,7 @@
     <link href="https://cdn.jsdelivr.net/gh/kenproxx/soft-ui-tntt@master/public/assets/css/nucleo-svg.css"
           rel="stylesheet"/>
     <!-- CSS Files -->
-    <link id="pagestyle"
-          href="https://cdn.jsdelivr.net/gh/kenproxx/soft-ui-tntt@master/public/assets/css/soft-ui-dashboard.css"
+    <link href="https://cdn.statically.io/gh/kenproxx/soft-ui-tntt/b1091567/public/assets/css/soft-ui-dashboard.css"
           rel="stylesheet"/>
 
     {{-- Custom CSS --}}
