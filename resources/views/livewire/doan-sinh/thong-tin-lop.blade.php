@@ -20,7 +20,7 @@
                     </h5>
                 </div>
                 @if(isHuynhTruong())
-                <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal"
+                <a href="#" class="btn btn-sm mb-0" type="button" data-bs-toggle="modal"
                    data-bs-target="#modal-create">+ Tạo mới tài khoản</a>
                 @endif
             </div>
@@ -210,7 +210,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn bg-gradient-primary">Lưu</button>
+                        <button type="submit" class="btn ">Lưu</button>
                     </div>
                 </form>
             </div>

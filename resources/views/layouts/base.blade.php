@@ -122,6 +122,28 @@
 <!-- Alpine -->
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
+<script>
+    // find all button
+    const buttons = document.querySelectorAll('button');
+
+    // find all a with type button
+    const aButtons = document.querySelectorAll('a.btn');
+
+    let arrayClassButton = ['bg-gradient-primary', 'bg-gradient-secondary', 'bg-gradient-success', 'bg-gradient-danger', 'bg-gradient-warning', 'bg-gradient-info', 'bg-gradient-dark', 'bg-gradient-light', 'bg-gradient-white',];
+
+    // loop through each button and randomly assign a class
+    buttons.forEach(button => {
+        let randomClass = arrayClassButton[Math.floor(Math.random() * arrayClassButton.length)];
+        button.classList.add(randomClass);
+    });
+
+    // loop through each a with type button and randomly assign a class
+    aButtons.forEach(aButton => {
+        let randomClass = arrayClassButton[Math.floor(Math.random() * arrayClassButton.length)];
+        aButton.classList.add(randomClass);
+    });
+</script>
+
 @livewireScripts
 
 </html>

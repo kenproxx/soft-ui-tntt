@@ -33,7 +33,7 @@
                 <div class="col-md-6">
                 </div>
                 <div class="col-md-6">
-                    <button type="button" wire:click="render" class="btn bg-gradient-primary">
+                    <button type="button" wire:click="render" class="btn ">
                         Tìm kiếm
                     </button>
                 </div>
@@ -50,7 +50,7 @@
                         Danh sách lớp
                     </h5>
                 </div>
-                <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button" data-bs-toggle="modal"
+                <a href="#" class="btn btn-sm mb-0" type="button" data-bs-toggle="modal"
                    data-bs-target="#modal-create">+ Tạo mới lớp</a>
             </div>
         </div>
@@ -238,7 +238,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn bg-gradient-primary">Lưu</button>
+                        <button type="submit" class="btn ">Lưu</button>
                     </div>
                 </form>
             </div>
@@ -279,7 +279,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn bg-gradient-primary">Lưu</button>
+                        <button type="submit" class="btn ">Lưu</button>
                     </div>
                 </form>
             </div>
@@ -308,7 +308,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn bg-gradient-primary">Lưu</button>
+                        <button type="submit" class="btn ">Lưu</button>
                     </div>
                 </form>
             </div>

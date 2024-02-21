@@ -151,7 +151,7 @@
     </h5>
     <div class="">
         <a href="{{ route('dashboard') }}">
-            <button class="btn bg-gradient-primary" type="button">
+            <button class="btn " type="button">
             <span>
                 Trở về trang chủ
             </span>
