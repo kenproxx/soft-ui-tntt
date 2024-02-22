@@ -33,7 +33,7 @@
                     </div>
                 </div>
             @else
-                @foreach($thongTinDoan as $item)
+                @foreach($thongTinDoan as $index => $item)
                     <div class="form-group row border-top">
                         <div class="col-12 col-sm-6 col-xl-3 ">
                             <label>Họ và tên</label>
@@ -54,9 +54,12 @@
                             <input name="sdt[]" value="{{ $item->sdt }}" type="number" placeholder="0123 456 789"
                                    class="form-control" required>
                         </div>
-                        <div onclick="removeInput(this)" class="col-12 col-sm-12 justify-content-center d-flex mt-3">
-                            <span class="inputRemove btn bg-gradient-danger">x</span>
-                        </div>
+                        @if( $index != 0)
+                            <div onclick="removeInput(this)"
+                                 class="col-12 col-sm-12 justify-content-center d-flex mt-3">
+                                <span class="inputRemove btn bg-gradient-danger">x</span>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             @endif

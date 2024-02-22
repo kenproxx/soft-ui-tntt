@@ -1,4 +1,4 @@
-@php use App\Models\User; @endphp
+@php @endphp
 <style>
 
     @media (min-width: 1200px) {
@@ -104,7 +104,7 @@
                         <span class="nav-link-text ms-1">Tài khoản</span>
                     </a>
                 </li>
-                @if(isOnlyRoleSuperAdmin() || (accountOfGiaoXu() || accountOfHigherGiaoXu()) && isAdminRole())
+                @if((accountOfGiaoXu() || accountOfHigherGiaoXu()) && isOnlyRoleAdmin())
                     <li class="nav-item pb-2">
                         <a class="nav-link {{ Route::currentRouteName() == 'doan-sinh.thong-tin-doan.edit' ? 'active' : '' }}"
                            href="{{ route('doan-sinh.thong-tin-doan.edit') }}">
@@ -193,18 +193,19 @@
                     </a>
                 </li>
             @endif
-            <li class="nav-item pb-2">
-                <a class="nav-link {{ Route::currentRouteName() == 'doan-sinh.thong-tin-doan' ? 'active' : '' }}"
-                   href="{{ route('doan-sinh.thong-tin-doan') }}">
-                    <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center
+            @if( !isOnlyRoleSuperAdmin() )
+                <li class="nav-item pb-2">
+                    <a class="nav-link {{ Route::currentRouteName() == 'doan-sinh.thong-tin-doan' ? 'active' : '' }}"
+                       href="{{ route('doan-sinh.thong-tin-doan') }}">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center
                         {{ in_array(request()->route()->getName(),['doan-sinh.thong-tin-doan']) ? 'text-white' : 'text-dark' }}"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Thông tin đơn vị của bạn</span>
-                </a>
-            </li>
-
+                        </div>
+                        <span class="nav-link-text ms-1">Thông tin đơn vị của bạn</span>
+                    </a>
+                </li>
+            @endif
             <li class="nav-item mt-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Cá nhân</h6>
             </li>
