@@ -1,3 +1,9 @@
+<style>
+    #profile-page .list-group li strong {
+        line-height: 42px;
+    }
+</style>
+
 <div class="main-content">
     <div class="page-header min-height-300 border-radius-xl"
          style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
@@ -26,74 +32,72 @@
                     <h5 class="mb-1">
                         {{ auth()->user()->holy_name . ' ' . auth()->user()->name }}
                     </h5>
-                    <p class="mb-0 font-weight-bold text-sm">
-                        CEO / Co-Founder
-                    </p>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
-<div class="container-fluid py-4">
+<div class="container-fluid py-4" id="profile-page">
     <div class="row">
         <div class="col-12 col-xl-4">
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
-                    <h6 class="mb-0">Platform Settings</h6>
+                    <div class="row">
+                        <div class="col-sm-11 col-10 d-flex align-items-center">
+                            <h6 class="mb-0">Thông tin cá nhân</h6>
+                        </div>
+                        <div class="col-sm-1 col-2 text-right">
+                            <a onclick="changeModeEditThongTinCaNhan()" class="textThongTinCaNhan cursor-pointer">
+                                <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
+                                   data-bs-placement="top" title="Sửa"></i>
+                            </a>
+                            <a onclick="saveThongTinCaNhan()" class="d-none inputThongTinCaNhan cursor-pointer">
+                                <i class="fas fa-check text-secondary text-sm" data-bs-toggle="tooltip"
+                                   data-bs-placement="top" title="Lưu"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body p-3">
-                    <h6 class="text-uppercase text-body text-xs font-weight-bolder">Account</h6>
                     <ul class="list-group">
-                        <li class="list-group-item border-0 px-0">
-                            <div class="form-group ps-0 ">
-
-                                <label class="form-check-label text-body ms-3 text-truncate mb-0 line-height-100"
-                                       for="flexSwitchCheckDefault">Teen thanh</label>
-                                <input class="form-control d-inline-block w-auto " type="text"
-                                       id="flexSwitchCheckDefault">
-                            </div>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Mã code:</strong> &nbsp;
+                            <span>123</span>
                         </li>
-                        <li class="list-group-item border-0 px-0">
-                            <div class="form-check form-switch ps-0">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                       for="flexSwitchCheckDefault1">Email me when someone answers on my post</label>
-                                <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault1">
-                            </div>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Username:</strong> &nbsp;
+                            <span>123</span>
                         </li>
-                        <li class="list-group-item border-0 px-0">
-                            <div class="form-check form-switch ps-0">
-
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                       for="flexSwitchCheckDefault2">Email me when someone mentions me</label>
-                                <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault2"
-                                       checked>
-                            </div>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Tên thánh:</strong> &nbsp;
+                            <span class="textThongTinCaNhan">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
                         </li>
-                    </ul>
-                    <h6 class="text-uppercase text-body text-xs font-weight-bolder mt-4">Application</h6>
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 px-0">
-                            <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault3">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                       for="flexSwitchCheckDefault3">New launches and projects</label>
-                            </div>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Tên gọi:</strong> &nbsp;
+                            <span class="textThongTinCaNhan">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
                         </li>
-                        <li class="list-group-item border-0 px-0">
-                            <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault4"
-                                       checked>
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                       for="flexSwitchCheckDefault4">Monthly product updates</label>
-                            </div>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Ngày sinh:</strong> &nbsp;
+                            <span class="textThongTinCaNhan">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
                         </li>
-                        <li class="list-group-item border-0 px-0 pb-0">
-                            <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault5">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                       for="flexSwitchCheckDefault5">Subscribe to newsletter</label>
-                            </div>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Giới tính:</strong> &nbsp;
+                            <span class="textThongTinCaNhan">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Email:</strong> &nbsp;
+                            <span class="textThongTinCaNhan">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Số điện thoại:</strong> &nbsp;
+                            <span class="textThongTinCaNhan">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
                         </li>
                     </ul>
                 </div>
@@ -103,48 +107,52 @@
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
                     <div class="row">
-                        <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">Profile Information</h6>
+                        <div class="col-sm-11 col-10 d-flex align-items-center">
+                            <h6 class="mb-0">Thông tin phụ huynh</h6>
                         </div>
-                        <div class="col-md-4 text-right">
-                            <a href="javascript:">
+                        <div class="col-sm-1 col-2 text-right">
+                            <a onclick="changeModeEditThongTinPhuHuynh()" class="textThongTinPhuHuynh cursor-pointer">
                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
-                                   data-bs-placement="top" title="Edit Profile"></i>
+                                   data-bs-placement="top" title="Sửa"></i>
+                            </a>
+                            <a onclick="saveThongTinPhuHuynh()" class="d-none inputThongTinPhuHuynh cursor-pointer">
+                                <i class="fas fa-check text-secondary text-sm" data-bs-toggle="tooltip"
+                                   data-bs-placement="top" title="Lưu"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body p-3">
-                    <p class="text-sm">
-                        Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally
-                        difficult paths, choose the one more painful in the short term (pain avoidance is creating an
-                        illusion of equality).
-                    </p>
-                    <hr class="horizontal gray-light my-4">
                     <ul class="list-group">
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
-                                Name:</strong> &nbsp; Alec M. Thompson
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Tên bố:</strong> &nbsp;
+                            <span class="textThongTinPhuHuynh">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
                         </li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong>
-                            &nbsp; (44) 123 1234 123
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Số điện thoại bố:</strong> &nbsp;
+                            <span class="textThongTinPhuHuynh">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
                         </li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong>
-                            &nbsp; alecthompson@mail.com
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Nghề nghiệp bố:</strong> &nbsp;
+                            <span class="textThongTinPhuHuynh">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
                         </li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong>
-                            &nbsp; USA
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Tên mẹ:</strong> &nbsp;
+                            <span class="textThongTinPhuHuynh">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
                         </li>
-                        <li class="list-group-item border-0 ps-0 pb-0">
-                            <strong class="text-dark text-sm">Social:</strong> &nbsp;
-                            <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:">
-                                <i class="fab fa-facebook fa-lg"></i>
-                            </a>
-                            <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:">
-                                <i class="fab fa-twitter fa-lg"></i>
-                            </a>
-                            <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:">
-                                <i class="fab fa-instagram fa-lg"></i>
-                            </a>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Số điện thoại mẹ:</strong> &nbsp;
+                            <span class="textThongTinPhuHuynh">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Nghề nghiệp mẹ:</strong> &nbsp;
+                            <span class="textThongTinPhuHuynh">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
                         </li>
                     </ul>
                 </div>
@@ -153,60 +161,85 @@
         <div class="col-12 col-xl-4">
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
-                    <h6 class="mb-0">Conversations</h6>
+                    <div class="row">
+                        <div class="col-sm-11 col-10 d-flex align-items-center">
+                            <h6 class="mb-0">Thông tin khác</h6>
+                        </div>
+                        <div class="col-sm-1 col-2 text-right">
+                            <a onclick="changeModeEditThongTinKhac()" class="textThongTinKhac cursor-pointer">
+                                <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
+                                   data-bs-placement="top" title="Sửa"></i>
+                            </a>
+                            <a onclick="saveThongTinKhac()" class="d-none inputThongTinKhac cursor-pointer">
+                                <i class="fas fa-check text-secondary text-sm" data-bs-toggle="tooltip"
+                                   data-bs-placement="top" title="Lưu"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body p-3">
                     <ul class="list-group">
-                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                            <div class="avatar me-3">
-                                <img src="../assets/img/kal-visuals-square.jpg" alt="kal"
-                                     class="border-radius-lg shadow">
-                            </div>
-                            <div class="d-flex align-items-start flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Sophie B.</h6>
-                                <p class="mb-0 text-xs">Hi! I need more information..</p>
-                            </div>
-                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:">Reply</a>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Giáo phận:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
                         </li>
-                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                            <div class="avatar me-3">
-                                <img src="../assets/img/marie.jpg" alt="kal" class="border-radius-lg shadow">
-                            </div>
-                            <div class="d-flex align-items-start flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Anne Marie</h6>
-                                <p class="mb-0 text-xs">Awesome work, can you..</p>
-                            </div>
-                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:">Reply</a>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Giáo hạt:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
                         </li>
-                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                            <div class="avatar me-3">
-                                <img src="../assets/img/ivana-square.jpg" alt="kal" class="border-radius-lg shadow">
-                            </div>
-                            <div class="d-flex align-items-start flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Ivanna</h6>
-                                <p class="mb-0 text-xs">About files I can..</p>
-                            </div>
-                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:">Reply</a>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Giáo xứ:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
                         </li>
-                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                            <div class="avatar me-3">
-                                <img src="../assets/img/team-4.jpg" alt="kal" class="border-radius-lg shadow">
-                            </div>
-                            <div class="d-flex align-items-start flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Peterson</h6>
-                                <p class="mb-0 text-xs">Have a great afternoon..</p>
-                            </div>
-                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:">Reply</a>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Giáo họ:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
                         </li>
-                        <li class="list-group-item border-0 d-flex align-items-center px-0">
-                            <div class="avatar me-3">
-                                <img src="../assets/img/team-3.jpg" alt="kal" class="border-radius-lg shadow">
-                            </div>
-                            <div class="d-flex align-items-start flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">Nick Daniel</h6>
-                                <p class="mb-0 text-xs">Hi! I need more information..</p>
-                            </div>
-                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:">Reply</a>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Địa chỉ:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                        </li>
+
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Ngày rửa tội:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Người rửa tội:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Nguời đỡ đầu rửa tội:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                        </li>
+
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Ngày thêm sức:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Người thêm sức:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Nguời đỡ đầu thêm sức:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong class="text-dark">Ngày tuyên hứa HT Cấp 1:</strong> &nbsp;
+                            <span class="textThongTinKhac">123</span>
+                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
                         </li>
                     </ul>
                 </div>
@@ -223,5 +256,40 @@
     function submitAvatarForm() {
         // Trigger form submission
         $('#avatarForm').submit();
+    }
+
+    function changeModeEditThongTinCaNhan() {
+        // an textThongTinCaNhan neu dang hien thi
+        // hien thi inputThongTinCaNhan neu dang an
+        // su dung toggle d-none
+
+        $('.textThongTinCaNhan').toggleClass('d-none');
+        $('.inputThongTinCaNhan').toggleClass('d-none');
+    }
+
+    function changeModeEditThongTinPhuHuynh() {
+        $('.textThongTinPhuHuynh').toggleClass('d-none');
+        $('.inputThongTinPhuHuynh').toggleClass('d-none');
+    }
+
+    function changeModeEditThongTinKhac() {
+        $('.textThongTinKhac').toggleClass('d-none');
+        $('.inputThongTinKhac').toggleClass('d-none');
+    }
+
+    function saveThongTinCaNhan() {
+        $('.textThongTinCaNhan').toggleClass('d-none');
+        $('.inputThongTinCaNhan').toggleClass('d-none');
+        console.log(123)
+    }
+
+    function saveThongTinPhuHuynh() {
+        $('.textThongTinPhuHuynh').toggleClass('d-none');
+        $('.inputThongTinPhuHuynh').toggleClass('d-none');
+    }
+
+    function saveThongTinKhac() {
+        $('.textThongTinKhac').toggleClass('d-none');
+        $('.inputThongTinKhac').toggleClass('d-none');
     }
 </script>
