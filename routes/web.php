@@ -13,12 +13,10 @@ use App\Http\Livewire\Exception\Error404;
 use App\Http\Livewire\Exception\Error500;
 use App\Http\Livewire\LaravelExamples\UserManagement;
 use App\Http\Livewire\LaravelExamples\UserProfile;
-use App\Http\Livewire\Profile;
 use App\Http\Livewire\Rtl;
 use App\Http\Livewire\StaticSignIn;
 use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Tables;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------

@@ -60,46 +60,59 @@
                     </div>
                 </div>
                 <div class="card-body p-3">
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Mã code:</strong> &nbsp;
-                            <span>123</span>
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Username:</strong> &nbsp;
-                            <span>123</span>
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Tên thánh:</strong> &nbsp;
-                            <span class="textThongTinCaNhan">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Tên gọi:</strong> &nbsp;
-                            <span class="textThongTinCaNhan">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Ngày sinh:</strong> &nbsp;
-                            <span class="textThongTinCaNhan">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Giới tính:</strong> &nbsp;
-                            <span class="textThongTinCaNhan">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Email:</strong> &nbsp;
-                            <span class="textThongTinCaNhan">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Số điện thoại:</strong> &nbsp;
-                            <span class="textThongTinCaNhan">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinCaNhan" type="text">
-                        </li>
-                    </ul>
+                    <form action="{{ route('profile.save.thong-tin-ca-nhan') }}" method="post" onsubmit="loadingMasterPage()" id="inputThongTinCaNhan">
+                        @csrf
+                        <ul class="list-group">
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Mã code:</strong> &nbsp;
+                                <span>{{ $user->code }}</span>
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Username:</strong> &nbsp;
+                                <span>{{ $user->username }}</span>
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Tên thánh:</strong> &nbsp;
+                                <span class="textThongTinCaNhan">{{ $user->holy_name }}</span>
+                                <input name="holy_name"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinCaNhan"
+                                       type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Tên gọi:</strong> &nbsp;
+                                <span class="textThongTinCaNhan">{{ $user->name }}</span>
+                                <input name="name" class="form-control d-inline-block w-auto d-none inputThongTinCaNhan"
+                                       type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Ngày sinh:</strong> &nbsp;
+                                <span class="textThongTinCaNhan">{{ $user->userInfo->date_of_birth }}</span>
+                                <input name="date_of_birth"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinCaNhan"
+                                       type="date">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Giới tính:</strong> &nbsp;
+                                <span class="textThongTinCaNhan">{{ $user->userInfo->sex }}</span>
+                                <input name="sex" class="form-control d-inline-block w-auto d-none inputThongTinCaNhan"
+                                       type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Email:</strong> &nbsp;
+                                <span class="textThongTinCaNhan">{{ $user->userInfo->my_email }}</span>
+                                <input name="my_email"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinCaNhan"
+                                       type="email">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Số điện thoại:</strong> &nbsp;
+                                <span class="textThongTinCaNhan">{{ $user->userInfo->my_phone }}</span>
+                                <input name="my_phone"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinCaNhan"
+                                       type="text">
+                            </li>
+                        </ul>
+                    </form>
                 </div>
             </div>
         </div>
@@ -123,38 +136,53 @@
                     </div>
                 </div>
                 <div class="card-body p-3">
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Tên bố:</strong> &nbsp;
-                            <span class="textThongTinPhuHuynh">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Số điện thoại bố:</strong> &nbsp;
-                            <span class="textThongTinPhuHuynh">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Nghề nghiệp bố:</strong> &nbsp;
-                            <span class="textThongTinPhuHuynh">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Tên mẹ:</strong> &nbsp;
-                            <span class="textThongTinPhuHuynh">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Số điện thoại mẹ:</strong> &nbsp;
-                            <span class="textThongTinPhuHuynh">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Nghề nghiệp mẹ:</strong> &nbsp;
-                            <span class="textThongTinPhuHuynh">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh" type="text">
-                        </li>
-                    </ul>
+                    <form action="{{ route('profile.save.thong-tin-phu-huynh') }}" method="post" onsubmit="loadingMasterPage()" id="inputThongTinPhuHuynh">
+                        @csrf
+                        <ul class="list-group">
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Tên bố:</strong> &nbsp;
+                                <span class="textThongTinPhuHuynh">{{ $user->userInfo->ten_bo }}</span>
+                                <input name="ten_bo"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh"
+                                       type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Số điện thoại bố:</strong> &nbsp;
+                                <span class="textThongTinPhuHuynh">{{ $user->userInfo->sdt_bo }}</span>
+                                <input name="sdt_bo"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh"
+                                       type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Nghề nghiệp bố:</strong> &nbsp;
+                                <span class="textThongTinPhuHuynh">{{ $user->userInfo->nghe_nghiep_bo }}</span>
+                                <input name="nghe_nghiep_bo"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh"
+                                       type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Tên mẹ:</strong> &nbsp;
+                                <span class="textThongTinPhuHuynh">{{ $user->userInfo->ten_me }}</span>
+                                <input name="ten_me"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh"
+                                       type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Số điện thoại mẹ:</strong> &nbsp;
+                                <span class="textThongTinPhuHuynh">{{ $user->userInfo->sdt_me }}</span>
+                                <input name="sdt_me"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh"
+                                       type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Nghề nghiệp mẹ:</strong> &nbsp;
+                                <span class="textThongTinPhuHuynh">{{ $user->userInfo->nghe_nghiep_me }}</span>
+                                <input name="nghe_nghiep_me"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinPhuHuynh"
+                                       type="text">
+                            </li>
+                        </ul>
+                    </form>
                 </div>
             </div>
         </div>
@@ -178,76 +206,81 @@
                     </div>
                 </div>
                 <div class="card-body p-3">
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Giáo phận:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Giáo hạt:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Giáo xứ:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Giáo họ:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Địa chỉ:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
+                    <form action="{{ route('profile.save.thong-tin-khac') }}" method="post" onsubmit="loadingMasterPage()" id="inputThongTinKhac">
+                        @csrf
+                        <ul class="list-group">
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Giáo phận:</strong> &nbsp;
+                                <span>{{ getNameAddressById($user->userInfo->giao_phan_id) }}</span>
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Giáo hạt:</strong> &nbsp;
+                                <span>{{ getNameAddressById($user->userInfo->giao_hat_id) }}</span>
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Giáo xứ:</strong> &nbsp;
+                                <span>{{ getNameAddressById($user->userInfo->giao_xu_id) }}</span>
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Giáo họ:</strong> &nbsp;
+                                <span>{{ getNameAddressById($user->userInfo->giao_ho_id) }}</span>
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Địa chỉ:</strong> &nbsp;
+                                <span class="textThongTinKhac">{{ $user->userInfo->dia_chi }}</span>
+                                <input name="dia_chi"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Ngày rửa tội:</strong> &nbsp;
+                                <span class="textThongTinKhac">{{ $user->userInfo->ngay_rua_toi }}</span>
+                                <input name="ngay_rua_toi"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="date">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Người rửa tội:</strong> &nbsp;
+                                <span class="textThongTinKhac">{{ $user->userInfo->nguoi_rua_toi }}</span>
+                                <input name="nguoi_rua_toi"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Nguời đỡ đầu rửa tội:</strong> &nbsp;
+                                <span class="textThongTinKhac">{{ $user->userInfo->nguoi_do_dau_rua_toi }}</span>
+                                <input name="nguoi_do_dau_rua_toi"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                            </li>
 
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Ngày rửa tội:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Người rửa tội:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Nguời đỡ đầu rửa tội:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
-
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Ngày thêm sức:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Người thêm sức:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Nguời đỡ đầu thêm sức:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Ngày tuyên hứa HT Cấp 1:</strong> &nbsp;
-                            <span class="textThongTinKhac">123</span>
-                            <input class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
-                        </li>
-                    </ul>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Ngày thêm sức:</strong> &nbsp;
+                                <span class="textThongTinKhac">{{ $user->userInfo->ngay_them_suc }}</span>
+                                <input name="ngay_them_suc"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="date">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Người thêm sức:</strong> &nbsp;
+                                <span class="textThongTinKhac">{{ $user->userInfo->nguoi_them_suc }}</span>
+                                <input name="nguoi_them_suc"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Nguời đỡ đầu thêm sức:</strong> &nbsp;
+                                <span class="textThongTinKhac">{{ $user->userInfo->nguoi_do_dau_them_suc }}</span>
+                                <input name="nguoi_do_dau_them_suc"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="text">
+                            </li>
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong class="text-dark">Ngày tuyên hứa HT Cấp 1:</strong> &nbsp;
+                                <span class="textThongTinKhac">{{ $user->userInfo->ngay_tuyen_hua_ht_1 }}</span>
+                                <input name="ngay_tuyen_hua_ht_1"
+                                       class="form-control d-inline-block w-auto d-none inputThongTinKhac" type="date">
+                            </li>
+                        </ul>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <script>
     function selectAvatar() {
         $('#avatarInput').click();
@@ -265,31 +298,49 @@
 
         $('.textThongTinCaNhan').toggleClass('d-none');
         $('.inputThongTinCaNhan').toggleClass('d-none');
+
+        // for each elemnt in inputThongTinCaNhan add value from textThongTinCaNhan
+        $('.inputThongTinCaNhan').each(function (index, element) {
+            $(element).val($(element).prev().text());
+        });
     }
 
     function changeModeEditThongTinPhuHuynh() {
         $('.textThongTinPhuHuynh').toggleClass('d-none');
         $('.inputThongTinPhuHuynh').toggleClass('d-none');
+
+        $('.inputThongTinPhuHuynh').each(function (index, element) {
+            $(element).val($(element).prev().text());
+        });
     }
 
     function changeModeEditThongTinKhac() {
         $('.textThongTinKhac').toggleClass('d-none');
         $('.inputThongTinKhac').toggleClass('d-none');
+
+        $('.inputThongTinKhac').each(function (index, element) {
+            $(element).val($(element).prev().text());
+        });
     }
 
     function saveThongTinCaNhan() {
         $('.textThongTinCaNhan').toggleClass('d-none');
         $('.inputThongTinCaNhan').toggleClass('d-none');
-        console.log(123)
+
+        $('#inputThongTinCaNhan').submit();
     }
 
     function saveThongTinPhuHuynh() {
         $('.textThongTinPhuHuynh').toggleClass('d-none');
         $('.inputThongTinPhuHuynh').toggleClass('d-none');
+
+        $('#inputThongTinPhuHuynh').submit();
     }
 
     function saveThongTinKhac() {
         $('.textThongTinKhac').toggleClass('d-none');
         $('.inputThongTinKhac').toggleClass('d-none');
+
+        $('#inputThongTinKhac').submit();
     }
 </script>

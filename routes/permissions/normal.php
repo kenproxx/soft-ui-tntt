@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CloudinaryController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\ThongTinDoanController;
 use App\Http\Controllers\UserController;
@@ -9,7 +10,6 @@ use App\Http\Livewire\DoanSinh\ThongTinDoan;
 use App\Http\Livewire\DoanSinh\ThongTinDoanEdit;
 use App\Http\Livewire\DoanSinh\ThongTinLop;
 use App\Http\Livewire\Profile;
-use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'thong-tin-dia-chi'], function () {
     Route::get('giao-phan', [AddressController::class, 'getGiaoPhan'])->name('dia-chi.giao-phan');
@@ -36,5 +36,9 @@ Route::group(['prefix' => 'file'], function () {
 
 Route::group(['prefix' => 'trang-ca-nhan'], function () {
     Route::get('', Profile::class)->name('profile');
+
     Route::post('avatar', [UserController::class, 'uploadAvatar'])->name('profile.upload.avatar');
+    Route::post('thong-tin-ca-nhan', [ProfileController::class, 'saveThongTinCaNhan'])->name('profile.save.thong-tin-ca-nhan');
+    Route::post('thong-tin-phu-huynh', [ProfileController::class, 'saveThongTinPhuHuynh'])->name('profile.save.thong-tin-phu-huynh');
+    Route::post('thong-tin-khac', [ProfileController::class, 'saveThongTinKhac'])->name('profile.save.thong-tin-khac');
 });

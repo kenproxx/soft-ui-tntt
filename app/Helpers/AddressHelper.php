@@ -132,3 +132,9 @@ if (!function_exists('getNameAddressById')) {
         return $address->name ?? $id;
     }
 }
+if (!function_exists('convertDateFormat')) {
+    function convertDateFormat($dateString)
+    {
+        return DateTime::createFromFormat('Y-m-d', $dateString)->format('d-m-Y');
+    }
+}
