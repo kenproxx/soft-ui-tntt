@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Auth;
 
 use App\Models\User;
+use App\Models\UserInfo;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
@@ -34,6 +35,10 @@ class SignUp extends Component
             'name' => $this->name,
             'username' => $this->username,
             'password' => Hash::make($this->password)
+        ]);
+
+        UserInfo::create([
+            'user_id' => $user->id
         ]);
 
         auth()->login($user);
