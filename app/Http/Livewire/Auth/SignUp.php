@@ -37,9 +37,9 @@ class SignUp extends Component
             'password' => Hash::make($this->password)
         ]);
 
-        UserInfo::create([
-            'user_id' => $user->id
-        ]);
+        $userInfo = new UserInfo();
+        $userInfo->user_id = $user->id;
+        $userInfo->save();
 
         auth()->login($user);
 
