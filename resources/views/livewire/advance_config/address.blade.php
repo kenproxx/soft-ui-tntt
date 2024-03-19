@@ -31,19 +31,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <button type="button" wire:click="render" class="btn ">
-                            Tìm kiếm
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <button type="button" wire:click="render" class="btn bg-gradient-primary">
+                Tìm kiếm
+            </button>
         </form>
     </div>
     <div class="card mb-4 mx-4">
@@ -52,7 +42,7 @@
                 <div>
                     <h5 class="mb-0">Danh sách địa chỉ</h5>
                 </div>
-                <a href="#" class="btn btn-sm mb-0" data-bs-toggle="modal"
+                <a href="#" class="btn bg-gradient-primary btn-sm mb-0" data-bs-toggle="modal"
                    data-bs-target="#modal-create" type="button">+&nbsp; Tạo mới địa chỉ</a>
             </div>
         </div>
@@ -258,7 +248,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="submit" class="btn ">
+                        <button type="submit" class="btn bg-gradient-primary">
                             Lưu
                         </button>
                     </div>
@@ -303,7 +293,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="submit" class="btn ">Lưu</button>
+                        <button type="submit" class="btn bg-gradient-primary">Lưu</button>
                     </div>
                 </form>
             </div>
@@ -335,7 +325,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="submit" class="btn ">Lưu</button>
+                        <button type="submit" class="btn bg-gradient-primary">Lưu</button>
                     </div>
                 </form>
             </div>

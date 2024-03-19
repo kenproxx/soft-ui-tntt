@@ -16,7 +16,7 @@
                         <div>
                             <h5 class="mb-0">All Users</h5>
                         </div>
-                        <a href="#" class="btn btn-sm mb-0" type="button">+&nbsp; New User</a>
+                        <a href="#" class="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; New User</a>
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">

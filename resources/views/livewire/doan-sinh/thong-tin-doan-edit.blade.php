@@ -5,10 +5,10 @@
         <div id="content" class="p-4">
             <div class="row">
                 <div class="col-12">
-                    <button type="button" onclick="addMoreInput()" class="btn ">
+                    <button type="button" onclick="addMoreInput()" class="btn bg-gradient-primary">
                         Thêm dòng
                     </button>
-                    <button type="submit" class="btn ">
+                    <button type="submit" class="btn bg-gradient-primary">
                         Lưu
                     </button>
                 </div>

@@ -3,7 +3,7 @@
         <form action="{{ route('user.update', $user->id) }}" method="post" onsubmit="loadingMasterPage()" enctype="multipart/form-data">
             @csrf
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn ">
+                <button type="submit" class="btn bg-gradient-primary">
                     Lưu
                 </button>
             </div>
